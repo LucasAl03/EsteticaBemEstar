@@ -1,19 +1,21 @@
 <header id="cabecalho">
     <div id="div-menu">
         <div id="logo">
-            <img src="/public/android-chrome-192x192.png" alt="Estética & Bem-Estar">
+            <a routerLink="/home">
+                <img src="" alt="logo">
+            </a>
         </div>
 
         <nav id="nav-menu">
             <ul id="lista-menu">
                 <li>
-                    <a routerLink="/home" class="rota-lnk">Home</a>
+                    <a routerLink="/home" routerLinkActive="ativo" class="rota-lnk">Home</a>
                 </li>
                 <li>
-                    <a routerLink="/cadastro" class="rota-lnk">Cadastro</a>
+                    <a routerLink="/cadastro" routerLinkActive="ativo" class="rota-lnk">Cadastro</a>
                 </li>
                 <li>
-                    <a routerLink="/lista" class="rota-lnk">Consulta</a>
+                    <a routerLink="/lista" routerLinkActive="ativo" class="rota-lnk">Consulta</a>
                 </li>
             </ul>
         </nav>
