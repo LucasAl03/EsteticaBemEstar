@@ -1,0 +1,154 @@
+/* Área principal da Home */
+.home-container {
+    min-height: 100vh;
+    padding: 60px 30px;
+    background: #f2f2f2;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Banner principal */
+  .home-banner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 40px;
+    text-align: center;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Texto pequeno acima do título */
+  .subtitulo {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #666;
+  }
+  
+  /* Título */
+  .home-banner h1 {
+    margin: 20px 0 15px;
+    font-size: 42px;
+    color: #222;
+  }
+  
+  /* Descrição */
+  .home-banner p {
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+  }
+  
+  /* Área dos botões */
+  .home-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 35px;
+  }
+  
+  /* Botão principal */
+  .botao-principal {
+    padding: 14px 28px;
+    border-radius: 10px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
+  }
+  
+  .botao-principal:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
+  }
+  
+  /* Botão secundário */
+  .botao-secundario {
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: 2px solid #222;
+    background: white;
+    color: #222;
+    text-decoration: none;
+    font-weight: bold;
+    transition:
+      transform 0.2s,
+      background 0.2s;
+  }
+  
+  .botao-secundario:hover {
+    transform: translateY(-3px);
+    background: #eee;
+  }
+  
+  /* Cards de informações */
+  .home-info {
+    max-width: 1100px;
+    margin: 50px auto 0;
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  
+  /* Cada informação */
+  .info-card {
+    padding: 30px 25px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
+  }
+  
+  .info-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  }
+  
+  .info-card h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  
+  .info-card p {
+    margin: 0;
+    line-height: 1.5;
+    color: #666;
+  }
+  
+  /* Responsividade para celular */
+  @media (max-width: 700px) {
+    .home-container {
+      padding: 30px 15px;
+    }
+  
+    .home-banner {
+      padding: 50px 20px;
+    }
+  
+    .home-banner h1 {
+      font-size: 32px;
+    }
+  
+    .home-banner p {
+      font-size: 16px;
+    }
+  
+    .home-botoes {
+      flex-direction: column;
+    }
+  
+    .home-info {
+      grid-template-columns: 1fr;
+    }
+  }
+  
