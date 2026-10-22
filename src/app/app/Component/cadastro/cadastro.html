@@ -19,6 +19,17 @@
         <label for="telefone">Telefone</label>
         <input type="text" id="telefone" name="telefone" maxlength="11" [(ngModel)]="telefone" required>
 
+        <h1>Endereço</h1>
+
+        <label for="cep">Cep</label>
+        <input type="text" id="cep" name="cep" maxlength="8" [(ngModel)]="cep" required>
+
+        <label for="numero">Número</label>
+        <input type="text" id="numero" name="numero" maxlength="10" [(ngModel)]="numero" required>
+
+        <label for="complemento">Complemento</label>
+        <input type="text" id="complemento" name="complemento" maxlength="150" [(ngModel)]="complemento" required>
+
         <div id="div-btns">
             <button type="submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
             <button type="reset">Limpar</button>
