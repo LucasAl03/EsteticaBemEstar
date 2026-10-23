@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
+import { Endereco } from '../../Models/Endereco';
 
 
 @Component({
@@ -19,14 +20,21 @@ export class Cadastro {
   nome = ''
   cpf = ''
   data_nascimento = ''
+  sexo = ''
   email = ''
   telefone = ''
+
+  // endereco
+  idendereco = 0
+  cep = ''
+  numero = ''
+  complemento = ''
 
   editar = false
   pessoaId = 0
 
   exibeDados(){
-    console.log(this.idpessoa, this.nome, this.cpf, this.data_nascimento, this.email, this.telefone)
+    console.log(this.idpessoa, this.nome, this.cpf, this.data_nascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
 
     this.limparCampos();
   }
@@ -35,8 +43,13 @@ export class Cadastro {
     this.nome = ''
     this.cpf = ''
     this.data_nascimento = ''
+    this.sexo = ''
     this.email = ''
     this.telefone = ''
+
+    this.cep = ''
+    this.numero = ''
+    this.complemento = ''
   }
 
   ngOnInit(){
@@ -49,12 +62,14 @@ export class Cadastro {
   }
 
   carregaCampo(pessoaId: number){
-    this.pessoaService.listarPessoa(this.pessoaId)
+    this.pessoaService.listarPessoa(pessoaId)
       .subscribe({
         next: (objPessoa) => {
           this.idpessoa = objPessoa.idpessoa
           this.nome = objPessoa.nome
           this.cpf = objPessoa.cpf
+          this.data_nascimento = objPessoa.data_nascimento
+          this.sexo = objPessoa.sexo
           this.email = objPessoa.email
           this.telefone = objPessoa.telefone
 
@@ -70,8 +85,14 @@ export class Cadastro {
     pessoaCadastra.nome = this.nome
     pessoaCadastra.cpf = this.cpf
     pessoaCadastra.data_nascimento = this.data_nascimento
+    pessoaCadastra.sexo = this.sexo
     pessoaCadastra.email = this.email
     pessoaCadastra.telefone = this.telefone
+
+    const cadastraEndereco = new Endereco()
+    cadastraEndereco.cep = this.cep
+    cadastraEndereco.numero = this.numero
+    cadastraEndereco.complemento = this.complemento
 
     if(!this.editar){
       this.pessoaService.cadastrarPessoa(pessoaCadastra)
