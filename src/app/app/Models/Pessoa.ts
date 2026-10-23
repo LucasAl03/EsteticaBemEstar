@@ -3,6 +3,7 @@ export class Pessoa {
     nome: string = ''
     cpf: string = ''
     data_nascimento: string = ''
+    sexo: string = ''
     email: string = ''
     telefone: string = ''
 }
