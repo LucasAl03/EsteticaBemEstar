@@ -12,7 +12,7 @@ export class PessoaService {
     constructor (private http: HttpClient){}
 
     cadastrarPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        const urlApi = ''
+        const urlApi = 'https://localhost:7169/swagger/index.html/PessoaEndereco/'
 
         return this.http.post<Pessoa>(urlApi, pessoa)
     }
