@@ -2,7 +2,7 @@
 
     <h1>Cadastro</h1>
 
-    <form id="pessoa-form" (ngSubmit)="enviaDados()" ngNativeValidate>
+    <form id="pessoa-form" (ngSubmit)="exibeDados()" ngNativeValidate>
 
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" maxlength="70" [(ngModel)]="nome" required>
@@ -12,6 +12,11 @@
 
         <label for="data_nascimento">Data de Nascimento</label>
         <input type="date" id="data_nascimento" name="data_nascimento" [(ngModel)]="data_nascimento" required>
+
+        <label>Sexo</label>
+        <input type="radio" name="sexo" id="sexoM" class="btnSelecao" value="M" [(ngModel)]="sexo" required> Masculino
+        <input type="radio" name="sexo" id="sexoF" class="btnSelecao" value="F" [(ngModel)]="sexo" required> Feminino
+        <input type="radio" name="sexo" id="sexoN" class="btnSelecao" value="N" [(ngModel)]="sexo" required> Não se Identificar
         
         <label for="email">Email</label>
         <input type="text" id="email" name="email" maxlength="120" [(ngModel)]="email" required>
@@ -19,16 +24,14 @@
         <label for="telefone">Telefone</label>
         <input type="text" id="telefone" name="telefone" maxlength="11" [(ngModel)]="telefone" required>
 
-        <h1>Endereço</h1>
-
         <label for="cep">Cep</label>
-        <input type="text" id="cep" name="cep" maxlength="8" [(ngModel)]="cep" required>
+        <input type="text" id="cep" name="cep" maxlength="11" [(ngModel)]="cep" required>
 
-        <label for="numero">Número</label>
-        <input type="text" id="numero" name="numero" maxlength="10" [(ngModel)]="numero" required>
+        <label for="numero">numero</label>
+        <input type="text" id="numero" name="numero" maxlength="11" [(ngModel)]="numero" required>
 
         <label for="complemento">Complemento</label>
-        <input type="text" id="complemento" name="complemento" maxlength="150" [(ngModel)]="complemento" required>
+        <input type="text" id="complemento" name="complemento" maxlength="11" [(ngModel)]="complemento" required>
 
         <div id="div-btns">
             <button type="submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
