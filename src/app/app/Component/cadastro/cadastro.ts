@@ -25,7 +25,6 @@ export class Cadastro {
   telefone = ''
 
   // endereco
-  idendereco = 0
   cep = ''
   numero = ''
   complemento = ''
