@@ -8,9 +8,9 @@ import { Endereco } from '../../Models/Endereco';
 
 @Component({
   imports: [FormsModule],
-  selector: 'app-cadastro',
-  styleUrl: './cadastro.css',
-  templateUrl: './cadastro.html',
+  selector: 'app-cadastro-funcionario',
+  styleUrl: './cadastro-funcionario.css',
+  templateUrl: './cadastro-funcionario.html',
 })
 export class Cadastro {
   constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute){}
