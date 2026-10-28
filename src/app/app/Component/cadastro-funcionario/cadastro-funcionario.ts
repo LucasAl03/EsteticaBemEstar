@@ -2,9 +2,9 @@ import {ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
-import { Pessoa } from '../../Models/Pessoa';
 import { Endereco } from '../../Models/Endereco';
 import { Funcionario } from '../../Models/Funcionario';
+import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 
 
 @Component({
@@ -88,25 +88,28 @@ export class CadastroFuncionario {
   }
 
   enviaDados(){
-    const pessoaCadastra = new Pessoa()
-    pessoaCadastra.Nome = this.Nome
-    pessoaCadastra.CPF = this.CPF
-    pessoaCadastra.DataNascimento = this.DataNascimento
-    pessoaCadastra.Sexo = this.Sexo
-    pessoaCadastra.Email = this.Email
-    pessoaCadastra.Telefone = this.Telefone
+    const pessoa = new PessoaFuncionario()
+    pessoa.Nome = this.Nome
+    pessoa.CPF = this.CPF
+    pessoa.DataNascimento = this.DataNascimento
+    pessoa.Sexo = this.Sexo
+    pessoa.Email = this.Email
+    pessoa.Telefone = this.Telefone
 
-    const cadastraEndereco = new Endereco()
-    cadastraEndereco.Cep = this.Cep
-    cadastraEndereco.Numero = this.Numero
-    cadastraEndereco.Complemento = this.Complemento
+    const endereco = new Endereco()
+    endereco.Cep = this.Cep
+    endereco.Numero = this.Numero
+    endereco.Complemento = this.Complemento
 
-    const cadastraFuncionario = new Funcionario()
-    cadastraFuncionario.Cargo = this.Cargo
-    cadastraFuncionario.DataAdmissao = this.DataAdmissao
+    const funcionario = new Funcionario()
+    funcionario.Cargo = this.Cargo
+    funcionario.DataAdmissao = this.DataAdmissao
+
+    pessoa.Enderecos = [endereco];
+    pessoa.Funcionarios = [funcionario];
 
     if(!this.editar){
-      this.pessoaService.cadastrarPessoa(pessoaCadastra)
+      this.pessoaService.cadastrarPessoa(pessoa)
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
@@ -115,12 +118,12 @@ export class CadastroFuncionario {
           }
         })
     } else {
-      pessoaCadastra.IdPessoa = this.pessoaId
+      pessoa.IdPessoa = this.pessoaId
 
-      this.pessoaService.alterarPessoa(pessoaCadastra)
+      this.pessoaService.alterarPessoa(pessoa)
         .subscribe({
           next: (resposta) => {
-            console.log(pessoaCadastra)
+            console.log(pessoa)
             console.log(resposta)
           }, error: (msgErro) => {
             console.log("Erro ao alterar a pessoa", msgErro)
