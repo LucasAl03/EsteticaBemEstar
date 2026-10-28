@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { Observable } from 'rxjs';
 
-@Service()
+@Injectable({
+    providedIn: 'root'
+})
 export class FuncionarioService {
     constructor (private http: HttpClient){}
 
