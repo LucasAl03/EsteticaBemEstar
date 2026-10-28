@@ -30,13 +30,13 @@ export class PessoaService {
     }
 
     alterarPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.idpessoa}`
+        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.IdPessoa}`
 
         return this.http.put<Pessoa>(urlApi, pessoa)
     }
 
     excluirPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.idpessoa}`
+        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.IdPessoa}`
 
         return this.http.delete<Pessoa>(urlApi)
     }
