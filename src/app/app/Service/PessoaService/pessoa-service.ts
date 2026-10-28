@@ -12,31 +12,31 @@ export class PessoaService {
     constructor (private http: HttpClient){}
 
     cadastrarPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        const urlApi = 'https://localhost:7169/swagger/index.html/PessoaEndereco/'
+        const urlApi = `https://localhost:7169/api/PessoaEndereco`
 
         return this.http.post<Pessoa>(urlApi, pessoa)
     }
 
     listarPessoas(): Observable<Pessoa[]>{
-        const urlApi = ''
+        const urlApi = `https://localhost:7169/api/PessoaEndereco/`
 
         return this.http.get<Pessoa[]>(urlApi)
     }
 
     listarPessoa(pessoaId: number): Observable<Pessoa>{
-        const urlApi = ``
+        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoaId}`
 
         return this.http.get<Pessoa>(urlApi)
     }
 
     alterarPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        const urlApi = ''
+        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.idpessoa}`
 
         return this.http.put<Pessoa>(urlApi, pessoa)
     }
 
     excluirPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        const urlApi = ''
+        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.idpessoa}`
 
         return this.http.delete<Pessoa>(urlApi)
     }
