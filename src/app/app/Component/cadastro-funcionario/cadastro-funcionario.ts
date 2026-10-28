@@ -17,13 +17,13 @@ export class CadastroFuncionario {
   constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute){}
 
   // pessoa
-  idpessoa = 0
-  nome = ''
-  cpf = ''
-  data_nascimento = ''
-  sexo = ''
-  email = ''
-  telefone = ''
+  IdPessoa = 0
+  Nome = ''
+  CPF = ''
+  DataNascimento = null
+  Sexo = ''
+  Email = ''
+  Telefone = 0n
 
   // endereco
   cep = ''
@@ -38,18 +38,18 @@ export class CadastroFuncionario {
   pessoaId = 0
 
   exibeDados(){
-    console.log(this.idpessoa, this.nome, this.cpf, this.data_nascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
+    console.log(this.IdPessoa, this.Nome, this.CPF, this.DataNascimento, this.Sexo, this.Email, this.Telefone, this.cep, this.numero, this.complemento)
 
     this.limparCampos();
   }
 
   limparCampos(){
-    this.nome = ''
-    this.cpf = ''
-    this.data_nascimento = ''
-    this.sexo = ''
-    this.email = ''
-    this.telefone = ''
+    this.Nome = ''
+    this.CPF = ''
+    this.DataNascimento = null
+    this.Sexo = ''
+    this.Email = ''
+    this.Telefone = 0n
 
     this.cep = ''
     this.numero = ''
@@ -69,13 +69,13 @@ export class CadastroFuncionario {
     this.pessoaService.listarPessoa(pessoaId)
       .subscribe({
         next: (objPessoa) => {
-          this.idpessoa = objPessoa.IdPessoa
-          this.nome = objPessoa.Nome
-          this.cpf = objPessoa.CPF
-          this.data_nascimento = objPessoa.DataNascimento
-          this.sexo = objPessoa.Sexo
-          this.email = objPessoa.Email
-          this.telefone = objPessoa.Telefone
+          this.IdPessoa = objPessoa.IdPessoa
+          this.Nome = objPessoa.Nome
+          this.CPF = objPessoa.CPF
+          this.DataNascimento = objPessoa.DataNascimento
+          this.Sexo = objPessoa.Sexo
+          this.Email = objPessoa.Email
+          this.Telefone = objPessoa.Telefone
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
@@ -86,12 +86,12 @@ export class CadastroFuncionario {
 
   enviaDados(){
     const pessoaCadastra = new Pessoa()
-    pessoaCadastra.Nome = this.nome
-    pessoaCadastra.CPF = this.cpf
-    pessoaCadastra.DataNascimento = this.data_nascimento
-    pessoaCadastra.Sexo = this.sexo
-    pessoaCadastra.Email = this.email
-    pessoaCadastra.Telefone = this.telefone
+    pessoaCadastra.Nome = this.Nome
+    pessoaCadastra.CPF = this.CPF
+    pessoaCadastra.DataNascimento = this.DataNascimento
+    pessoaCadastra.Sexo = this.Sexo
+    pessoaCadastra.Email = this.Email
+    pessoaCadastra.Telefone = this.Telefone
 
     const cadastraEndereco = new Endereco()
     cadastraEndereco.cep = this.cep

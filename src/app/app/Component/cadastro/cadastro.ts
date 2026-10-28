@@ -19,10 +19,10 @@ export class Cadastro {
   Idpessoa = 0
   Nome = ''
   CPF = ''
-  DataNascimento = ''
+  DataNascimento = null
   Sexo = ''
   Email = ''
-  Telefone = ''
+  Telefone = 0n
 
   // endereco
   cep = ''
@@ -41,10 +41,10 @@ export class Cadastro {
   limparCampos(){
     this.Nome = ''
     this.CPF = ''
-    this.DataNascimento = ''
+    this.DataNascimento = null
     this.Sexo = ''
     this.Email = ''
-    this.Telefone = ''
+    this.Telefone = 0n
 
     this.cep = ''
     this.numero = ''

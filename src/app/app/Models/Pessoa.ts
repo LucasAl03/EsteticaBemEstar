@@ -1,9 +1,11 @@
+import { on } from "events"
+
 export class Pessoa {
     IdPessoa: number = 0
     Nome: string = ''
     CPF: string = ''
-    DataNascimento: string = ''
+    DataNascimento: Date | null = null
     Sexo: string = ''
     Email: string = ''
-    Telefone: bigint.number = 0
+    Telefone: bigint = 0n
 }
