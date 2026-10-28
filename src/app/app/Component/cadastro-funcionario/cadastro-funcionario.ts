@@ -69,13 +69,13 @@ export class CadastroFuncionario {
     this.pessoaService.listarPessoa(pessoaId)
       .subscribe({
         next: (objPessoa) => {
-          this.idpessoa = objPessoa.idpessoa
-          this.nome = objPessoa.nome
-          this.cpf = objPessoa.cpf
-          this.data_nascimento = objPessoa.data_nascimento
-          this.sexo = objPessoa.sexo
-          this.email = objPessoa.email
-          this.telefone = objPessoa.telefone
+          this.idpessoa = objPessoa.IdPessoa
+          this.nome = objPessoa.Nome
+          this.cpf = objPessoa.CPF
+          this.data_nascimento = objPessoa.DataNascimento
+          this.sexo = objPessoa.Sexo
+          this.email = objPessoa.Email
+          this.telefone = objPessoa.Telefone
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
@@ -86,12 +86,12 @@ export class CadastroFuncionario {
 
   enviaDados(){
     const pessoaCadastra = new Pessoa()
-    pessoaCadastra.nome = this.nome
-    pessoaCadastra.cpf = this.cpf
-    pessoaCadastra.data_nascimento = this.data_nascimento
-    pessoaCadastra.sexo = this.sexo
-    pessoaCadastra.email = this.email
-    pessoaCadastra.telefone = this.telefone
+    pessoaCadastra.Nome = this.nome
+    pessoaCadastra.CPF = this.cpf
+    pessoaCadastra.DataNascimento = this.data_nascimento
+    pessoaCadastra.Sexo = this.sexo
+    pessoaCadastra.Email = this.email
+    pessoaCadastra.Telefone = this.telefone
 
     const cadastraEndereco = new Endereco()
     cadastraEndereco.cep = this.cep
@@ -108,7 +108,7 @@ export class CadastroFuncionario {
           }
         })
     } else {
-      pessoaCadastra.idpessoa = this.pessoaId
+      pessoaCadastra.IdPessoa = this.pessoaId
 
       this.pessoaService.alterarPessoa(pessoaCadastra)
         .subscribe({

@@ -1,9 +1,9 @@
 export class Pessoa {
-    idpessoa: number = 0
-    nome: string = ''
-    cpf: string = ''
-    data_nascimento: string = ''
-    sexo: string = ''
-    email: string = ''
-    telefone: string = ''
+    IdPessoa: number = 0
+    Nome: string = ''
+    CPF: string = ''
+    DataNascimento: string = ''
+    Sexo: string = ''
+    Email: string = ''
+    Telefone: bigint.number = 0
 }
