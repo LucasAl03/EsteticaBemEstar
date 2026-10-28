@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
 import { Endereco } from '../../Models/Endereco';
+import { Funcionario } from '../../Models/Funcionario';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Endereco } from '../../Models/Endereco';
   styleUrl: './cadastro-funcionario.css',
   templateUrl: './cadastro-funcionario.html',
 })
-export class Cadastro {
+export class CadastroFuncionario {
   constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute){}
 
   // pessoa
@@ -28,6 +29,10 @@ export class Cadastro {
   cep = ''
   numero = ''
   complemento = ''
+
+  // cargo 
+  cargo = ''
+  dataadmissao = ''
 
   editar = false
   pessoaId = 0
