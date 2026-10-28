@@ -20,25 +20,25 @@ export class CadastroFuncionario {
   IdPessoa = 0
   Nome = ''
   CPF = ''
-  DataNascimento = null
+  DataNascimento = ''
   Sexo = ''
   Email = ''
-  Telefone = 0n
+  Telefone = ''
 
   // endereco
-  cep = ''
-  numero = ''
-  complemento = ''
+  Cep = ''
+  Numero = ''
+  Complemento = ''
 
   // cargo 
-  cargo = ''
-  dataadmissao = ''
+  Cargo = ''
+  DataAdmissao = ''
 
   editar = false
   pessoaId = 0
 
   exibeDados(){
-    console.log(this.IdPessoa, this.Nome, this.CPF, this.DataNascimento, this.Sexo, this.Email, this.Telefone, this.cep, this.numero, this.complemento)
+    console.log(this.IdPessoa, this.Nome, this.CPF, this.DataNascimento, this.Sexo, this.Email, this.Telefone, this.Cep, this.Numero, this.Complemento)
 
     this.limparCampos();
   }
@@ -46,18 +46,21 @@ export class CadastroFuncionario {
   limparCampos(){
     this.Nome = ''
     this.CPF = ''
-    this.DataNascimento = null
+    this.DataNascimento = ''
     this.Sexo = ''
     this.Email = ''
-    this.Telefone = 0n
+    this.Telefone = ''
 
-    this.cep = ''
-    this.numero = ''
-    this.complemento = ''
+    this.Cep = ''
+    this.Numero = ''
+    this.Complemento = ''
+
+    this.Cargo = ''
+    this.DataAdmissao = ''
   }
 
   ngOnInit(){
-    this.pessoaId = Number(this.route.snapshot.paramMap.get('idpessoa'))
+    this.pessoaId = Number(this.route.snapshot.paramMap.get('IdPessoa'))
 
     if(this.pessoaId > 0){
       this.editar = true
@@ -94,9 +97,13 @@ export class CadastroFuncionario {
     pessoaCadastra.Telefone = this.Telefone
 
     const cadastraEndereco = new Endereco()
-    cadastraEndereco.cep = this.cep
-    cadastraEndereco.numero = this.numero
-    cadastraEndereco.complemento = this.complemento
+    cadastraEndereco.Cep = this.Cep
+    cadastraEndereco.Numero = this.Numero
+    cadastraEndereco.Complemento = this.Complemento
+
+    const cadastraFuncionario = new Funcionario()
+    cadastraFuncionario.Cargo = this.Cargo
+    cadastraFuncionario.DataAdmissao = this.DataAdmissao
 
     if(!this.editar){
       this.pessoaService.cadastrarPessoa(pessoaCadastra)
