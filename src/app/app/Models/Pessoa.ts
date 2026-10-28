@@ -1,11 +1,12 @@
-import { on } from "events"
+import { Endereco } from "./Endereco"
 
 export class Pessoa {
     IdPessoa: number = 0
     Nome: string = ''
     CPF: string = ''
-    DataNascimento: Date | null = null
+    DataNascimento: string = ''
     Sexo: string = ''
     Email: string = ''
-    Telefone: bigint = 0n
+    Telefone: string = ''
+    Enderecos: Endereco[] = []
 }
