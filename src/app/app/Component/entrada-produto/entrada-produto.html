@@ -1,1 +1,30 @@
-<p>entrada-produto works!</p>
+<div id="entradaproduto">
+    <h1>Entrada de produto no Estoque</h1>
+
+    <form class="formulario" (ngSubmit)="exibeDados()" ngNativeValidate>
+        <label for="IdItem">Produto</label>
+        <select name="IdItem" id="IdItem" required [(ngModel)]="IdItem">
+            <option value="0" selected>Selecione o Produto</option>
+        </select>
+
+        <label for="QuantidadeEntrada">Entrada no Estoque</label>
+        <input type="number" name="QuantidadeEntrada" id="QuantidadeEntrada" max="1000" required [(ngModel)]="QuantidadeEntrada">
+
+        <label for="Unidade">Unidade de Medida</label>
+        <select name="Unidade" id="Unidade" [(ngModel)]="Unidade">
+            <option value="">Unidade do Produto</option>
+            <option value="UN">UN</option>
+            <option value="KG">KG</option>
+            <option value="ML">ML</option>
+        </select>
+
+        <label for="dataentrada">Data de Entrada</label>
+        <input type="date" name="dataentrada" id="dataentrada" required [(ngModel)]="DataEntradaProduto">
+
+        <label for="ValorUnitarioEntrada">Valor Unitario de Entrada</label>
+        <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="ValorUnitarioEntrada">
+
+        <button type="submit">Confirmar</button>
+        <button type="reset">Limpar</button>
+    </form>
+</div>
