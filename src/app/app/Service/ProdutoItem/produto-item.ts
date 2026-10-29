@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Produto } from '../../Models/Produto';
+import { ProdutoApi } from '../../Models/ProdutoApi';
 
 @Injectable({
     providedIn: 'root'
@@ -9,33 +10,49 @@ import { Produto } from '../../Models/Produto';
 export class ProdutoItem {
     constructor (private http: HttpClient){}
 
-    cadastrarPessoa(produto: Produto): Observable<Produto>{
+    cadastrarProduto(produto: Produto): Observable<Produto>{
         const urlApi = `https://localhost:7169/api/ProdutoItem`
 
         return this.http.post<Produto>(urlApi, produto)
     }
 
-    listarPessoas(): Observable<Produto[]>{
+    listarProdutos(): Observable<Produto[]>{
         const urlApi = `https://localhost:7169/api/ProdutoItem/`
 
-        return this.http.get<Produto[]>(urlApi)
+        return this.http.get<ProdutoApi[]>(urlApi)
+        .pipe(map(lista => lista.map(api => this.paraProduto(api))))
     }
 
-    listarPessoa(produtoId: number): Observable<Produto>{
+    listarProduto(produtoId: number): Observable<Produto>{
         const urlApi = `https://localhost:7169/api/ProdutoItem/${produtoId}`
 
         return this.http.get<Produto>(urlApi)
     }
 
-    alterarPessoa(produto: Produto): Observable<Produto>{
-        const urlApi = `https://localhost:7169/api/ProdutoItem/${produto.iditem}`
+    alterarProduto(produto: Produto): Observable<Produto>{
+        const urlApi = `https://localhost:7169/api/ProdutoItem/${produto.IdItem}`
 
         return this.http.put<Produto>(urlApi, produto)
     }
 
-    excluirPessoa(produto: Produto): Observable<Produto>{
-        const urlApi = `https://localhost:7169/api/ProdutoItem/${produto.iditem}`
+    excluirProduto(produto: Produto): Observable<Produto>{
+        const urlApi = `https://localhost:7169/api/ProdutoItem/${produto.IdItem}`
 
         return this.http.delete<Produto>(urlApi)
     }
+
+    private paraProduto(api: ProdutoApi): Produto {
+        const p = new Produto()
+        p.IdItem = api.idItem
+        p.IdCategoria = api.idCategoria
+        p.Item = api.item
+        p.DescricaoItem = api.descricaoItem
+        p.Preco = api.preco
+        p.TipoItem = api.tipoItem
+        p.AtivoProdutoServico = api.ativoProdutoServico
+        p.PrecoVenda = api.produto?.precoVenda ?? null
+        p.Unidade = api.produto?.unidade ?? ''
+        p.CodigoPreco = api.produto?.codigoPreco ?? null
+        return p
+      }
 }
