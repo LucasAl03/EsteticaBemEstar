@@ -46,4 +46,23 @@ export class EntradaProduto {
     this.DataEntradaProduto = ''
     this.ValorUnitarioEntrada = 0
   }
+
+  carregaCampo(pessoaId: number){
+    this.entradaService.listarPessoa(produtoId)
+      .subscribe({
+        next: (objProduto) => {
+          this.IdEntradaProduto = objProduto.IdEntradaProduto
+          this.IdItem = objProduto.IdItem
+          this.QuantidadeEntrada = objProduto.QuantidadeEntrada
+          this.Unidade = objProduto.Unidade
+          this.DataEntradaProduto = objProduto.DataEntradaProduto
+          this.ValorUnitarioEntrada = objProduto.ValorUnitarioEntrada
+
+          this.cdr.detectChanges()
+      }, error: (msgErro) =>{
+        console.log("Erro ao listar pessoa", msgErro)
+      }
+      })
+  }
+
 }
