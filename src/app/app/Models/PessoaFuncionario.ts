@@ -8,7 +8,8 @@ export class PessoaFuncionario {
     DataNascimento: string = ''
     Sexo: string = ''
     Email: string = ''
-    Telefone: string = ''
+    Telefone: number | null = null
+    AtivoPessoa: string = ''
     Enderecos: Endereco[] = []
     Funcionarios: Funcionario[] = []
 }
