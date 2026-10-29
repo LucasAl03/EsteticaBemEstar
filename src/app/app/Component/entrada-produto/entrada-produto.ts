@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EntradaService } from '../../Service/EntradaService/entrada-service';
 import { FormsModule } from '@angular/forms';
+import { Entrada } from '../../Models/Entrada';
 
 @Component({
   imports: [FormsModule],
@@ -10,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './entrada-produto.html',
 })
 export class EntradaProduto {
-  constructor(private cdr: ChangeDetectorRef, private pessoaService: EntradaService, private route: ActivatedRoute){}
+  constructor(private cdr: ChangeDetectorRef, private entradaService: EntradaService, private route: ActivatedRoute){}
 
   
   IdEntradaProduto = 0
@@ -20,8 +21,22 @@ export class EntradaProduto {
   DataEntradaProduto = ''
   ValorUnitarioEntrada = 0
 
+  editar = false
+  produtoId = 0
+
+  ngOnInit(){
+    this.produtoId = Number(this.route.snapshot.paramMap.get('IdEntradaProduto'))
+
+    if(this.produtoId > 0){
+      this.editar = true
+      this.carregaCampo(this.produtoId)
+    }
+  }
+
   exibeDados(){
     console.log(this.IdItem, this.QuantidadeEntrada, this.Unidade, this.DataEntradaProduto, this.ValorUnitarioEntrada)
+
+    this.limparCampos();
   }
 
   limparCampos(){
