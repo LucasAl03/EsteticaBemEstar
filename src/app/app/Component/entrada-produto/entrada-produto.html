@@ -3,18 +3,18 @@
 
     <form class="formulario" (ngSubmit)="enviaDados()" ngNativeValidate>
         <label for="IdItem">Produto</label>
-        <select name="IdItem" id="IdItem" required [(ngModel)]="IdItem" (ngModelChange)="selecionaProduto()">
+        <select name="IdItem" id="IdItem" required [(ngModel)]="idItem" (ngModelChange)="selecionaProduto()">
             <option [ngValue]="0" selected>Selecione o Produto</option>
-            @for (p of produtos; track p.IdItem){
-            <option [ngValue]="p.IdItem">{{p.Item}}</option>
+            @for (p of produtos; track p.idItem){
+            <option [ngValue]="p.idItem">{{p.item}}</option>
         }
         </select>
 
         <label for="QuantidadeEntrada">Entrada no Estoque</label>
-        <input type="number" name="QuantidadeEntrada" id="QuantidadeEntrada" max="1000" required [(ngModel)]="QuantidadeEntrada">
+        <input type="number" name="QuantidadeEntrada" id="QuantidadeEntrada" max="1000" required [(ngModel)]="quantidadeEntrada">
 
         <label for="Unidade">Unidade de Medida</label>
-        <select name="Unidade" id="Unidade" [(ngModel)]="Unidade">
+        <select name="Unidade" id="Unidade" [(ngModel)]="unidade">
             <option value="">Unidade do Produto</option>
             <option value="UN">UN</option>
             <option value="KG">KG</option>
@@ -22,10 +22,10 @@
         </select>
 
         <label for="dataentrada">Data de Entrada</label>
-        <input type="date" name="dataentrada" id="dataentrada" required [(ngModel)]="DataEntradaProduto">
+        <input type="date" name="dataentrada" id="dataentrada" required [(ngModel)]="dataEntradaProduto">
 
         <label for="ValorUnitarioEntrada">Valor Unitario de Entrada</label>
-        <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="ValorUnitarioEntrada" step="0.1">
+        <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="valorUnitarioEntrada" step="0.1">
 
         <div id="div-btns">
             <button type="submit" class="btn-submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
@@ -35,18 +35,23 @@
 
     <div id="div-cards">
         <div id="card">
-            <div class="card">
-                <h3 class="entrada-produto">Nome do produto</h3>
-
-                <span class="valor-entrada">Valor de entrada</span><p></p>
-
-                <span class="data-entrada">Data de entrada</span>
-
-                <div id="btns-card">
-                    <a href="" class="btn-excluir">Exluir</a><p></p>
-                    <a href="" class="btn-edita">Editar</a>
+            @for (e of entradas; track e.idEntradaProduto) {
+                @let p = produtos.find(prod => prod.idItem === e.idItem);
+                <div class="card">
+                    <h3 class="entrada-produto">{{p?.item}}</h3>
+        
+                    <span class="valor-entrada">R$ {{e.valorUnitarioEntrada}}</span><p></p>
+        
+                    <span class="data-entrada">{{e.dataEntradaProduto}}</span>
+        
+                    <div id="btns-card">
+                        <a href="" class="btn-excluir">Excluir</a>
+                        <a href="" class="btn-edita">Editar</a>
+                    </div>
                 </div>
-            </div>
+            } @empty {
+                <h3 class="entrada-produto">Nenhuma entrada cadastrada.</h3>
+            }
         </div>
         
     </div>
