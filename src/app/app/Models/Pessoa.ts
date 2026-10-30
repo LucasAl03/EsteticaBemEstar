@@ -7,6 +7,7 @@ export class Pessoa {
     DataNascimento: string = ''
     Sexo: string = ''
     Email: string = ''
-    Telefone: string = ''
+    Telefone: number | null = null 
+    AtivoPessoa: string = ''
     Enderecos: Endereco[] = []
 }
