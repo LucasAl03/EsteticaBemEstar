@@ -32,7 +32,7 @@ export class EntradaProduto implements OnInit {
   produtoId = 0
 
   ngOnInit(){
-    this.produtoId = Number(this.route.snapshot.paramMap.get('IdEntradaProduto'))
+    this.produtoId = Number(this.route.snapshot.paramMap.get('idEntradaProduto'))
 
     if(this.produtoId > 0){
       this.editar = true
@@ -146,7 +146,7 @@ export class EntradaProduto implements OnInit {
     this.entradaService.listarEntradas()
       .subscribe({
         next: (lista) => {
-          this.entradas = lista.filter(e => e.idEntradaProduto != 0)
+          this.entradas = lista.sort((a, b) => b.idEntradaProduto - a.idEntradaProduto)
           this.cdr.detectChanges()
         },
         error: (err) => console.log('Erro ao listar as entradas', err)
