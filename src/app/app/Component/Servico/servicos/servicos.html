@@ -3,11 +3,11 @@
     <h1>Serviços Disponíveis</h1>
 
     <div id="div-cards">
-        @for (p of produtos; track p.IdItem){
+        @for (p of produtos; track p.idItem){
             <div class="card">
-            <h3 class="servico">{{p.Item}}</h3>
-
-            <span class="preco-servico">R$ {{p.Preco}}</span>
+            <h3 class="servico">{{p.item}}</h3>
+            
+            <span class="preco-servico">R$ {{p.preco}}</span>
 
             <div id="btns">
                 <a href="">adicionar ao carrinho</a>
