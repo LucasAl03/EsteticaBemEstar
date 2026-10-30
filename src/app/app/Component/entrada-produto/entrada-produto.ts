@@ -26,6 +26,8 @@ export class EntradaProduto implements OnInit {
   // array do objeto Produto 
   produtos: Produto[] = []
 
+  entradas: Entrada[] = []
+
   editar = false
   produtoId = 0
 
@@ -137,5 +139,10 @@ export class EntradaProduto implements OnInit {
       this.Unidade = ''
       this.ValorUnitarioEntrada = null
     }
+  }
+
+  entradaProduto(){
+    this.entradaService.listarEntradas()
+      .subscribe({})
   }
 }
