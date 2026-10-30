@@ -1,1 +1,19 @@
-<p>servicos works!</p>
+<div id="lista-servicos">
+
+    <h1>Serviços Disponíveis</h1>
+
+    <div id="div-cards">
+        @for (p of produtos; track p.IdItem){
+            <div class="card">
+            <h3 class="servico">{{p.Item}}</h3>
+
+            <span class="preco-servico">R$ {{p.Preco}}</span>
+
+            <div id="btns">
+                <a href="">adicionar ao carrinho</a>
+            </div>
+
+        </div>
+        }
+    </div>
+</div>
