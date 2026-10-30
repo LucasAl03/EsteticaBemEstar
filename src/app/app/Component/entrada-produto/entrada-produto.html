@@ -1,10 +1,13 @@
-<div id="entradaproduto">
+<div id="entrada-produto">
     <h1>Entrada de produto no Estoque</h1>
 
-    <form class="formulario" (ngSubmit)="exibeDados()" ngNativeValidate>
+    <form class="formulario" (ngSubmit)="enviaDados()" ngNativeValidate>
         <label for="IdItem">Produto</label>
-        <select name="IdItem" id="IdItem" required [(ngModel)]="IdItem">
-            <option value="0" selected>Selecione o Produto</option>
+        <select name="IdItem" id="IdItem" required [(ngModel)]="IdItem" (ngModelChange)="selecionaProduto()">
+            <option [ngValue]="0" selected>Selecione o Produto</option>
+            @for (p of produtos; track p.IdItem){
+            <option [ngValue]="p.IdItem">{{p.Item}}</option>
+        }
         </select>
 
         <label for="QuantidadeEntrada">Entrada no Estoque</label>
@@ -22,9 +25,11 @@
         <input type="date" name="dataentrada" id="dataentrada" required [(ngModel)]="DataEntradaProduto">
 
         <label for="ValorUnitarioEntrada">Valor Unitario de Entrada</label>
-        <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="ValorUnitarioEntrada">
+        <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="ValorUnitarioEntrada" step="0.1">
 
-        <button type="submit">Confirmar</button>
-        <button type="reset">Limpar</button>
+        <div id="div-btns">
+            <button type="submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
+            <button type="reset">Limpar</button>
+        </div>
     </form>
 </div>
