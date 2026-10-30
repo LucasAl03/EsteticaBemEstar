@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Entrada } from '../../Models/Entrada';
+import { EstoqueResposta } from '../../Models/EstoqueResposta';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,9 @@ export class entradaService {
     listarEntradas(): Observable<Entrada[]>{
         const urlApi = `https://localhost:7169/api/EntradaProdEstoque/`
 
-        return this.http.get<Entrada[]>(urlApi)
+        return this.http.get<EstoqueResposta[]>(urlApi).pipe(
+            map(estoque => estoque.flatMap(e => e.entradaProdutos ?? []))
+        )
     }
 
     listarEntrada(produtoId: number): Observable<Entrada>{
