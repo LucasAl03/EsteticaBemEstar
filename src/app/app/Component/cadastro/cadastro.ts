@@ -22,7 +22,8 @@ export class Cadastro {
   DataNascimento = '' 
   Sexo = ''
   Email = ''
-  Telefone = ''
+  Telefone: number | null = null
+  AtivoPessoa = 'S'
 
   // endereco
   Cep = ''
@@ -44,7 +45,7 @@ export class Cadastro {
     this.DataNascimento = ''
     this.Sexo = ''
     this.Email = ''
-    this.Telefone = ''
+    this.Telefone = null
 
     this.Cep = ''
     this.Numero = ''
@@ -71,6 +72,7 @@ export class Cadastro {
           this.Sexo = objPessoa.Sexo
           this.Email = objPessoa.Email
           this.Telefone = objPessoa.Telefone
+          this.AtivoPessoa = objPessoa.AtivoPessoa
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
@@ -87,6 +89,7 @@ export class Cadastro {
     pessoa.Sexo = this.Sexo
     pessoa.Email = this.Email
     pessoa.Telefone = this.Telefone
+    pessoa.AtivoPessoa = this.AtivoPessoa
 
     const endereco = new Endereco()
     endereco.Cep = this.Cep
