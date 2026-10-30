@@ -13,7 +13,6 @@ import { Produto } from '../../../Models/Produto';
 export class Servicos implements OnInit{
 
   constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem){}
-
   
   produtos: Produto[] = []
 
