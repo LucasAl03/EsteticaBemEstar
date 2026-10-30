@@ -1,8 +1,10 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EntradaService } from '../../Service/EntradaService/entrada-service';
 import { FormsModule } from '@angular/forms';
 import { Entrada } from '../../Models/Entrada';
+import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
+import { entradaService } from '../../Service/EntradaService/entrada-service';
+import { Produto } from '../../Models/Produto';
 
 @Component({
   imports: [FormsModule],
@@ -10,16 +12,19 @@ import { Entrada } from '../../Models/Entrada';
   styleUrl: './entrada-produto.css',
   templateUrl: './entrada-produto.html',
 })
-export class EntradaProduto {
-  constructor(private cdr: ChangeDetectorRef, private entradaService: EntradaService, private route: ActivatedRoute){}
+export class EntradaProduto implements OnInit {
+  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem){}
 
-  
+  // declaração dos atributos para Entrada
   IdEntradaProduto = 0
   IdItem = 0
-  QuantidadeEntrada = 0
+  QuantidadeEntrada: number | null = null
   Unidade = ''
   DataEntradaProduto = ''
-  ValorUnitarioEntrada = 0
+  ValorUnitarioEntrada: number | null = null
+
+  // array do objeto Produto 
+  produtos: Produto[] = []
 
   editar = false
   produtoId = 0
@@ -31,6 +36,8 @@ export class EntradaProduto {
       this.editar = true
       this.carregaCampo(this.produtoId)
     }
+
+    this.carregaProdutos()
   }
 
   exibeDados(){
@@ -41,14 +48,14 @@ export class EntradaProduto {
 
   limparCampos(){
     this.IdItem = 0
-    this.QuantidadeEntrada = 0
+    this.QuantidadeEntrada = null
     this.Unidade = ''
     this.DataEntradaProduto = ''
-    this.ValorUnitarioEntrada = 0
+    this.ValorUnitarioEntrada = null
   }
 
-  carregaCampo(pessoaId: number){
-    this.entradaService.listarPessoa(produtoId)
+  carregaCampo(produtoId: number){
+    this.entradaService.listarEntrada(produtoId)
       .subscribe({
         next: (objProduto) => {
           this.IdEntradaProduto = objProduto.IdEntradaProduto
@@ -60,9 +67,75 @@ export class EntradaProduto {
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
-        console.log("Erro ao listar pessoa", msgErro)
+        console.log("Erro ao listar o produto", msgErro)
       }
       })
   }
 
+  enviaDados(){
+    const produto = new Entrada()
+    produto.IdItem = this.IdItem
+    produto.QuantidadeEntrada = this.QuantidadeEntrada
+    produto.Unidade = this.Unidade
+    produto.DataEntradaProduto = this.DataEntradaProduto
+    produto.ValorUnitarioEntrada = (this.ValorUnitarioEntrada)
+
+    if(!this.editar){
+      this.entradaService.cadastrarEntrada(produto)
+        .subscribe({
+          next: (resposta) => {
+            console.log(resposta)
+          }, error: (msgErro) => {
+            console.log("Erro ao cadastrar a entrada.", msgErro)
+          }
+        })
+    } else {
+      produto.IdEntradaProduto = this.produtoId
+
+      this.entradaService.alterarEntrada(produto)
+        .subscribe({
+          next: (resposta) => {
+            console.log(produto)
+            console.log(resposta)
+          }, error: (msgErro) => {
+            console.log("Erro ao alterar a entrada", msgErro)
+          }
+        })
+    }
+    this.limparCampos();
+  }
+
+  listarEntrada(produtoId: number){
+    this.entradaService.listarEntrada(produtoId)
+      .subscribe({
+        next: (dados) => {
+          console.table(dados)
+        }, error: (msgErro) => {
+          console.log("Erro ao listar as entradas", msgErro)
+        }
+      })
+  }
+
+  carregaProdutos(){
+    this.produtoService.listarProdutos()
+      .subscribe({
+        next: (lista) => {
+          this.produtos = lista.filter(p => p.TipoItem === 'P')
+          this.cdr.detectChanges()
+        },
+        error: (err) => console.log('Erro ao listar os produtos', err)
+      })
+  }
+
+  selecionaProduto(){
+    const produto = this.produtos.find(p => p.IdItem === this.IdItem)
+
+    if (produto) {
+      this.Unidade = produto.Unidade
+      this.ValorUnitarioEntrada = produto.Preco
+    } else {
+      this.Unidade = ''
+      this.ValorUnitarioEntrada = null
+    }
+  }
 }
