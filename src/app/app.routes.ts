@@ -24,7 +24,7 @@ export const routes: Routes = [
         component: CadastroFuncionario
     },
     {
-        path: 'entrada-produto',
+        path: 'entrada',
         component: EntradaProduto
     }
 ];
