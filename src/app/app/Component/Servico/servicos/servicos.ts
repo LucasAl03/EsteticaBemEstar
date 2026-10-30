@@ -25,7 +25,7 @@ export class Servicos implements OnInit{
     this.produtoService.listarProdutos()
       .subscribe({
         next: (lista) => {
-          this.produtos = lista.filter(p => p.TipoItem === 'S')
+          this.produtos = lista.filter(p => p.TipoItem === 'S' && p.AtivoProdutoServico === 'S')
           this.cdr.detectChanges()
         },
         error: (err) => console.log('Erro ao listar os produtos', err)
