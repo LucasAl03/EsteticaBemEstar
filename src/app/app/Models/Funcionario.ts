@@ -1,4 +1,4 @@
 export class Funcionario {
-    Cargo: string = ''
-    DataAdmissao: string = ''
+    cargo: string = ''
+    dataAdmissao: string = ''
 }

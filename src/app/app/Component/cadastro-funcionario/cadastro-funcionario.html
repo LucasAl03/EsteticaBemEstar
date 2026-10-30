@@ -5,43 +5,43 @@
     <form id="pessoa-form" (ngSubmit)="exibeDados()" ngNativeValidate>
 
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" maxlength="70" [(ngModel)]="Nome" required>
+        <input type="text" id="nome" name="nome" maxlength="70" [(ngModel)]="nome" required>
 
         <label for="cpf">CPF</label>
-        <input type="text" id="cpf" name="cpf" maxlength="11" [(ngModel)]="CPF" required>
+        <input type="text" id="cpf" name="cpf" maxlength="11" [(ngModel)]="cpf" required>
 
         <label for="data_nascimento">Data de Nascimento</label>
-        <input type="date" id="data_nascimento" name="data_nascimento" [(ngModel)]="DataNascimento" required>
+        <input type="date" id="data_nascimento" name="data_nascimento" [(ngModel)]="dataNascimento" required>
 
         <label>Sexo</label>
-        <input type="radio" name="sexo" id="sexoM" class="btnSelecao" value="M" [(ngModel)]="Sexo" required> Masculino
-        <input type="radio" name="sexo" id="sexoF" class="btnSelecao" value="F" [(ngModel)]="Sexo" required> Feminino
-        <input type="radio" name="sexo" id="sexoN" class="btnSelecao" value="N" [(ngModel)]="Sexo" required> Não se Identificar
+        <input type="radio" name="sexo" id="sexoM" class="btnSelecao" value="M" [(ngModel)]="sexo" required> Masculino
+        <input type="radio" name="sexo" id="sexoF" class="btnSelecao" value="F" [(ngModel)]="sexo" required> Feminino
+        <input type="radio" name="sexo" id="sexoN" class="btnSelecao" value="N" [(ngModel)]="sexo" required> Não se Identificar
         
         <label for="email">Email</label>
-        <input type="text" id="email" name="email" maxlength="120" [(ngModel)]="Email" required>
+        <input type="text" id="email" name="email" maxlength="120" [(ngModel)]="email" required>
 
         <label for="Telefone">Telefone</label>
-        <input type="text" id="Telefone" name="Telefone" maxlength="11" [(ngModel)]="Telefone" required>
+        <input type="text" id="Telefone" name="Telefone" maxlength="11" [(ngModel)]="telefone" required>
 
         <h2>Endereço</h2>
 
         <label for="cep">Cep</label>
-        <input type="text" id="cep" name="cep" maxlength="11" [(ngModel)]="Cep" required>
+        <input type="text" id="cep" name="cep" maxlength="11" [(ngModel)]="cep" required>
 
         <label for="numero">numero</label>
-        <input type="text" id="numero" name="numero" maxlength="11" [(ngModel)]="Numero" required>
+        <input type="text" id="numero" name="numero" maxlength="11" [(ngModel)]="numero" required>
 
         <label for="complemento">Complemento</label>
-        <input type="text" id="complemento" name="complemento" maxlength="11" [(ngModel)]="Complemento" required>
+        <input type="text" id="complemento" name="complemento" maxlength="11" [(ngModel)]="complemento" required>
 
         <h2>Função na Empresa</h2>
 
         <label for="cargo">Cargo</label>
-        <input type="text" id="cargo" name="cargo" maxlength="60" [(ngModel)]="Cargo" required>
+        <input type="text" id="cargo" name="cargo" maxlength="60" [(ngModel)]="cargo" required>
 
         <label for="dataadmissao">Data de Admissão</label>
-        <input type="date" name="dataadmissao" id="dataadmissao" [(ngModel)]="DataAdmissao" required>
+        <input type="date" name="dataadmissao" id="dataadmissao" [(ngModel)]="dataAdmissao" required>
 
         <div id="div-btns">
             <button type="submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>

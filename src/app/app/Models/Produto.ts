@@ -1,12 +1,12 @@
 export class Produto{
-    IdItem: number = 0
-    IdCategoria: number = 0
-    Item: string = ''
-    DescricaoItem: string = ''
-    Preco: number | null = null
-    TipoItem: string = ''
-    AtivoProdutoServico: string = ''
-    PrecoVenda: number | null = null
-    Unidade: string = ''
-    CodigoPreco: number | null = null
+    idItem: number = 0
+    idCategoria: number = 0
+    item: string = ''
+    descricaoItem: string = ''
+    preco: number | null = null
+    tipoItem: string = ''
+    ativoProdutoServico: string = ''
+    precoVenda: number | null = null
+    unidade: string = ''
+    oodigoPreco: number | null = null
 }

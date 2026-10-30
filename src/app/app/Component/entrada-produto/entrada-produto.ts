@@ -16,12 +16,12 @@ export class EntradaProduto implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem){}
 
   // declaração dos atributos para Entrada
-  IdEntradaProduto = 0
-  IdItem = 0
-  QuantidadeEntrada: number | null = null
-  Unidade = ''
-  DataEntradaProduto = ''
-  ValorUnitarioEntrada: number | null = null
+  idEntradaProduto = 0
+  idItem = 0
+  quantidadeEntrada: number | null = null
+  unidade = ''
+  dataEntradaProduto = ''
+  valorUnitarioEntrada: number | null = null
 
   // array do objeto Produto 
   produtos: Produto[] = []
@@ -40,32 +40,33 @@ export class EntradaProduto implements OnInit {
     }
 
     this.carregaProdutos()
+    this.carregaEntradas()
   }
 
   exibeDados(){
-    console.log(this.IdItem, this.QuantidadeEntrada, this.Unidade, this.DataEntradaProduto, this.ValorUnitarioEntrada)
+    console.log(this.idItem, this.quantidadeEntrada, this.unidade, this.dataEntradaProduto, this.valorUnitarioEntrada)
 
     this.limparCampos();
   }
 
   limparCampos(){
-    this.IdItem = 0
-    this.QuantidadeEntrada = null
-    this.Unidade = ''
-    this.DataEntradaProduto = ''
-    this.ValorUnitarioEntrada = null
+    this.idItem = 0
+    this.quantidadeEntrada = null
+    this.unidade = ''
+    this.dataEntradaProduto = ''
+    this.valorUnitarioEntrada = null
   }
 
   carregaCampo(produtoId: number){
     this.entradaService.listarEntrada(produtoId)
       .subscribe({
         next: (objProduto) => {
-          this.IdEntradaProduto = objProduto.IdEntradaProduto
-          this.IdItem = objProduto.IdItem
-          this.QuantidadeEntrada = objProduto.QuantidadeEntrada
-          this.Unidade = objProduto.Unidade
-          this.DataEntradaProduto = objProduto.DataEntradaProduto
-          this.ValorUnitarioEntrada = objProduto.ValorUnitarioEntrada
+          this.idEntradaProduto = objProduto.idEntradaProduto
+          this.idItem = objProduto.idItem
+          this.quantidadeEntrada = objProduto.quantidadeEntrada
+          this.unidade = objProduto.unidade
+          this.dataEntradaProduto = objProduto.dataEntradaProduto
+          this.valorUnitarioEntrada = objProduto.valorUnitarioEntrada
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
@@ -76,11 +77,11 @@ export class EntradaProduto implements OnInit {
 
   enviaDados(){
     const produto = new Entrada()
-    produto.IdItem = this.IdItem
-    produto.QuantidadeEntrada = this.QuantidadeEntrada
-    produto.Unidade = this.Unidade
-    produto.DataEntradaProduto = this.DataEntradaProduto
-    produto.ValorUnitarioEntrada = (this.ValorUnitarioEntrada)
+    produto.idItem = this.idItem
+    produto.quantidadeEntrada = this.quantidadeEntrada
+    produto.unidade = this.unidade
+    produto.dataEntradaProduto = this.dataEntradaProduto
+    produto.valorUnitarioEntrada = (this.valorUnitarioEntrada)
 
     if(!this.editar){
       this.entradaService.cadastrarEntrada(produto)
@@ -92,7 +93,7 @@ export class EntradaProduto implements OnInit {
           }
         })
     } else {
-      produto.IdEntradaProduto = this.produtoId
+      produto.idEntradaProduto = this.produtoId
 
       this.entradaService.alterarEntrada(produto)
         .subscribe({
@@ -122,7 +123,7 @@ export class EntradaProduto implements OnInit {
     this.produtoService.listarProdutos()
       .subscribe({
         next: (lista) => {
-          this.produtos = lista.filter(p => p.TipoItem === 'P')
+          this.produtos = lista.filter(p => p.tipoItem === 'P')
           this.cdr.detectChanges()
         },
         error: (err) => console.log('Erro ao listar os produtos', err)
@@ -130,19 +131,25 @@ export class EntradaProduto implements OnInit {
   }
 
   selecionaProduto(){
-    const produto = this.produtos.find(p => p.IdItem === this.IdItem)
+    const produto = this.produtos.find(p => p.idItem === this.idItem)
 
     if (produto) {
-      this.Unidade = produto.Unidade
-      this.ValorUnitarioEntrada = produto.Preco
+      this.unidade = produto.unidade
+      this.valorUnitarioEntrada = produto.preco
     } else {
-      this.Unidade = ''
-      this.ValorUnitarioEntrada = null
+      this.unidade = ''
+      this.valorUnitarioEntrada = null
     }
   }
 
-  entradaProduto(){
+  carregaEntradas(){
     this.entradaService.listarEntradas()
-      .subscribe({})
+      .subscribe({
+        next: (lista) => {
+          this.entradas = lista.filter(e => e.idEntradaProduto != 0)
+          this.cdr.detectChanges()
+        },
+        error: (err) => console.log('Erro ao listar as entradas', err)
+      })
   }
 }

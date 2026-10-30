@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Entrada } from '../../Models/Entrada';
 
 @Injectable({
@@ -28,13 +28,13 @@ export class entradaService {
     }
 
     alterarEntrada(produto: Entrada): Observable<Entrada>{
-        const urlApi = `https://localhost:7169/api/EntradaProdEstoque/${produto.IdEntradaProduto}`
+        const urlApi = `https://localhost:7169/api/EntradaProdEstoque/${produto.idEntradaProduto}`
 
         return this.http.put<Entrada>(urlApi, produto)
     }
 
     excluirEntrada(produto: Entrada): Observable<Entrada>{
-        const urlApi = `https://localhost:7169/api/EntradaProdEstoque/${produto.IdEntradaProduto}`
+        const urlApi = `https://localhost:7169/api/EntradaProdEstoque/${produto.idEntradaProduto}`
 
         return this.http.delete<Entrada>(urlApi)
     }

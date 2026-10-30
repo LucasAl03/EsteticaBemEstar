@@ -28,25 +28,26 @@
         <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="ValorUnitarioEntrada" step="0.1">
 
         <div id="div-btns">
-            <button type="submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
-            <button type="reset">Limpar</button>
+            <button type="submit" class="btn-submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
+            <button type="reset" class="btn-limpa">Limpar</button>
         </div>
     </form>
 
     <div id="div-cards">
         <div id="card">
-
-        </div>
-        @for (p of produtos; track p.IdItem){
             <div class="card">
-            <h3 class="servico">{{p.Item}}</h3>
+                <h3 class="entrada-produto">Nome do produto</h3>
 
-            <span class="preco-servico">R$ {{p.Preco}}</span>
+                <span class="valor-entrada">Valor de entrada</span><p></p>
 
-            <div id="btns">
-                <a href="">adicionar ao carrinho</a>
+                <span class="data-entrada">Data de entrada</span>
+
+                <div id="btns-card">
+                    <a href="" class="btn-excluir">Exluir</a><p></p>
+                    <a href="" class="btn-edita">Editar</a>
+                </div>
             </div>
         </div>
-        }
+        
     </div>
 </div>

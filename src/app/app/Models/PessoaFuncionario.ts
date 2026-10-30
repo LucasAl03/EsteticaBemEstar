@@ -2,14 +2,14 @@ import { Endereco } from "./Endereco"
 import { Funcionario } from "./Funcionario"
 
 export class PessoaFuncionario {
-    IdPessoa: number = 0
-    Nome: string = ''
-    CPF: string = ''
-    DataNascimento: string = ''
-    Sexo: string = ''
-    Email: string = ''
-    Telefone: number | null = null
-    AtivoPessoa: string = ''
+    idPessoa: number = 0
+    nome: string = ''
+    cpf: string = ''
+    dataNascimento: string = ''
+    sexo: string = ''
+    email: string = ''
+    telefone: number | null = null
+    ativoPessoa: string = ''
     Enderecos: Endereco[] = []
     Funcionarios: Funcionario[] = []
 }

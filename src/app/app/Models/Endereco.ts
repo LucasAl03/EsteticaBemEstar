@@ -1,5 +1,5 @@
 export class Endereco{
-    Cep: string = ''
-    Numero: string = ''
-    Complemento: string = ''
+    cep: string = ''
+    numero: string = ''
+    complemento: string = ''
 }

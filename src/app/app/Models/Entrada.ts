@@ -1,8 +1,8 @@
 export class Entrada {
-    IdEntradaProduto: number = 0
-    IdItem: number = 0
-    QuantidadeEntrada: number | null = null
-    Unidade: string = ''
-    DataEntradaProduto: string = ''
-    ValorUnitarioEntrada: number | null = null
+    idEntradaProduto: number = 0
+    idItem: number = 0
+    quantidadeEntrada: number | null = null
+    unidade: string = ''
+    dataEntradaProduto: string = ''
+    valorUnitarioEntrada: number | null = null
 }
