@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Endereco } from '../../Models/Endereco';
 import { Funcionario } from '../../Models/Funcionario';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
+import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
   templateUrl: './cadastro-funcionario.html',
 })
 export class CadastroFuncionario {
-  constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute){}
+  constructor(private cdr: ChangeDetectorRef, private pessoaService: FuncionarioService, private route: ActivatedRoute){}
 
   // pessoa
   idPessoa = 0
@@ -72,7 +72,7 @@ export class CadastroFuncionario {
   }
 
   carregaCampo(pessoaId: number){
-    this.pessoaService.listarPessoa(pessoaId)
+    this.pessoaService.listarFuncioanrio(pessoaId)
       .subscribe({
         next: (objPessoa) => {
           this.idPessoa = objPessoa.idPessoa
@@ -114,7 +114,7 @@ export class CadastroFuncionario {
     pessoa.Funcionarios = [funcionario];
 
     if(!this.editar){
-      this.pessoaService.cadastrarPessoa(pessoa)
+      this.pessoaService.cadastrarFuncionario(pessoa)
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
@@ -125,7 +125,7 @@ export class CadastroFuncionario {
     } else {
       pessoa.idPessoa = this.pessoaId
 
-      this.pessoaService.alterarPessoa(pessoa)
+      this.pessoaService.alterarFuncionario(pessoa)
         .subscribe({
           next: (resposta) => {
             console.log(pessoa)
@@ -139,7 +139,7 @@ export class CadastroFuncionario {
   }
 
   listarPessoa(pessoaId: number){
-    this.pessoaService.listarPessoa(pessoaId)
+    this.pessoaService.listarFuncioanrio(pessoaId)
       .subscribe({
         next: (dados) => {
           console.table(dados)
