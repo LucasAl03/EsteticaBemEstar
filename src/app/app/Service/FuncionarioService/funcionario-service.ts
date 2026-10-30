@@ -9,32 +9,32 @@ import { Observable } from 'rxjs';
 export class FuncionarioService {
     constructor (private http: HttpClient){}
 
-    cadastrarPessoa(pessoa: PessoaFuncionario): Observable<PessoaFuncionario>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco`
+    cadastrarFuncionario(pessoa: PessoaFuncionario): Observable<PessoaFuncionario>{
+        const urlApi = `https://localhost:7169/api/FuncionarioEndereco`
 
         return this.http.post<PessoaFuncionario>(urlApi, pessoa)
     }
 
-    listarPessoas(): Observable<PessoaFuncionario[]>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco/`
+    listarFuncionarios(): Observable<PessoaFuncionario[]>{
+        const urlApi = `https://localhost:7169/api/FuncionarioEndereco/`
 
         return this.http.get<PessoaFuncionario[]>(urlApi)
     }
 
-    listarPessoa(pessoaId: number): Observable<PessoaFuncionario>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoaId}`
+    listarFuncioanrio(pessoaId: number): Observable<PessoaFuncionario>{
+        const urlApi = `https://localhost:7169/api/FuncionarioEndereco/${pessoaId}`
 
         return this.http.get<PessoaFuncionario>(urlApi)
     }
 
-    alterarPessoa(pessoa: PessoaFuncionario): Observable<PessoaFuncionario>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.IdPessoa}`
+    alterarFuncionario(pessoa: PessoaFuncionario): Observable<PessoaFuncionario>{
+        const urlApi = `https://localhost:7169/api/FuncionarioEndereco/${pessoa.idPessoa}`
 
         return this.http.put<PessoaFuncionario>(urlApi, pessoa)
     }
 
-    excluirPessoa(pessoa: PessoaFuncionario): Observable<PessoaFuncionario>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.IdPessoa}`
+    excluirFuncionario(pessoa: PessoaFuncionario): Observable<PessoaFuncionario>{
+        const urlApi = `https://localhost:7169/api/FuncionarioEndereco/${pessoa.idPessoa}`
 
         return this.http.delete<PessoaFuncionario>(urlApi)
     }
