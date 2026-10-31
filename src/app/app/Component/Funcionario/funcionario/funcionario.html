@@ -1,1 +1,15 @@
-<p>funcionario works!</p>
+<div id="funcionarios">
+    <h3 class="lista">Funcionários</h3>
+
+    <div id="cards">
+        @for (f of funcionarios; track f.idPessoa){
+        <div id="card">
+            <h4 class="card-nome"> {{f.nome}} </h4>
+            
+            <span class="data-admissao">  </span>
+        </div>
+        } @empty {
+            <h4>Nenhum Funcionário cadastrado.</h4>
+        }
+    </div>
+</div>
