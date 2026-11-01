@@ -1,12 +1,31 @@
 <div id="funcionarios">
     <h3 class="lista">Funcionários</h3>
 
-    <div id="cards">
-        @for (f of funcionarios; track f.idPessoa){
-        <div id="card">
-            <h4 class="card-nome"> {{f.nome}} </h4>
-            
-            <span class="data-admissao">  </span>
+    <div class="cards">
+        @for (p of pessoa; track p.idPessoa) {
+        <div class="card">
+            <h4 class="card-nome">Nome: {{ p.nome }}</h4>
+
+            @if (p.funcionario) {
+            <div class="cargo-info">
+                <span class="cargo">Cargo: {{ p.funcionario.cargo }}</span>
+                <span class="data-admissao">Data de Admissão: {{ p.funcionario.dataAdmissao | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            }
+
+            @for (end of p.enderecos; track end.idEndereco) {
+                <h4>Endereço {{$index + 1}}</h4>
+            <div class="endereco-info">
+                <span class="endereco-cep">{{ end.cep }}</span>
+                <span class="endereco-numero">{{ end.numero }}</span>
+                <span class="endereco-comple">{{ end.complemento }}</span>
+            </div>
+            }
+
+            <div class="btns">
+                <a href="" class="btns-exclui">Excluir</a>
+                <a href="" class="btns-editar">Editar</a>
+            </div>
         </div>
         } @empty {
             <h4>Nenhum Funcionário cadastrado.</h4>
