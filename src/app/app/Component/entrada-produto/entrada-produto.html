@@ -38,11 +38,13 @@
             @for (e of entradas; track e.idEntradaProduto) {
                 @let p = produtos.find(prod => prod.idItem === e.idItem);
                 <div class="card">
-                    <h3 class="entrada-produto">{{p?.item}}</h3>
+                    <h3 class="entrada-produto">Produto: {{p?.item}}</h3>
         
-                    <span class="valor-entrada">R$ {{e.valorUnitarioEntrada}}</span><p></p>
+                    <span class="valor-entrada">Valor Unitário: R$ {{e.valorUnitarioEntrada}}</span><p></p>
         
-                    <span class="data-entrada">{{e.dataEntradaProduto}}</span>
+                    <span class="data-entrada">Data: {{e.dataEntradaProduto | date: 'dd/MM/yyyy'}}</span> <p></p>
+
+                    <span class="quant-entrada"> Quantidade: {{e.quantidadeEntrada}} </span>
         
                     <div id="btns-card">
                         <a href="" class="btn-excluir">Excluir</a>
