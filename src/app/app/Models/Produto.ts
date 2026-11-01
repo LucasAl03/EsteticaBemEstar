@@ -8,5 +8,5 @@ export class Produto{
     ativoProdutoServico: string = ''
     precoVenda: number | null = null
     unidade: string = ''
-    oodigoPreco: number | null = null
+    codigoPreco: number | null = null
 }
