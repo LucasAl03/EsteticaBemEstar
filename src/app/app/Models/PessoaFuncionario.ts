@@ -1,5 +1,5 @@
 import { Endereco } from "./Endereco"
-import { Funcionario } from "./Funcionario"
+import { FuncionarioCargo } from "./FuncionarioCargo"
 
 export class PessoaFuncionario {
     idPessoa: number = 0
@@ -10,6 +10,6 @@ export class PessoaFuncionario {
     email: string = ''
     telefone: number | null = null
     ativoPessoa: string = ''
-    Enderecos: Endereco[] = []
-    Funcionarios: Funcionario[] = []
+    enderecos: Endereco[] = []
+    funcionario: FuncionarioCargo | null = null
 }
