@@ -5,9 +5,10 @@ import { Entrada } from '../../Models/Entrada';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 import { entradaService } from '../../Service/EntradaService/entrada-service';
 import { Produto } from '../../Models/Produto';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   selector: 'app-entrada-produto',
   styleUrl: './entrada-produto.css',
   templateUrl: './entrada-produto.html',
