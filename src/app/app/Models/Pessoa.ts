@@ -9,5 +9,5 @@ export class Pessoa {
     email: string = ''
     telefone: number | null = null 
     ativoPessoa: string = ''
-    Enderecos: Endereco[] = []
+    enderecos: Endereco[] = []
 }
