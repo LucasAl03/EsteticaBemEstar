@@ -96,7 +96,7 @@ export class Cadastro {
     endereco.numero = this.numero
     endereco.complemento = this.complemento
 
-    pessoa.Enderecos = [endereco];
+    pessoa.enderecos = [endereco];
 
     if(!this.editar){
       this.pessoaService.cadastrarPessoa(pessoa)
