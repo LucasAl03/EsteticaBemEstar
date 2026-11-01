@@ -1,0 +1,247 @@
+/* ===== Paleta branco + verde ===== */
+:host {
+  --verde-700: #15803d;
+  --verde-600: #16a34a;
+  --verde-100: #dcfce7;
+  --verde-50:  #f0fdf4;
+
+  --cor-texto: #1f2937;
+  --cor-texto-suave: #5b6b61;
+  --cor-borda: #d9efe1;
+  --cor-perigo: #dc2626;
+  --sombra: 0 2px 10px rgba(22, 101, 52, 0.08);
+  --sombra-hover: 0 10px 24px rgba(22, 101, 52, 0.16);
+
+  display: block;
+  padding: 24px 16px;
+  background: #ffffff;
+  color: var(--cor-texto);
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* ===== Container ===== */
+#entrada-produto {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#entrada-produto h1 {
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--verde-700);
+  border-bottom: 3px solid var(--verde-600);
+}
+
+/* ===== Formulário ===== */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 560px;
+  margin: 0 auto 40px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-top: 4px solid var(--verde-600);
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+}
+
+.formulario label {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--verde-700);
+}
+
+.formulario input,
+.formulario select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--cor-texto);
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formulario input:hover,
+.formulario select:hover {
+  border-color: var(--verde-600);
+}
+
+.formulario input:focus,
+.formulario select:focus {
+  outline: none;
+  border-color: var(--verde-600);
+  box-shadow: 0 0 0 3px var(--verde-100);
+}
+
+/* ===== Botões do formulário ===== */
+#div-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#div-btns button {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-submit {
+  background: var(--verde-600);
+  color: #ffffff;
+}
+
+.btn-submit:hover {
+  background: var(--verde-700);
+}
+
+.btn-limpa {
+  background: #ffffff;
+  color: var(--verde-700);
+  border-color: var(--verde-600) !important;
+}
+
+.btn-limpa:hover {
+  background: var(--verde-50);
+}
+
+/* ===== Grid de cards ===== */
+/* No seu HTML, o #card é o container que envolve o @for */
+#div-cards {
+  width: 100%;
+}
+
+#card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Mensagem de lista vazia */
+#card > h3 {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 32px 0;
+  text-align: center;
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+
+/* ===== Card ===== */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-top: 4px solid var(--verde-600);
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-hover);
+}
+
+.card .entrada-produto {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.card span {
+  display: block;
+  padding: 8px 12px;
+  font-size: 0.92rem;
+  color: var(--cor-texto-suave);
+  background: var(--verde-50);
+  border-left: 3px solid var(--verde-600);
+  border-radius: 6px;
+}
+
+/* Os <p></p> vazios do HTML criam espaço extra; aqui eles são anulados */
+.card p {
+  display: none;
+}
+
+.valor-entrada {
+  color: var(--verde-700) !important;
+  font-weight: 600;
+}
+
+/* ===== Botões do card ===== */
+#btns-card,
+.btns-card {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+#btns-card a,
+.btns-card a {
+  flex: 1;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-edita {
+  background: var(--verde-600);
+  color: #ffffff;
+}
+
+.btn-edita:hover {
+  background: var(--verde-700);
+}
+
+.btn-excluir {
+  background: #ffffff;
+  color: var(--cor-perigo);
+  border-color: var(--cor-perigo) !important;
+}
+
+.btn-excluir:hover {
+  background: var(--cor-perigo);
+  color: #ffffff;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 480px) {
+  #entrada-produto h1 {
+    font-size: 1.4rem;
+  }
+
+  .formulario {
+    padding: 16px;
+  }
+
+  #card {
+    grid-template-columns: 1fr;
+  }
+}
