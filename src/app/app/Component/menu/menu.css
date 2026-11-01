@@ -1,53 +1,181 @@
-#cabecalho{
-    background-color: var(--primaria);
-    width: 100%;
-    height: 100px;
-    padding: 5px;
-    color: var(--branca);
+/* ===== Variáveis (mesma paleta da lista de funcionários) ===== */
+:host {
+  --verde-700: #15803d;
+  --verde-600: #16a34a;
+  --verde-100: #dcfce7;
+  --verde-50:  #f0fdf4;
+  --cor-texto: #1f2937;
+  --cor-borda: #d9efe1;
+
+  display: block;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-#div-menu{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* ===== Cabeçalho ===== */
+#cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 3px solid var(--verde-600);
+  box-shadow: 0 2px 10px rgba(22, 101, 52, 0.08);
 }
 
-#logo, #lista-menu{
+#div-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+/* ===== Logo ===== */
+#logo a {
+  display: flex;
+  align-items: center;
+}
+
+#logo img {
+  display: block;
+  height: 44px;
+  width: auto;
+  min-width: 44px;
+  color: var(--verde-700); /* cor do texto "logo" enquanto não há imagem */
+  font-weight: 600;
+}
+
+/* ===== Navegação ===== */
+#nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#lista-menu,
+#lista-icon {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none; /* remove a bolinha preta */
+}
+
+/* ===== Links ===== */
+#lista-menu a {
+  position: relative;
+  display: block;
+  padding: 8px 14px;
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap; /* "Cadastro Funcionário" não quebra em 2 linhas */
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#lista-menu a:hover {
+  background: var(--verde-50);
+  color: var(--verde-700);
+}
+
+/* Linha verde que aparece embaixo no hover e no item ativo */
+#lista-menu a::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--verde-600);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+#lista-menu a:hover::after,
+#lista-menu a.ativo::after {
+  transform: scaleX(1);
+}
+
+/* Item ativo (routerLinkActive="ativo") */
+#lista-menu a.ativo {
+  background: var(--verde-100);
+  color: var(--verde-700);
+  font-weight: 600;
+}
+
+#lista-menu a:focus-visible {
+  outline: 2px solid var(--verde-600);
+  outline-offset: 2px;
+}
+
+/* ===== Ícones (lista-icon) ===== */
+#lista-icon li {
+  display: flex;
+  align-items: center;
+}
+
+#lista-icon a,
+#lista-icon button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--verde-700);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#lista-icon a:hover,
+#lista-icon button:hover {
+  background: var(--verde-100);
+}
+
+/* ===== Telas médias: menu em duas linhas ===== */
+@media (max-width: 1000px) {
+  #div-menu {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  #logo {
     display: flex;
-    align-items: center;
     justify-content: center;
+  }
+
+  #nav-menu {
+    justify-content: center;
+  }
+
+  #lista-menu {
+    justify-content: center;
+  }
 }
 
-#nav-menu, #lista-menu{
-    width: 10%;
-    height: 100px;
-}
+/* ===== Mobile: menu rolável na horizontal ===== */
+@media (max-width: 600px) {
+  #nav-menu {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    scrollbar-width: thin;
+  }
 
-#logo{
-    width: 20%;
-    height: 100px;
-}
+  #lista-menu {
+    flex-wrap: nowrap;
+  }
 
-#lista-menu{
-    width: 50%;
-    height: 100px;
-    padding: 0px 15px;
-    justify-content: right;
-}
-
-#lista-menu li{
-    list-style: none;
-    margin: 0px 5px;
-}
-
-/*FORMATAÇÃO DOS LINKS DO MENU*/
-a:link, a:visited, a:active{
-    text-decoration: none;
-    font-size: 20px;
-    color: var(--branca);
-    transition: opacity 0.5s ease;
-}
-
-a:hover{
-    opacity: 0.5;
+  #lista-menu a {
+    padding: 8px 10px;
+    font-size: 0.88rem;
+  }
 }
