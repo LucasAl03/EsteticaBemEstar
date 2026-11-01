@@ -91,12 +91,12 @@ export class Cadastro {
     pessoa.telefone = this.telefone
     pessoa.ativoPessoa = this.ativoPessoa
 
-    const endereco = new Endereco()
-    endereco.cep = this.cep
-    endereco.numero = this.numero
-    endereco.complemento = this.complemento
+    const enderecos = new Endereco()
+    enderecos.cep = this.cep
+    enderecos.numero = this.numero
+    enderecos.complemento = this.complemento
 
-    pessoa.enderecos = [endereco];
+    pessoa.enderecos = [enderecos];
 
     if(!this.editar){
       this.pessoaService.cadastrarPessoa(pessoa)
