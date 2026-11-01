@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Endereco } from '../../Models/Endereco';
-import { Funcionario } from '../../Models/Funcionario';
+import { FuncionarioCargo } from '../../Models/FuncionarioCargo';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 
@@ -101,17 +101,17 @@ export class CadastroFuncionario {
     pessoa.telefone = this.telefone
     pessoa.ativoPessoa = this.ativoPessoa
 
-    const endereco = new Endereco()
-    endereco.cep = this.cep
-    endereco.numero = this.numero
-    endereco.complemento = this.complemento
+    const enderecos = new Endereco()
+    enderecos.cep = this.cep
+    enderecos.numero = this.numero
+    enderecos.complemento = this.complemento
 
-    const funcionario = new Funcionario()
+    const funcionario = new FuncionarioCargo()
     funcionario.cargo = this.cargo
     funcionario.dataAdmissao = this.dataAdmissao
 
-    pessoa.Enderecos = [endereco];
-    pessoa.Funcionarios = [funcionario];
+    pessoa.enderecos = [enderecos];
+    pessoa.funcionario = funcionario
 
     if(!this.editar){
       this.pessoaService.cadastrarFuncionario(pessoa)
