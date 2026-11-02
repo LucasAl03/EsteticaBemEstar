@@ -23,8 +23,7 @@ export class Funcionario implements OnInit {
     this.funcionarioService.listarFuncionarios()
       .subscribe({
         next: (lista) => {
-          console.log(lista)
-          this.pessoa = lista.filter(f => f.funcionario)
+          this.pessoa = lista.filter(f => f.funcionario).sort((a,b) => b.idPessoa - a.idPessoa)
           this.cdr.detectChanges()
         },
         error: (erro) => console.log('Erro ao listar os funcionarios', erro)
