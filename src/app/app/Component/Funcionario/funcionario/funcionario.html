@@ -1,10 +1,16 @@
 <div id="funcionarios">
     <h3 class="lista">Funcionários</h3>
 
+    <h4 class="lista">{{pessoa.length}}</h4>
+
     <div class="cards">
         @for (p of pessoa; track p.idPessoa) {
         <div class="card">
             <h4 class="card-nome">Nome: {{ p.nome }}</h4>
+            <h4 class="card-nome">CPF: {{p.cpf}} </h4>
+            <h4 class="card-nome">Sexo: {{(p.sexo === 'F') ? 'Feminino' : 'Masculino'}} </h4>
+            <h4 class="card-nome">Email: {{p.email}} </h4>
+            <h4 class="card-nome">Telefone: {{p.telefone}} </h4>
 
             @if (p.funcionario) {
             <div class="cargo-info">
