@@ -73,6 +73,7 @@ export class Cadastro {
           this.idpessoa = objPessoa.idPessoa
           this.nome = objPessoa.nome
           this.cpf = objPessoa.cpf
+          this.cpfOriginal = objPessoa.cpf
           this.dataNascimento = objPessoa.dataNascimento
           this.sexo = objPessoa.sexo
           this.email = objPessoa.email
