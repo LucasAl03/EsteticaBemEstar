@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
 import { Endereco } from '../../Models/Endereco';
+import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Endereco } from '../../Models/Endereco';
   templateUrl: './cadastro.html',
 })
 export class Cadastro {
-  constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute){}
+  constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private funcionarioService: FuncionarioService ){}
 
   // pessoa
   idpessoa = 0
@@ -32,6 +33,8 @@ export class Cadastro {
 
   editar = false
   pessoaId = 0
+
+  cpfOriginal: string = ''
 
   exibeDados(){
     console.log(this.idpessoa, this.nome, this.cpf, this.dataNascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
@@ -54,6 +57,8 @@ export class Cadastro {
 
   ngOnInit(){
     this.pessoaId = Number(this.route.snapshot.paramMap.get('IdPessoa'))
+
+    this.carregaCpfs();
 
     if(this.pessoaId > 0){
       this.editar = true
@@ -132,5 +137,28 @@ export class Cadastro {
           console.log("Erro ao listar pessoas", msgErro)
         }
       })
+  }
+
+  cpfExiste = false
+  private cpfsCadastrados: string[] = []
+
+  carregaCpfs() {
+    this.funcionarioService.listarFuncionarios().subscribe({
+      next: (lista) => {
+        this.cpfsCadastrados = lista.map(p => p.cpf)
+      },
+      error: (erro) => console.log('Erro ao carregar CPFs', erro)
+    })
+  }
+
+  verificaCpf(valor: string) {
+    this.cpf = valor
+
+    if (valor.length !== 11) {
+      this.cpfExiste = false
+      return
+    }
+    // na edição, ignora o CPF da própria pessoa
+    this.cpfExiste = this.cpfsCadastrados.includes(valor) && valor !== this.cpfOriginal
   }
 }
