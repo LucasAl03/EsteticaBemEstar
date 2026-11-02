@@ -80,6 +80,10 @@ export class Cadastro {
           this.telefone = objPessoa.telefone
           this.ativoPessoa = objPessoa.ativoPessoa
 
+          this.cep = objPessoa.enderecos?.[0]?.cep ?? ''
+          this.numero = objPessoa.enderecos?.[0]?.numero ?? ''
+          this.complemento = objPessoa.enderecos?.[0]?.complemento ?? ''
+
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
         console.log("Erro ao listar pessoa", msgErro)
