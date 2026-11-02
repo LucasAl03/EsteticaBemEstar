@@ -6,6 +6,7 @@ import { CadastroFuncionario } from './app/Component/cadastro-funcionario/cadast
 import { EntradaProduto } from './app/Component/entrada-produto/entrada-produto';
 import { Servicos } from './app/Component/Servico/servicos/servicos';
 import { Funcionario } from './app/Component/Funcionario/funcionario/funcionario';
+import { Clientes } from './app/Component/clientes/clientes';
 
 export const routes: Routes = [
     {
@@ -36,5 +37,9 @@ export const routes: Routes = [
     {
         path: 'funcionario-lista',
         component: Funcionario
+    },
+    {
+        path: 'lista-cliente',
+        component: Clientes
     }
 ];
