@@ -8,6 +8,8 @@ import { Servicos } from './app/Component/Servico/servicos/servicos';
 import { Funcionario } from './app/Component/Funcionario/funcionario/funcionario';
 import { Clientes } from './app/Component/clientes/clientes';
 import { CadastroCategoria } from './app/Component/cadastro-categoria/cadastro-categoria';
+import { ListaProdutos } from './app/Component/Produtos/lista-produtos/lista-produtos';
+import { CadastroProdutos } from './app/Component/Produtos/cadastro-produtos/cadastro-produtos';
 
 export const routes: Routes = [
     {
@@ -58,5 +60,13 @@ export const routes: Routes = [
     {
         path: 'categoria-cadastra/:idCategoria',
         component: CadastroCategoria
+    },
+    {
+        path: 'lista-produtos',
+        component: ListaProdutos
+    },
+    {
+        path: 'cadastro-produtos',
+        component: CadastroProdutos
     }
 ];
