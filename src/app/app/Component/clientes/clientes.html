@@ -13,12 +13,21 @@
                 <span><strong>Telefone:</strong> {{ p.telefone }}</span>
             </div>
 
+            <div class="enderecos-cabecalho">
+                <h5 class="endereco-titulo">Endereços</h5>
+                <button type="button" class="novo-end" title="Novo endereço" (click)="novoEnd(p)">+</button>
+            </div>
+
             @for (end of p.enderecos; track end.idEndereco; let i = $index) {
             <h5 class="endereco-titulo">Endereço {{ i + 1 }}</h5>
             <div class="endereco-info">
                 <span class="endereco-cep">{{ end.cep }}</span>
                 <span class="endereco-numero">{{ end.numero }}</span>
                 <span class="endereco-comple">{{ end.complemento }}</span>
+            </div>
+            <div class="end-btns">
+                <button type="button" class="editar-end" (click)="buscaIdEnd(end)" >Editar</button>
+                <button type="button" class="excluir-end" (click)="excluirEnd(end)">Excluir</button>
             </div>
             }
 
