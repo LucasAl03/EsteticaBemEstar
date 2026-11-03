@@ -56,7 +56,7 @@ export class Cadastro {
   }
 
   ngOnInit(){
-    this.pessoaId = Number(this.route.snapshot.paramMap.get('IdPessoa'))
+    this.pessoaId = Number(this.route.snapshot.paramMap.get('idPessoa'))
 
     this.carregaCpfs();
 

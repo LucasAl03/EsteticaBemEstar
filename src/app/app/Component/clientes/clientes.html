@@ -1,19 +1,20 @@
 <div id="funcionarios">
-    <h3 class="lista">Clientes</h3>
-
-    <h4 class="lista">{{pessoa.length}}</h4>
+    <h3 class="lista">Clientes <span class="contador">{{ pessoa.length }}</span></h3>
 
     <div class="cards">
         @for (p of pessoa; track p.idPessoa) {
         <div class="card">
-            <h4 class="card-nome">Nome: {{ p.nome }}</h4>
-            <h4 class="card-nome">CPF: {{p.cpf}} </h4>
-            <h4 class="card-nome">Sexo: {{(p.sexo === 'F') ? 'Feminino' : 'Masculino'}} </h4>
-            <h4 class="card-nome">Email: {{p.email}} </h4>
-            <h4 class="card-nome">Telefone: {{p.telefone}} </h4>
+            <h4 class="card-nome">{{ p.nome }}</h4>
 
-            @for (end of p.enderecos; track end.idEndereco) {
-                <h4>Endereço {{$index + 1}}</h4>
+            <div class="dados-pessoa">
+                <span><strong>CPF:</strong> {{ p.cpf }}</span>
+                <span><strong>Sexo:</strong> {{ p.sexo === 'F' ? 'Feminino' : p.sexo === 'M' ? 'Masculino' : 'Não informado' }}</span>
+                <span><strong>Email:</strong> {{ p.email }}</span>
+                <span><strong>Telefone:</strong> {{ p.telefone }}</span>
+            </div>
+
+            @for (end of p.enderecos; track end.idEndereco; let i = $index) {
+            <h5 class="endereco-titulo">Endereço {{ i + 1 }}</h5>
             <div class="endereco-info">
                 <span class="endereco-cep">{{ end.cep }}</span>
                 <span class="endereco-numero">{{ end.numero }}</span>
@@ -22,12 +23,12 @@
             }
 
             <div class="btns">
-                <a href="" class="btns-exclui">Excluir</a>
-                <a href="" class="btns-editar">Editar</a>
+                <button type="button" class="btns-exclui" (click)="excluir(p)">Excluir</button>
+                <button type="button" class="btns-editar" (click)="buscaId(p)">Editar</button>
             </div>
         </div>
         } @empty {
-            <h4>Nenhum Cliente cadastrado.</h4>
+            <h4 class="vazio">Nenhum Cliente cadastrado.</h4>
         }
     </div>
 </div>

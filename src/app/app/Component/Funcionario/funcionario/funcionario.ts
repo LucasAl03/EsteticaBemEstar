@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FuncionarioService } from '../../../Service/FuncionarioService/funcionario-service';
 import { PessoaFuncionario } from '../../../Models/PessoaFuncionario';
 import { DatePipe } from '@angular/common';
+
 
 @Component({
   imports: [DatePipe],
@@ -11,7 +12,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './funcionario.html',
 })
 export class Funcionario implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute){}
+  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router){}
 
   pessoa: PessoaFuncionario[] = []
 
@@ -28,5 +29,18 @@ export class Funcionario implements OnInit {
         },
         error: (erro) => console.log('Erro ao listar os funcionarios', erro)
       })
+  }
+
+  buscaId(p: PessoaFuncionario) {
+        this.router.navigate(['/cadastro-funcionario', p.idPessoa])
+      }
+  
+  excluir(p: PessoaFuncionario) {
+    if (confirm('Certeza que deseja excluir o registro deste cliente?')) {
+      this.funcionarioService.excluirFuncionario(p.idPessoa).subscribe({
+        next: () => this.carregaFuncionarios(),
+        error: (erro) => console.log('Erro ao excluir', erro)
+      })
+    }
   }
 }

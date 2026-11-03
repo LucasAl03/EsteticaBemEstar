@@ -23,7 +23,15 @@ export const routes: Routes = [
         component: Cadastro
     },
     {
+        path: 'cadastro/:idPessoa',
+        component: Cadastro
+    },
+    {
         path: 'cadastro-funcionario',
+        component: CadastroFuncionario
+    },
+    {
+        path: 'cadastro-funcionario/:idPessoa',
         component: CadastroFuncionario
     },
     {

@@ -1,45 +1,52 @@
 /* ===== Paleta branco + verde ===== */
 :host {
-  --verde-900: #14532d;
   --verde-700: #15803d;
   --verde-600: #16a34a;
-  --verde-500: #22c55e;
-  --verde-200: #bbf7d0;
   --verde-100: #dcfce7;
   --verde-50:  #f0fdf4;
 
-  --cor-fundo: #ffffff;
-  --cor-card: #ffffff;
   --cor-texto: #1f2937;
   --cor-texto-suave: #5b6b61;
   --cor-borda: #d9efe1;
-  --cor-primaria: var(--verde-600);
-  --cor-primaria-escura: var(--verde-700);
-  --cor-destaque-bg: var(--verde-50);
   --cor-perigo: #dc2626;
   --sombra: 0 2px 10px rgba(22, 101, 52, 0.08);
   --sombra-hover: 0 10px 24px rgba(22, 101, 52, 0.16);
 
   display: block;
   padding: 24px 16px;
-  background: var(--cor-fundo);
+  background: #ffffff;
   color: var(--cor-texto);
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-/* ===== Container ===== */
+/* ===== Container e título ===== */
 #funcionarios {
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .lista {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin: 0 0 24px;
   padding-bottom: 12px;
   font-size: 1.8rem;
   font-weight: 600;
-  color: var(--cor-primaria-escura);
-  border-bottom: 3px solid var(--cor-primaria);
+  color: var(--verde-700);
+  border-bottom: 3px solid var(--verde-600);
+}
+
+/* Selo com o total de clientes */
+.contador {
+  min-width: 28px;
+  padding: 2px 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  background: var(--verde-600);
+  border-radius: 999px;
 }
 
 /* ===== Grid de cards ===== */
@@ -49,8 +56,9 @@
   gap: 20px;
 }
 
-.cards > h4 {
+.vazio {
   grid-column: 1 / -1;
+  margin: 0;
   padding: 32px 0;
   text-align: center;
   font-weight: 400;
@@ -63,9 +71,9 @@
   flex-direction: column;
   gap: 12px;
   padding: 20px;
-  background: var(--cor-card);
+  background: #ffffff;
   border: 1px solid var(--cor-borda);
-  border-top: 4px solid var(--cor-primaria);
+  border-top: 4px solid var(--verde-600);
   border-radius: 12px;
   box-shadow: var(--sombra);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -76,53 +84,51 @@
   box-shadow: var(--sombra-hover);
 }
 
-.card h4 {
-  margin: 0;
-}
-
 .card-nome {
+  margin: 0;
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--cor-texto);
 }
 
-/* Subtítulo "Endereço N" */
-.card h4:not(.card-nome) {
-  margin-top: 4px;
+/* ===== Dados da pessoa ===== */
+.dados-pessoa {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.92rem;
+  color: var(--cor-texto-suave);
+  word-break: break-word; /* e-mails longos não estouram o card */
+}
+
+.dados-pessoa strong {
+  color: var(--verde-700);
+  font-weight: 600;
+}
+
+/* ===== Endereços ===== */
+.endereco-titulo {
+  margin: 4px 0 0;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--cor-primaria-escura);
+  color: var(--verde-700);
 }
 
-/* ===== Blocos de informação ===== */
-.cargo-info,
 .endereco-info {
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: 10px 12px;
-  background: var(--cor-destaque-bg);
-  border-left: 3px solid var(--cor-primaria);
-  border-radius: 6px;
   font-size: 0.92rem;
-}
-
-.cargo,
-.data-admissao,
-.endereco-cep,
-.endereco-numero,
-.endereco-comple {
   color: var(--cor-texto-suave);
+  background: var(--verde-50);
+  border-left: 3px solid var(--verde-600);
+  border-radius: 6px;
 }
 
-.cargo {
-  color: var(--cor-primaria-escura);
-  font-weight: 600;
-}
-
-/* Rótulos dos endereços via CSS (opcional) */
+/* Rótulos via CSS (se preferir, escreva-os no HTML e apague estas 3 linhas) */
 .endereco-cep::before { content: 'CEP: '; }
 .endereco-numero::before { content: 'Nº: '; }
 .endereco-comple::before { content: 'Compl.: '; }
@@ -131,18 +137,18 @@
 .btns {
   display: flex;
   gap: 10px;
-  margin-top: auto;
+  margin-top: auto; /* empurra os botões para o fim do card */
   padding-top: 12px;
   border-top: 1px solid var(--cor-borda);
 }
 
-.btns a {
+.btns button {
   flex: 1;
   padding: 8px 12px;
-  text-align: center;
-  text-decoration: none;
+  font-family: inherit;
   font-size: 0.9rem;
   font-weight: 500;
+  text-align: center;
   border: 1px solid transparent;
   border-radius: 8px;
   cursor: pointer;
@@ -150,23 +156,23 @@
 }
 
 .btns-editar {
-  background: var(--cor-primaria);
   color: #ffffff;
+  background: var(--verde-600);
 }
 
 .btns-editar:hover {
-  background: var(--cor-primaria-escura);
+  background: var(--verde-700);
 }
 
 .btns-exclui {
-  background: #ffffff;
   color: var(--cor-perigo);
-  border-color: var(--cor-perigo);
+  background: #ffffff;
+  border-color: var(--cor-perigo) !important;
 }
 
 .btns-exclui:hover {
-  background: var(--cor-perigo);
   color: #ffffff;
+  background: var(--cor-perigo);
 }
 
 /* ===== Mobile ===== */

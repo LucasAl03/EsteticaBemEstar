@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
 
@@ -10,7 +10,7 @@ import { Pessoa } from '../../Models/Pessoa';
   templateUrl: './clientes.html',
 })
 export class Clientes implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute){}
+  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router){}
 
   pessoa: Pessoa[] = []
   
@@ -29,5 +29,17 @@ export class Clientes implements OnInit {
         })
     }
 
-    
+    buscaId(p: Pessoa) {
+      this.router.navigate(['/cadastro', p.idPessoa])
+    }
+
+  excluir(p: Pessoa) {
+    if (confirm('Certeza que deseja excluir o registro deste cliente?')) {
+      this.pessoaService.excluirPessoa(p.idPessoa).subscribe({
+        next: () => this.carregaPessoa(),
+        error: (erro) => console.log('Erro ao excluir', erro)
+      })
+    }
+  }
+
 }
