@@ -1,0 +1,204 @@
+/* CONTAINER PRINCIPAL */
+#pedidos {
+    width: 92%;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+/* TÍTULO */
+.pedidos {
+    color: #145c32;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #1b7040;
+    padding-bottom: 12px;
+}
+
+/* LISTA DE ATENDIMENTOS */
+.pedidos-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    align-items: start;
+}
+
+/* CARD DO ATENDIMENTO */
+.card {
+    background: #ffffff;
+    border: 1px solid #d5e6d9;
+    border-top: 5px solid #176b39;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 4px 12px rgba(0, 60, 25, 0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 60, 25, 0.16);
+}
+
+/* INFORMAÇÕES DO CLIENTE */
+.cliente-nome {
+    color: #145c32;
+    font-size: 1.35rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.data-atendimento,
+.id-pedido {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* ÁREA DOS ITENS */
+.items-cards {
+    background: #f4f9f5;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.itens-pedido {
+    color: #176b39;
+    font-size: 1.1rem;
+    margin: 0 0 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #c9dfce;
+}
+
+/* CARD DE CADA ITEM */
+.item-card {
+    background: #ffffff;
+    border: 1px solid #dce9df;
+    border-left: 4px solid #269653;
+    border-radius: 9px;
+    padding: 14px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.item-card:last-child {
+    margin-bottom: 0;
+}
+
+.item {
+    color: #145c32;
+    font-size: 1.05rem;
+    margin: 0 0 5px;
+}
+
+.quantidade-item,
+.preco-item,
+.funcionario,
+.cargo {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* BOTÕES */
+.remov-item,
+.edita-item,
+.exclui-atendi,
+.edita-atendi {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.remov-item:hover,
+.edita-item:hover,
+.exclui-atendi:hover,
+.edita-atendi:hover {
+    transform: translateY(-2px);
+}
+
+/* BOTÕES DOS ITENS */
+.remov-item {
+    background: #fde8e7;
+    color: #b42318;
+}
+
+.remov-item:hover {
+    background: #f8cecb;
+}
+
+.edita-item {
+    background: #e3f0e7;
+    color: #176b39;
+}
+
+.edita-item:hover {
+    background: #cce5d4;
+}
+
+/* BOTÕES DO ATENDIMENTO */
+.exclui-atendi {
+    background: #b42318;
+    color: white;
+    margin-top: 8px;
+}
+
+.exclui-atendi:hover {
+    background: #8f1c14;
+}
+
+.edita-atendi {
+    background: #176b39;
+    color: white;
+}
+
+.edita-atendi:hover {
+    background: #10532b;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    #pedidos {
+        width: 96%;
+        padding: 12px;
+        margin: 20px auto;
+    }
+
+    .pedidos {
+        font-size: 1.8rem;
+    }
+
+    .pedidos-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .pedidos {
+        font-size: 1.5rem;
+    }
+
+    .item-card {
+        padding: 10px;
+    }
+
+    .remov-item,
+    .edita-item,
+    .exclui-atendi,
+    .edita-atendi {
+        width: 100%;
+    }
+}

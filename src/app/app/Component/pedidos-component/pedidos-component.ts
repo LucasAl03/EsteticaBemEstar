@@ -58,4 +58,8 @@ export class PedidosComponent {
         error: (erro) => console.log('Erro ao listar os items', erro)
       })
   }
+
+  buscaProduto(idItem: number): Produto | undefined {
+    return this.item.find(p => p.idItem === idItem);
+  }
 }
