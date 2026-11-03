@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
+import { Endereco } from '../../Models/Endereco';
+import { EnderecoService } from '../../Service/EnderecoService/endereco-service';
 
 @Component({
   imports: [],
@@ -10,7 +12,7 @@ import { Pessoa } from '../../Models/Pessoa';
   templateUrl: './clientes.html',
 })
 export class Clientes implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router){}
+  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService){}
 
   pessoa: Pessoa[] = []
   
@@ -42,4 +44,22 @@ export class Clientes implements OnInit {
     }
   }
 
+  buscaIdEnd(e: Endereco){
+    this.router.navigate(['/endereco-cadastro', e.idEndereco])
+  }
+
+  excluirEnd(e: Endereco){
+    if (confirm('Certeza que deseja excluir este endereço.')){
+      this.enderecoService.excluirEndereco(e.idEndereco).subscribe({
+        next: () => this.carregaPessoa(),
+        error: (erro) => console.log('Erro ao excluir o endereço', erro)
+      })
+    }
+  }
+
+  novoEnd(p: Pessoa){
+    this.router.navigate(['/endereco-cadastro'], {
+      queryParams: { idPessoa: p.idPessoa }
+    });
+  }
 }
