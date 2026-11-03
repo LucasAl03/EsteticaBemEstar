@@ -1,9 +1,10 @@
+
 /* ===== Paleta branco + verde ===== */
 :host {
   --verde-700: #15803d;
   --verde-600: #16a34a;
   --verde-100: #dcfce7;
-  --verde-50:  #f0fdf4;
+  --verde-50: #f0fdf4;
 
   --cor-texto: #1f2937;
   --cor-texto-suave: #5b6b61;
@@ -19,13 +20,20 @@
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-/* ===== Container ===== */
+/* ===== Container principal ===== */
 #entrada-produto {
   max-width: 1200px;
   margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(280px, 1fr);
+  column-gap: 32px;
+  align-items: start;
 }
 
+/* ===== Título ===== */
 #entrada-produto h1 {
+  grid-column: 1 / -1;
   margin: 0 0 24px;
   padding-bottom: 12px;
   font-size: 1.8rem;
@@ -36,12 +44,18 @@
 
 /* ===== Formulário ===== */
 .formulario {
+  grid-column: 1;
+  grid-row: 2;
+
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
   max-width: 560px;
-  margin: 0 auto 40px;
+  box-sizing: border-box;
+  margin: 0 0 40px;
   padding: 24px;
+
   background: #ffffff;
   border: 1px solid var(--cor-borda);
   border-top: 4px solid var(--verde-600);
@@ -120,9 +134,10 @@
   background: var(--verde-50);
 }
 
-/* ===== Grid de cards ===== */
-/* No seu HTML, o #card é o container que envolve o @for */
+/* ===== Grid das entradas de produtos ===== */
 #div-cards {
+  grid-column: 1;
+  grid-row: 3;
   width: 100%;
 }
 
@@ -142,7 +157,7 @@
   color: var(--cor-texto-suave);
 }
 
-/* ===== Card ===== */
+/* ===== Cards de entrada ===== */
 .card {
   display: flex;
   flex-direction: column;
@@ -178,7 +193,7 @@
   border-radius: 6px;
 }
 
-/* Os <p></p> vazios do HTML criam espaço extra; aqui eles são anulados */
+/* Anula parágrafos vazios */
 .card p {
   display: none;
 }
@@ -188,7 +203,7 @@
   font-weight: 600;
 }
 
-/* ===== Botões do card ===== */
+/* ===== Botões dos cards ===== */
 #btns-card,
 .btns-card {
   display: flex;
@@ -231,7 +246,123 @@
   color: #ffffff;
 }
 
-/* ===== Mobile ===== */
+/* ===================================
+   ESTOQUE - LATERAL DIREITA
+=================================== */
+
+/* ===== Container de estoque ===== */
+#cards-estoque {
+  grid-column: 2;
+  grid-row: 2 / 4;
+
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Título do estoque, se existir ===== */
+#cards-estoque h2,
+#cards-estoque h3 {
+  color: var(--verde-700);
+  margin-top: 0;
+}
+
+/* ===== Grid dos produtos ===== */
+#cards-estoq {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  justify-content: start;
+  align-items: stretch;
+}
+
+/* ===== Card de estoque ===== */
+#cards-estoq > .card {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-top: 4px solid var(--verde-600);
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#cards-estoq > .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-hover);
+}
+
+/* ===== Nome do produto ===== */
+#cards-estoq .item-nome {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+/* ===== Quantidade em estoque ===== */
+#cards-estoq .estoque-produto {
+  display: block;
+  padding: 10px 12px;
+  font-size: 0.92rem;
+  color: var(--cor-texto-suave);
+  background: var(--verde-50);
+  border-left: 3px solid var(--verde-600);
+  border-radius: 6px;
+}
+
+/* ===== Estoque vazio ===== */
+#cards-estoq > h3 {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 32px 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+
+/* ===================================
+   RESPONSIVIDADE
+=================================== */
+
+/* ===== Tablets e telas menores ===== */
+@media (max-width: 850px) {
+  #entrada-produto {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #entrada-produto .formulario {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  #div-cards,
+  #cards-estoque {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  #cards-estoq {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* ===== Celulares ===== */
 @media (max-width: 480px) {
   #entrada-produto h1 {
     font-size: 1.4rem;
@@ -241,7 +372,16 @@
     padding: 16px;
   }
 
-  #card {
+  #card,
+  #cards-estoq {
     grid-template-columns: 1fr;
+  }
+
+  #cards-estoq > .card {
+    padding: 16px;
+  }
+
+  #cards-estoq .item-nome {
+    font-size: 1rem;
   }
 }
