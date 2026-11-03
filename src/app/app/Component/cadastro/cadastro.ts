@@ -17,7 +17,7 @@ export class Cadastro {
   constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private funcionarioService: FuncionarioService ){}
 
   // pessoa
-  idpessoa = 0
+  idPessoa = 0
   nome = ''
   cpf = ''
   dataNascimento = '' 
@@ -37,7 +37,7 @@ export class Cadastro {
   cpfOriginal: string = ''
 
   exibeDados(){
-    console.log(this.idpessoa, this.nome, this.cpf, this.dataNascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
+    console.log(this.idPessoa, this.nome, this.cpf, this.dataNascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
 
     this.limparCampos();
   }
@@ -70,7 +70,7 @@ export class Cadastro {
     this.pessoaService.listarPessoa(pessoaId)
       .subscribe({
         next: (objPessoa) => {
-          this.idpessoa = objPessoa.idPessoa
+          this.idPessoa = objPessoa.idPessoa
           this.nome = objPessoa.nome
           this.cpf = objPessoa.cpf
           this.cpfOriginal = objPessoa.cpf
