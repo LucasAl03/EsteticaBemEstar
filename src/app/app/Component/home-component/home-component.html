@@ -19,12 +19,45 @@
   
       <div class="info-card">
         <h2> Seu carrinho</h2>
-        <img src="/public/carrinho.png" alt="">
+        <a routerLink="/carrinho" ><img src="/public/carrinho.png" alt=""></a>
       </div>
   
       <div class="info-card">
-        <h2> Mção</h2>
-        <p>eck.</p>
+        <h2>Pedidos</h2>
+        <a routerLink="/pedido-component">Página de pedidos</a>
+      </div>
+    </section>
+
+    <section class="cards-items">
+      <div class="cards-produtos">
+        <h2 class="titulo-section">Serviços</h2>
+        @for (p of items; track p.idItem){
+          @if (p.tipoItem === 'S'){
+        <div class="card">
+          <h3 class="item-nome"> {{p.item}} </h3>
+          <span class="preco-card"> {{p.preco | currency: 'BRL'}} </span>
+
+          <div class="btns-card">
+            <button class="carrinho-btn">Adicionar ao carrinho</button>
+          </div>
+        </div>
+          }
+        }
+      </div>
+      <div class="cards-produtos">
+        <h2 class="titulo-section">Produtos</h2>
+        @for (p of items; track p.idItem){
+          @if (p.tipoItem === 'P') {
+        <div class="card">
+          <h3 class="item-nome">{{p.item}}</h3>
+          <span class="preco-card">{{p.produto?.precoVenda | currency: 'BRL'}}</span>
+
+          <div class="btns-card">
+            <button class="carrinho-btn">Adicionar ao carrinho</button>
+          </div>
+        </div>
+          }
+        }
       </div>
     </section>
   </main>

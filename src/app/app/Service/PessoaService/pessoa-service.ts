@@ -33,9 +33,9 @@ export class PessoaService {
         return this.http.put<Pessoa>(urlApi, pessoa)
     }
 
-    excluirPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco/${pessoa.idPessoa}`
+    excluirPessoa(idPessoa: number): Observable<void>{
+        const urlApi = `https://localhost:7169/api/PessoaEndereco/${idPessoa}`
 
-        return this.http.delete<Pessoa>(urlApi)
+        return this.http.delete<void>(urlApi)
     }
 }

@@ -6,7 +6,11 @@ export class Produto{
     preco: number | null = null
     tipoItem: string = ''
     ativoProdutoServico: string = ''
+    produto: DetalheProduto | null = null
+}
+
+export class DetalheProduto{
     precoVenda: number | null = null
     unidade: string = ''
-    oodigoPreco: number | null = null
+    codigoPreco: number | null = null
 }

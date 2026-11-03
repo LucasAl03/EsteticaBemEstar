@@ -1,10 +1,11 @@
-import {ChangeDetectorRef, Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Endereco } from '../../Models/Endereco';
-import { Funcionario } from '../../Models/Funcionario';
+import { FuncionarioCargo } from '../../Models/FuncionarioCargo';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
+import { cp } from 'fs';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { FuncionarioService } from '../../Service/FuncionarioService/funcionario
   styleUrl: './cadastro-funcionario.css',
   templateUrl: './cadastro-funcionario.html',
 })
-export class CadastroFuncionario {
+export class CadastroFuncionario implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private pessoaService: FuncionarioService, private route: ActivatedRoute){}
 
   // pessoa
@@ -37,6 +38,8 @@ export class CadastroFuncionario {
 
   editar = false
   pessoaId = 0
+
+  cpfOriginal: string = ''
 
   exibeDados(){
     console.log(this.idPessoa, this.nome, this.cpf, this.dataNascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
@@ -63,7 +66,9 @@ export class CadastroFuncionario {
   }
 
   ngOnInit(){
-    this.pessoaId = Number(this.route.snapshot.paramMap.get('IdPessoa'))
+    this.pessoaId = Number(this.route.snapshot.paramMap.get('idPessoa'))
+
+    this.carregaCpfs()
 
     if(this.pessoaId > 0){
       this.editar = true
@@ -78,11 +83,20 @@ export class CadastroFuncionario {
           this.idPessoa = objPessoa.idPessoa
           this.nome = objPessoa.nome
           this.cpf = objPessoa.cpf
+          this.cpfOriginal = objPessoa.cpf
           this.dataNascimento = objPessoa.dataNascimento
           this.sexo = objPessoa.sexo
           this.email = objPessoa.email
           this.telefone = objPessoa.telefone
           this.ativoPessoa = objPessoa.ativoPessoa
+
+          this.cep = objPessoa.enderecos?.[0]?.cep ?? ''
+          this.numero = objPessoa.enderecos?.[0]?.numero ?? ''
+          this.complemento = objPessoa.enderecos?.[0]?.complemento ?? ''
+
+          // cargo
+          this.cargo = objPessoa.funcionario?.cargo ?? ''
+          this.dataAdmissao = objPessoa.funcionario?.dataAdmissao ?? ''
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
@@ -101,17 +115,17 @@ export class CadastroFuncionario {
     pessoa.telefone = this.telefone
     pessoa.ativoPessoa = this.ativoPessoa
 
-    const endereco = new Endereco()
-    endereco.cep = this.cep
-    endereco.numero = this.numero
-    endereco.complemento = this.complemento
+    const enderecos = new Endereco()
+    enderecos.cep = this.cep
+    enderecos.numero = this.numero
+    enderecos.complemento = this.complemento
 
-    const funcionario = new Funcionario()
+    const funcionario = new FuncionarioCargo()
     funcionario.cargo = this.cargo
     funcionario.dataAdmissao = this.dataAdmissao
 
-    pessoa.Enderecos = [endereco];
-    pessoa.Funcionarios = [funcionario];
+    pessoa.enderecos = [enderecos];
+    pessoa.funcionario = funcionario
 
     if(!this.editar){
       this.pessoaService.cadastrarFuncionario(pessoa)
@@ -147,5 +161,28 @@ export class CadastroFuncionario {
           console.log("Erro ao listar pessoas", msgErro)
         }
       })
+  }
+
+  cpfExiste = false
+  private cpfsCadastrados: string[] = []
+
+  carregaCpfs() {
+    this.pessoaService.listarFuncionarios().subscribe({
+      next: (lista) => {
+        this.cpfsCadastrados = lista.map(p => p.cpf)
+      },
+      error: (erro) => console.log('Erro ao carregar CPFs', erro)
+    })
+  }
+
+  verificaCpf(valor: string) {
+    this.cpf = valor
+
+    if (valor.length !== 11) {
+      this.cpfExiste = false
+      return
+    }
+    // na edição, ignora o CPF da própria pessoa
+    this.cpfExiste = this.cpfsCadastrados.includes(valor) && valor !== this.cpfOriginal
   }
 }

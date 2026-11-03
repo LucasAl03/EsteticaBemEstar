@@ -1,0 +1,32 @@
+<div id="categorias">
+    <h1>Cadastro de categorias</h1>
+
+    <form class="formulario" (ngSubmit)="enviaDados()" ngNativeValidate>
+
+        <label for="categoria">Categoria:</label>
+        <input type="text" name="categoria" id="categoria" maxlength="35" required [(ngModel)]="categoria">
+
+        <div id="div-btns">
+            <button type="submit" class="btn-submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
+            <button type="reset" class="btn-limpa">Limpar</button>
+        </div>
+    </form>
+
+    <div id="div-cards">
+        <div id="card">
+            @for (c of catego; track c.idCategoria) {
+                <div class="card">
+                    <h3 class="card-categoria">Categoria: {{c?.categoria}}</h3>
+        
+                    <div class="btns-card">
+                        <button type="button" class="btns-exclui" (click)="excluir(c)">Excluir</button>
+                        <button type="button" class="btns-editar" (click)="buscaId(c)">Editar</button>
+                    </div>
+                </div>
+            } @empty {
+                <h3 class="card-categoria">Nenhuma Categoria cadastrada.</h3>
+            }
+        </div>
+        
+    </div>
+</div>

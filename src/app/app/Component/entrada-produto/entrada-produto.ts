@@ -1,19 +1,21 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Entrada } from '../../Models/Entrada';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 import { entradaService } from '../../Service/EntradaService/entrada-service';
 import { Produto } from '../../Models/Produto';
+import { DatePipe } from '@angular/common';
+import { EstoqueResposta } from '../../Models/EstoqueResposta';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   selector: 'app-entrada-produto',
   styleUrl: './entrada-produto.css',
   templateUrl: './entrada-produto.html',
 })
 export class EntradaProduto implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem){}
+  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem, private router: Router){}
 
   // declaração dos atributos para Entrada
   idEntradaProduto = 0
@@ -28,6 +30,8 @@ export class EntradaProduto implements OnInit {
 
   entradas: Entrada[] = []
 
+  estoque_resposta: EstoqueResposta[] = []
+
   editar = false
   produtoId = 0
 
@@ -41,6 +45,7 @@ export class EntradaProduto implements OnInit {
 
     this.carregaProdutos()
     this.carregaEntradas()
+    this.carregaEstoque()
   }
 
   exibeDados(){
@@ -69,6 +74,7 @@ export class EntradaProduto implements OnInit {
           this.valorUnitarioEntrada = objProduto.valorUnitarioEntrada
 
           this.cdr.detectChanges()
+          this.carregaEntradas();
       }, error: (msgErro) =>{
         console.log("Erro ao listar o produto", msgErro)
       }
@@ -131,11 +137,11 @@ export class EntradaProduto implements OnInit {
   }
 
   selecionaProduto(){
-    const produto = this.produtos.find(p => p.idItem === this.idItem)
+    const item = this.produtos.find(p => p.idItem === this.idItem)
 
-    if (produto) {
-      this.unidade = produto.unidade
-      this.valorUnitarioEntrada = produto.preco
+    if (item) {
+      this.unidade = item.produto?.unidade ?? ''
+      this.valorUnitarioEntrada = item.preco
     } else {
       this.unidade = ''
       this.valorUnitarioEntrada = null
@@ -151,5 +157,29 @@ export class EntradaProduto implements OnInit {
         },
         error: (err) => console.log('Erro ao listar as entradas', err)
       })
+  }
+
+  carregaEstoque(){
+    this.entradaService.listarEstoque()
+      .subscribe({
+        next: (lista) => {
+          this.estoque_resposta = lista.sort((a,b) => b.idItem - a.idItem)
+          this.cdr.detectChanges()
+        },
+        error: (erro) => console.log('Erro ao listar o estoque.', erro)
+      })
+  }
+
+  buscaId(e: Entrada) {
+    this.router.navigate(['/entrada', e.idEntradaProduto])
+  }
+
+  excluir(e: Entrada) {
+    if (confirm('Certeza que deseja excluir esse registro de entrada?')) {
+      this.entradaService.excluirEntrada(e.idEntradaProduto).subscribe({
+        next: () => this.carregaEntradas(),
+        error: (erro) => console.log('Erro ao excluir', erro)
+      })
+    }
   }
 }

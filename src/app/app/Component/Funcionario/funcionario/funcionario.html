@@ -1,17 +1,51 @@
 <div id="funcionarios">
-    <h3 class="lista">Funcionários</h3>
+    <h3 class="lista">Funcionários <span class="contador">{{ pessoa.length }}</span></h3>
 
-    <div id="cards">
-        @for (f of funcionarios; track f.idPessoa){
-        <div id="card">
-            <h4 class="card-nome"> {{f.nome}} </h4>
+    <div class="cards">
+        @for (p of pessoa; track p.idPessoa) {
+        <div class="card">
+            <h4 class="card-nome">{{ p.nome }}</h4>
 
-            <span class="card-cpf"> {{f.cpf}} </span>
+            @if (p.funcionario) {
+            <div class="cargo-info">
+                <span class="cargo">{{ p.funcionario.cargo }}</span>
+                <span class="data-admissao">Admissão: {{ p.funcionario.dataAdmissao | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            }
+
+            <div class="dados-pessoa">
+                <span><strong>CPF:</strong> {{ p.cpf }}</span>
+                <span><strong>Sexo:</strong> {{ p.sexo === 'F' ? 'Feminino' : p.sexo === 'M' ? 'Masculino' : 'Não informado' }}</span>
+                <span><strong>Email:</strong> {{ p.email }}</span>
+                <span><strong>Telefone:</strong> {{ p.telefone }}</span>
+            </div>
+
+            <div class="enderecos-cabecalho">
+                <h5 class="endereco-titulo">Endereços</h5>
+                <button type="button" class="novo-end" title="Novo endereço" (click)="novoEnd(p)">+</button>
+            </div>
             
-            <span class="data-admissao">  </span>
+            @for (end of p.enderecos; track end.idEndereco; let i = $index) {
+            <h5 class="endereco-titulo">{{ i + 1 }}º Endereço</h5>
+            <div class="endereco-info">
+                <span class="endereco-cep">{{ end.cep }}</span>
+                <span class="endereco-numero">{{ end.numero }}</span>
+                <span class="endereco-comple">{{ end.complemento }}</span>
+
+                <div class="end-btns">
+                    <button type="button" class="editar-end" (click)="buscaIdEnd(end)" >Editar</button>
+                    <button type="button" class="excluir-end" (click)="excluirEnd(end)">Excluir</button>
+                </div>
+            </div>
+            }
+
+            <div class="btns">
+                <button type="button" class="btns-exclui" (click)="excluir(p)">Excluir</button>
+                <button type="button" class="btns-editar" (click)="buscaId(p)">Editar</button>
+            </div>
         </div>
         } @empty {
-            <h4>Nenhum Funcionário cadastrado.</h4>
+            <h4 class="vazio">Nenhum funcionário cadastrado.</h4>
         }
     </div>
 </div>

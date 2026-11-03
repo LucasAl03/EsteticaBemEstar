@@ -1,0 +1,40 @@
+<div id="pedidos">
+    <h1 class="pedidos">Pedidos</h1>
+    <div class="pedidos-cards">
+        @for (a of atendimento; track a.idAtendimento){
+        <div class="card">
+            
+            <h3 class="cliente-nome">{{a.nomePessoa}}</h3>
+
+            <span class="data-atendimento"> {{a.dataAtendimento | date: 'dd/MM/yyyy'}} </span>
+
+            <span class="id-pedido">Id do atendimento: {{a.idAtendimento}} </span>
+            
+            <div class="items-cards">
+
+                <h4 class="itens-pedido">Itens do Atendimento</h4>
+                @for (i of a.itens; track $index){
+                <div class="item-card">
+                    <h3 class="item"> {{ buscaProduto(i.idItem)?.tipoItem === 'P' ? 'Produto' : 'Serviço' }} {{i.item}}</h3>
+
+                    <span class="quantidade-item">Quantidade: {{i.quantidade}}</span>
+                    <span class="preco-item">Valor: {{i.valorUnitario | currency: 'BRL'}} </span>
+                    <span class="funcionario">Funcionário: {{i.nomeFuncionario}} </span>
+                    <span class="cargo">Cargo: {{i.cargo}} </span>
+
+                    <button class="remov-item"> Remover </button>
+                    <button class="edita-item"> Editar </button>
+                </div>
+                } @empty {
+                    <h3 class="item">Nenhum Item registrado nesse Atendimento.</h3>
+                }
+            </div>
+            <button class="exclui-atendi"> Excluir Atendimento </button>
+            <button class="edita-atendi"> Editar Atendimento </button>
+        </div>
+        } @empty{
+            <h3 class="cliente-nome"> Nenhum Atendimento registrado. </h3>
+        }
+    </div>
+
+</div>

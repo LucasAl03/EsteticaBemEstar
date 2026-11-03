@@ -3,7 +3,7 @@
 import { Entrada } from "./Entrada"
 
 export interface EstoqueResposta {
-    iditem: number
+    idItem: number
     quantidadeEstoque: number
     entradaProdutos: Entrada[]
 }

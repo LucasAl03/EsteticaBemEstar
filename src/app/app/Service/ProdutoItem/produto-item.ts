@@ -33,9 +33,9 @@ export class ProdutoItem {
         return this.http.put<Produto>(urlApi, produto)
     }
 
-    excluirProduto(produto: Produto): Observable<Produto>{
-        const urlApi = `https://localhost:7169/api/ProdutoItem/${produto.idItem}`
+    excluirProduto(idItem: number): Observable<void>{
+        const urlApi = `https://localhost:7169/api/ProdutoItem/${idItem}`
 
-        return this.http.delete<Produto>(urlApi)
+        return this.http.delete<void>(urlApi)
     }
 }

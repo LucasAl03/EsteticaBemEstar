@@ -1,9 +1,10 @@
-import {ChangeDetectorRef, Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
 import { Endereco } from '../../Models/Endereco';
+import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 
 
 @Component({
@@ -12,11 +13,11 @@ import { Endereco } from '../../Models/Endereco';
   styleUrl: './cadastro.css',
   templateUrl: './cadastro.html',
 })
-export class Cadastro {
-  constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute){}
+export class Cadastro implements OnInit {
+  constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private funcionarioService: FuncionarioService ){}
 
   // pessoa
-  idpessoa = 0
+  idPessoa = 0
   nome = ''
   cpf = ''
   dataNascimento = '' 
@@ -33,8 +34,10 @@ export class Cadastro {
   editar = false
   pessoaId = 0
 
+  cpfOriginal: string = ''
+
   exibeDados(){
-    console.log(this.idpessoa, this.nome, this.cpf, this.dataNascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
+    console.log(this.idPessoa, this.nome, this.cpf, this.dataNascimento, this.sexo, this.email, this.telefone, this.cep, this.numero, this.complemento)
 
     this.limparCampos();
   }
@@ -53,7 +56,9 @@ export class Cadastro {
   }
 
   ngOnInit(){
-    this.pessoaId = Number(this.route.snapshot.paramMap.get('IdPessoa'))
+    this.pessoaId = Number(this.route.snapshot.paramMap.get('idPessoa'))
+
+    this.carregaCpfs();
 
     if(this.pessoaId > 0){
       this.editar = true
@@ -65,14 +70,19 @@ export class Cadastro {
     this.pessoaService.listarPessoa(pessoaId)
       .subscribe({
         next: (objPessoa) => {
-          this.idpessoa = objPessoa.idPessoa
+          this.idPessoa = objPessoa.idPessoa
           this.nome = objPessoa.nome
           this.cpf = objPessoa.cpf
+          this.cpfOriginal = objPessoa.cpf
           this.dataNascimento = objPessoa.dataNascimento
           this.sexo = objPessoa.sexo
           this.email = objPessoa.email
           this.telefone = objPessoa.telefone
           this.ativoPessoa = objPessoa.ativoPessoa
+
+          this.cep = objPessoa.enderecos?.[0]?.cep ?? ''
+          this.numero = objPessoa.enderecos?.[0]?.numero ?? ''
+          this.complemento = objPessoa.enderecos?.[0]?.complemento ?? ''
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
@@ -91,12 +101,12 @@ export class Cadastro {
     pessoa.telefone = this.telefone
     pessoa.ativoPessoa = this.ativoPessoa
 
-    const endereco = new Endereco()
-    endereco.cep = this.cep
-    endereco.numero = this.numero
-    endereco.complemento = this.complemento
+    const enderecos = new Endereco()
+    enderecos.cep = this.cep
+    enderecos.numero = this.numero
+    enderecos.complemento = this.complemento
 
-    pessoa.Enderecos = [endereco];
+    pessoa.enderecos = [enderecos];
 
     if(!this.editar){
       this.pessoaService.cadastrarPessoa(pessoa)
@@ -132,5 +142,28 @@ export class Cadastro {
           console.log("Erro ao listar pessoas", msgErro)
         }
       })
+  }
+
+  cpfExiste = false
+  private cpfsCadastrados: string[] = []
+
+  carregaCpfs() {
+    this.funcionarioService.listarFuncionarios().subscribe({
+      next: (lista) => {
+        this.cpfsCadastrados = lista.map(p => p.cpf)
+      },
+      error: (erro) => console.log('Erro ao carregar CPFs', erro)
+    })
+  }
+
+  verificaCpf(valor: string) {
+    this.cpf = valor
+
+    if (valor.length !== 11) {
+      this.cpfExiste = false
+      return
+    }
+    // na edição, ignora o CPF da própria pessoa
+    this.cpfExiste = this.cpfsCadastrados.includes(valor) && valor !== this.cpfOriginal
   }
 }

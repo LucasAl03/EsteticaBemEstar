@@ -1,0 +1,167 @@
+/* ===== Paleta branco + verde ===== */
+:host {
+  --verde-700: #15803d;
+  --verde-600: #16a34a;
+  --verde-100: #dcfce7;
+  --verde-50:  #f0fdf4;
+
+  --cor-texto: #1f2937;
+  --cor-borda: #d9efe1;
+  --cor-erro: #dc2626;
+  --sombra: 0 2px 10px rgba(22, 101, 52, 0.08);
+
+  display: block;
+  padding: 24px 16px;
+  background: #ffffff;
+  color: var(--cor-texto);
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* ===== Container e título ===== */
+#cadastro {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+#cadastro h1 {
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--verde-700);
+  border-bottom: 3px solid var(--verde-600);
+}
+
+/* ===== Formulário ===== */
+#pessoa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-top: 4px solid var(--verde-600);
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+}
+
+/* ===== Labels e campos ===== */
+#pessoa-form > label {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--verde-700);
+}
+
+#pessoa-form input:not([type="radio"]) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--cor-texto);
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#pessoa-form input:not([type="radio"]):hover {
+  border-color: var(--verde-600);
+}
+
+#pessoa-form input:not([type="radio"]):focus {
+  outline: none;
+  border-color: var(--verde-600);
+  box-shadow: 0 0 0 3px var(--verde-100);
+}
+
+/* Erro só depois que o usuário mexeu no campo */
+#pessoa-form input.ng-invalid.ng-touched:not([type="radio"]) {
+  border-color: var(--cor-erro);
+}
+
+/* ===== Sexo (radio) ===== */
+.btnSelecao {
+  width: 18px;
+  height: 18px;
+  margin: 0 6px 0 0;
+  accent-color: var(--verde-600);
+  cursor: pointer;
+}
+
+.grupo-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#pessoa-form .grupo-radio label {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--cor-texto);
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#pessoa-form .grupo-radio label:hover {
+  background: var(--verde-50);
+  border-color: var(--verde-600);
+}
+
+#pessoa-form .grupo-radio label:has(input:checked) {
+  background: var(--verde-100);
+  border-color: var(--verde-600);
+  color: var(--verde-700);
+  font-weight: 600;
+}
+
+/* ===== Botões ===== */
+#div-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+#div-btns button {
+  flex: 1;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid var(--verde-600);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#div-btns button[type="submit"] {
+  background: var(--verde-600);
+  color: #ffffff;
+}
+
+#div-btns button[type="submit"]:hover {
+  background: var(--verde-700);
+}
+
+#div-btns button[type="reset"] {
+  background: #ffffff;
+  color: var(--verde-700);
+}
+
+#div-btns button[type="reset"]:hover {
+  background: var(--verde-50);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 480px) {
+  #cadastro h1 { font-size: 1.4rem; }
+  #pessoa-form { padding: 16px; }
+}

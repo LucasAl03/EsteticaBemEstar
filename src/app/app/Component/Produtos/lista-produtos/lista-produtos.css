@@ -1,0 +1,136 @@
+/* ===== Paleta branco + verde ===== */
+:host {
+  --verde-700: #15803d;
+  --verde-600: #16a34a;
+  --verde-100: #dcfce7;
+  --verde-50:  #f0fdf4;
+
+  --cor-texto: #1f2937;
+  --cor-texto-suave: #5b6b61;
+  --cor-borda: #d9efe1;
+  --sombra: 0 2px 10px rgba(22, 101, 52, 0.08);
+  --sombra-hover: 0 10px 24px rgba(22, 101, 52, 0.16);
+
+  display: block;
+  padding: 24px 16px;
+  background: #ffffff;
+  color: var(--cor-texto);
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* ===== Container e título ===== */
+#lista-servicos {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#lista-servicos h1 {
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--verde-700);
+  border-bottom: 3px solid var(--verde-600);
+}
+
+/* ===== Grid de cards ===== */
+#div-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* ===== Card ===== */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-top: 4px solid var(--verde-600);
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-hover);
+}
+
+.servico {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.preco-servico {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 6px 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--verde-700);
+  background: var(--verde-50);
+  border-left: 3px solid var(--verde-600);
+  border-radius: 6px;
+}
+
+/* ===== Botão ===== */
+.btns,
+#btns {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.btns a,
+.btns button,
+#btns a,
+#btns button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: var(--verde-600);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btns a:hover,
+.btns button:hover,
+#btns a:hover,
+#btns button:hover {
+  background: var(--verde-700);
+}
+
+/* ===== Lista vazia ===== */
+.vazio {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 32px 0;
+  text-align: center;
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 480px) {
+  #lista-servicos h1 {
+    font-size: 1.4rem;
+  }
+
+  #div-cards {
+    grid-template-columns: 1fr;
+  }
+}

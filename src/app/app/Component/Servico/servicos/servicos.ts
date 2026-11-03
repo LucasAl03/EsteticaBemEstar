@@ -3,9 +3,10 @@ import { ProdutoItem } from '../../../Service/ProdutoItem/produto-item';
 import { ActivatedRoute } from '@angular/router';
 import { entradaService } from '../../../Service/EntradaService/entrada-service';
 import { Produto } from '../../../Models/Produto';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [CurrencyPipe],
   selector: 'app-servicos',
   styleUrl: './servicos.css',
   templateUrl: './servicos.html',
