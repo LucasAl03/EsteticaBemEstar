@@ -229,6 +229,24 @@
   border-radius: 6px;
 }
 
+.cabecalho-section {
+  grid-column: 1 / -1;  
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  gap: 1rem;
+  width: 100%;
+}
+
+.toggle-btn {
+  margin-left: auto;    
+  cursor: pointer;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+}
+
 /* =====================================
    BOTÃO CARRINHO
 ===================================== */

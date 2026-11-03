@@ -23,8 +23,12 @@
 
     <section class="cards-items">
       <div class="cards-produtos">
+        <div class="cabecalho-section">
         <h2 class="titulo-section" routerLink="/servicos">Serviços</h2>
-        @for (p of itemsFiltrados; track p.idItem){
+        <button type="button" class="btn-recolhe" (click)="alternarServicos()" [attr.aria-expanded]="servicosAbertos">{{ servicosAbertos ? 'Recolher ▲' : 'Expandir ▼' }}</button>
+      </div>
+      @if (servicosAbertos) {
+        @for (p of servicos; track p.idItem){
           @if (p.tipoItem === 'S'){
         <div class="card">
           <h3 class="item-nome"> {{p.item}} </h3>
@@ -38,9 +42,15 @@
         } @empty {
           Serviços não Disponíveis
         }
+      }
       </div>
       <div class="cards-produtos">
-        <h2 class="titulo-section" routerLink="/lista-produtos">Produtos</h2>
+        <div class="cabecalho-section">
+          <h2 class="titulo-section" routerLink="/lista-produtos">Produtos</h2>
+
+          <button type="button" class="btn-recolhe" (click)="alternarProdutos()" [attr.aria-expanded]="produtosAbertos"> {{ produtosAbertos ? 'Recolher ▲' : 'Expandir ▼' }}</button>
+        </div>
+      @if (produtosAbertos) {
         @for (p of itemsFiltrados; track p.idItem){
           @if (p.tipoItem === 'P') {
         <div class="card">
@@ -55,6 +65,7 @@
         } @empty {
           Produtos Não Disponíveis
         }
+      }
       </div>
     </section>
   </main>

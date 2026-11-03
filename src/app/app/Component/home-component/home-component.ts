@@ -23,6 +23,9 @@ export class HomeComponent {
   idCategoria = 0
   pesquisa: string = ''
 
+  servicosAbertos = true
+  produtosAbertos = true
+
   ngOnInit(){
     this.carregaItem();
     this.carregaCategoria();
@@ -58,5 +61,21 @@ export class HomeComponent {
       const filtraTexto = !texto || p.item.toLocaleLowerCase().includes(texto)
       return filtraCategoria && filtraTexto
     })
+  }
+
+  get servicos(): Produto[]{
+    return this.itemsFiltrados.filter(p => p.tipoItem === 'S')
+  }
+
+  get produtos(): Produto[]{
+    return this.itemsFiltrados.filter(p => p.tipoItem === 'P')
+  }
+
+  alternarServicos() {
+    this.servicosAbertos = !this.servicosAbertos
+  }
+
+  alternarProdutos(){
+    this.produtosAbertos = !this.produtosAbertos
   }
 }
