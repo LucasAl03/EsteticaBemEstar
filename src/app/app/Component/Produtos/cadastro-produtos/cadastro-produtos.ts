@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProdutoItem } from '../../../Service/ProdutoItem/produto-item';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Produto, DetalheProduto } from '../../../Models/Produto';
 import { Categoria } from '../../../Models/Categoria';
 import { CategoriaService } from '../../../Service/CategoriaService/categoria-service';
@@ -14,7 +14,7 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './cadastro-produtos.html',
 })
 export class CadastroProdutos implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private produtoService: ProdutoItem, private route: ActivatedRoute, private categoriaService: CategoriaService){}
+  constructor (private cdr: ChangeDetectorRef, private produtoService: ProdutoItem, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router){}
 
   catego: Categoria[] = []
   prodserv: Produto[] = []
@@ -100,6 +100,7 @@ export class CadastroProdutos implements OnInit {
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
+            this.router.navigate(['/cadastro-produto'])
             this.limparCampos();
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar o serviço/produto.", msgErro)
@@ -113,6 +114,7 @@ export class CadastroProdutos implements OnInit {
           next: (resposta) => {
             console.log(item)
             console.log(resposta)
+            this.router.navigate(['/cadastro-produto'])
             this.limparCampos();
           }, error: (msgErro) => {
             console.log("Erro ao alterar o serviço/produto", msgErro)
@@ -153,5 +155,18 @@ export class CadastroProdutos implements OnInit {
         },
         error: (err) => console.log('Erro ao carregar os produtos e serviços', err)
       })
+  }
+
+  buscaId(p: Produto) {
+    this.router.navigate(['/cadastro-produto', p.idItem])
+  }
+
+  excluir(p: Produto) {
+    if (confirm('Certeza que deseja excluir esse registro de entrada?')) {
+      this.produtoService.excluirProduto(p.idItem).subscribe({
+        next: () => this.carregaProdServ(),
+        error: (erro) => console.log('Erro ao excluir', erro)
+      })
+    }
   }
 }
