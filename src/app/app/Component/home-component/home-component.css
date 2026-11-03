@@ -171,6 +171,10 @@
   border-bottom: 3px solid var(--verde-600);
 }
 
+.titulo-section:hover{
+  cursor: pointer;
+}
+
 /* =====================================
    CARD DE PRODUTO E SERVIÇO
 ===================================== */
