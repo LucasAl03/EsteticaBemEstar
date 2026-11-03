@@ -24,6 +24,12 @@ export class entradaService {
         )
     }
 
+    listarEstoque(): Observable<EstoqueResposta[]>{
+        const urlApi = `https://localhost:7169/api/EntradaProdEstoque/`
+
+        return this.http.get<EstoqueResposta[]>(urlApi)
+    }
+
     listarEntrada(produtoId: number): Observable<Entrada>{
         const urlApi = `https://localhost:7169/api/EntradaProdEstoque/${produtoId}`
 
