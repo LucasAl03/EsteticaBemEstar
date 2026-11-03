@@ -36,9 +36,9 @@ export class entradaService {
         return this.http.put<Entrada>(urlApi, produto)
     }
 
-    excluirEntrada(produto: Entrada): Observable<Entrada>{
-        const urlApi = `https://localhost:7169/api/EntradaProdEstoque/${produto.idEntradaProduto}`
+    excluirEntrada(idEntradaProduto: number): Observable<void>{
+        const urlApi = `https://localhost:7169/api/EntradaProdEstoque/${idEntradaProduto}`
 
-        return this.http.delete<Entrada>(urlApi)
+        return this.http.delete<void>(urlApi)
     }
 }
