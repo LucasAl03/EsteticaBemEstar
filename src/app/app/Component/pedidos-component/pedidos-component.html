@@ -9,6 +9,8 @@
             <span class="data-atendimento"> {{a.dataAtendimento | date: 'dd/MM/yyyy'}} </span>
 
             <span class="id-pedido">Id do atendimento: {{a.idAtendimento}} </span>
+
+            <span class="status">Status: {{a.statusAtendimento === 'A' ? 'Ativo' : 'Não Ativo'}} </span>
             
             <div class="items-cards">
 
