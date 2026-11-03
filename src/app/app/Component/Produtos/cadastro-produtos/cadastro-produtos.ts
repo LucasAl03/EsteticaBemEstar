@@ -196,31 +196,4 @@ export class CadastroProdutos implements OnInit {
     this.codigoPreco = valor === null ? null : Number(valor)
     this.calculaPrecoVenda()
   }
-
-  filtroTipo: '' | 'P' | 'S' = '';
-  filtroSituacao: '' | 'S' | 'N' = '';
-
-  get qtdProdutos(): number {
-    return this.prodserv.filter(p => p.tipoItem === 'P').length;
-  }
-
-  get qtdServicos(): number {
-    return this.prodserv.filter(p => p.tipoItem === 'S').length;
-  }
-
-  get prodservFiltrados(): Produto[] {
-    return this.prodserv.filter(p =>
-      (!this.filtroTipo || p.tipoItem === this.filtroTipo) &&
-      (!this.filtroSituacao || p.ativoProdutoServico === this.filtroSituacao)
-    );
-  }
-
-  alternarTipo(tipo: 'P' | 'S') {
-    this.filtroTipo = this.filtroTipo === tipo ? '' : tipo;
-  }
-
-  limparFiltros() {
-    this.filtroTipo = '';
-    this.filtroSituacao = '';
-  }
 }
