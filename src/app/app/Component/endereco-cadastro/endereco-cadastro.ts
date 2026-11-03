@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EnderecoService } from '../../Service/EnderecoService/endereco-service';
 import { Endereco } from '../../Models/Endereco';
 import { Pessoa } from '../../Models/Pessoa';
+import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
+import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 
 @Component({
   imports: [FormsModule],
@@ -13,7 +15,7 @@ import { Pessoa } from '../../Models/Pessoa';
   templateUrl: './endereco-cadastro.html',
 })
 export class EnderecoCadastro implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private funcionarioService: PessoaService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, ){}
+  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, private pessoaService: PessoaService){}
 
   idEndereco = 0
   idPessoa = 0
@@ -25,6 +27,8 @@ export class EnderecoCadastro implements OnInit {
   enderecoId = 0
 
   pessoa: Pessoa[] = []
+
+  funcionario: PessoaFuncionario[] = []
 
   limparCampos(){
     this.cep = ''
@@ -42,6 +46,7 @@ export class EnderecoCadastro implements OnInit {
     }
 
     this.carregaPessoa();
+    this.carregaFuncionarios();
   }
 
   carregaCampo(enderecoId: number){
@@ -108,7 +113,7 @@ export class EnderecoCadastro implements OnInit {
   }
 
   carregaPessoa(){
-    this.funcionarioService.listarPessoas()
+    this.funcionarioService.listarFuncionarios()
       .subscribe({
         next: (lista) => {
           this.pessoa = lista
@@ -116,6 +121,17 @@ export class EnderecoCadastro implements OnInit {
           this.cdr.detectChanges
         },
         error: (erro) => console.log('Erro ao lista as pessoas', erro)
+      })
+  }
+
+  carregaFuncionarios(){
+    this.funcionarioService.listarFuncionarios()
+      .subscribe({
+        next: (lista) => {
+          this.funcionario = lista
+          this.cdr.detectChanges
+        },
+        error: (erro) => console.log('Erro ao listar os funcionarios', erro)
       })
   }
   
