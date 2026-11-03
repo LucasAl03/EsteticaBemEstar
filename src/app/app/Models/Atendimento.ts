@@ -3,6 +3,7 @@ export class Atendimento{
     nomePessoa: string = ''
     idPessoa: number = 0
     dataAtendimento: string = ''
+    statusAtendimento: string = ''
     itens: AtendimentoItem[] = []
 }
 
