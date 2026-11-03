@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Categoria } from '../../Models/Categoria';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
-import { url } from 'inspector';
 
 @Injectable({
     providedIn: 'root'
@@ -30,13 +28,13 @@ export class CategoriaService {
     }
 
     alterarCategoria(categoria: Categoria): Observable<Categoria>{
-        const urlApi = `https://localhost:7169/api/Endereco/${categoria.idCategoria}`
+        const urlApi = `https://localhost:7169/api/Categorium/${categoria.idCategoria}`
 
         return this.http.put<Categoria>(urlApi, categoria)
     }
 
     excluirCategoria(idCategoria: number): Observable<void>{
-        const urlApi = `https://localhost:7169/api/Endereco/${idCategoria}`
+        const urlApi = `https://localhost:7169/api/Categorium/${idCategoria}`
 
         return this.http.delete<void>(urlApi)
     }
