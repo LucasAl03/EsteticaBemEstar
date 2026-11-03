@@ -1,41 +1,61 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { AtendimentoService } from '../../Service/AtendimentoService/atendimento-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Atendimento } from '../../Models/Atendimento';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Produto } from '../../Models/Produto';
+import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 
 @Component({
-  imports: [],
+  imports: [DatePipe, CurrencyPipe],
   selector: 'app-pedidos-component',
   styleUrl: './pedidos-component.css',
   templateUrl: './pedidos-component.html',
 })
 export class PedidosComponent {
-  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router){}
+  constructor (private cdr: ChangeDetectorRef, private atendimentoService: AtendimentoService, private route: ActivatedRoute, private router: Router, private produtoService: ProdutoItem){}
 
-  pessoa: Pessoa[] = []
+  atendimento: Atendimento[] = []
+
+  item: Produto[] = []
   
     ngOnInit(){
-      this.carregaPessoa();
+      this.carregaAtendimento();
+      this.carregaItems();
     }
   
-    carregaPessoa(){
-      this.pessoaService.listarPessoas()
+    carregaAtendimento(){
+      this.atendimentoService.listarAtendimentos()
         .subscribe({
           next: (lista) => {
-            this.pessoa = lista.sort((a, b) => b.idPessoa - a.idPessoa)
+            this.atendimento = lista.sort((a, b) => b.idAtendimento - a.idAtendimento)
             this.cdr.detectChanges()
           },
-          error: (erro) => console.log('Erro ao listar os clientes', erro)
+          error: (erro) => console.log('Erro ao listar os atendimentos', erro)
         })
     }
 
-    buscaId(p: Pessoa) {
-      this.router.navigate(['/cadastro', p.idPessoa])
+    buscaId(a: Atendimento) {
+      this.router.navigate(['/cadastro', a.idAtendimento])
     }
 
-  excluir(p: Pessoa) {
-    if (confirm('Certeza que deseja excluir o registro deste cliente?')) {
-      this.pessoaService.excluirPessoa(p.idPessoa).subscribe({
-        next: () => this.carregaPessoa(),
+  excluir(a: Atendimento) {
+    if (confirm('Certeza que deseja excluir o atendimento?')) {
+      this.atendimentoService.excluirAtendimento(a.idPessoa).subscribe({
+        next: () => this.carregaAtendimento(),
         error: (erro) => console.log('Erro ao excluir', erro)
       })
     }
+  }
+
+  carregaItems(){
+    this.produtoService.listarProdutos()
+      .subscribe({
+        next: (lista) => {
+          this.item = lista.sort((a, b) => b.idItem - a.idItem)
+          this.cdr.detectChanges()
+        },
+        error: (erro) => console.log('Erro ao listar os items', erro)
+      })
   }
 }
