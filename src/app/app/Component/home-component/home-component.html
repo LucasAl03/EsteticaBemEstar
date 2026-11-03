@@ -23,7 +23,7 @@
 
     <section class="cards-items">
       <div class="cards-produtos">
-        <h2 class="titulo-section">Serviços</h2>
+        <h2 class="titulo-section" routerLink="/servicos">Serviços</h2>
         @for (p of itemsFiltrados; track p.idItem){
           @if (p.tipoItem === 'S'){
         <div class="card">
@@ -40,7 +40,7 @@
         }
       </div>
       <div class="cards-produtos">
-        <h2 class="titulo-section">Produtos</h2>
+        <h2 class="titulo-section" routerLink="/lista-produtos">Produtos</h2>
         @for (p of itemsFiltrados; track p.idItem){
           @if (p.tipoItem === 'P') {
         <div class="card">
