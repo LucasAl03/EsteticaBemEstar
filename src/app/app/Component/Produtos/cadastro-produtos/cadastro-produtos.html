@@ -1,1 +1,41 @@
-<p>cadastro-produtos works!</p>
+<div id="produtos-servicos">
+    <h3 class="titulo-cadastro">Cadastro de Serviços & Itens</h3>
+    <form class="formulario-item">
+        <label for="item">Nome do Item</label>
+        <input type="text" id="item" name="item" maxlength="40" required>
+
+        <label for="descricaoItem">Descrição do Item</label>
+        <input type="text" id="descricaoItem" name="descricaoItem" required>
+
+        <label for="preco">Preço de Venda</label>
+        <input type="number" id="preco" name="preco" step="0.1"  required>
+
+        <label for="tipoItem">Tipo</label>
+        <select name="tipoItem" id="tipoItem" [(ngModel)]="tipoItem" required>
+            <option value="0" selected>Selecione o tipo do item</option>
+            <option value="P">Produto</option>
+            <option value="S">Serviço</option>
+        </select>
+
+        @if(tipoItem == 'P'){
+            <label for="precoVenda">Preço de venda</label>
+            <input type="number" id="precoVenda" name="precoVenda" required readonly>
+
+            <label for="unidade">Unidade</label>
+            <select name="unidade" id="unidade" required>
+                <option value="0">Selecione a unidade de medida</option>
+                <option value="UN">Unidade</option>
+                <option value="KG">Quilograma</option>
+                <option value="ML">Mililitro</option>
+            </select>
+
+            <label for="codigoPreco">Código de Preço</label>
+            <select name="codigoPreco" id="codigoPreco" required>
+                <option value="0" selected>Selecione o código</option>
+                <option value="1">1 - 4% de lucro</option>
+                <option value="2">2 - 8% de lucro</option>
+                <option value="3">3 - 10% de lucro</option>
+            </select>
+        }
+    </form>
+</div>

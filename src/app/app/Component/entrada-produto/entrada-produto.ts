@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Entrada } from '../../Models/Entrada';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './entrada-produto.html',
 })
 export class EntradaProduto implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem){}
+  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem, private router: Router){}
 
   // declaração dos atributos para Entrada
   idEntradaProduto = 0
@@ -70,6 +70,7 @@ export class EntradaProduto implements OnInit {
           this.valorUnitarioEntrada = objProduto.valorUnitarioEntrada
 
           this.cdr.detectChanges()
+          this.carregaEntradas();
       }, error: (msgErro) =>{
         console.log("Erro ao listar o produto", msgErro)
       }
@@ -152,5 +153,18 @@ export class EntradaProduto implements OnInit {
         },
         error: (err) => console.log('Erro ao listar as entradas', err)
       })
+  }
+
+  buscaId(e: Entrada) {
+    this.router.navigate(['/entrada', e.idEntradaProduto])
+  }
+
+  excluir(e: Entrada) {
+    if (confirm('Certeza que deseja excluir esse registro de entrada?')) {
+      this.entradaService.excluirEntrada(e.idEntradaProduto).subscribe({
+        next: () => this.carregaEntradas(),
+        error: (erro) => console.log('Erro ao excluir', erro)
+      })
+    }
   }
 }

@@ -42,6 +42,10 @@ export const routes: Routes = [
         component: EntradaProduto
     },
     {
+        path: 'entrada/:idEntradaProduto',
+        component: EntradaProduto
+    },
+    {
         path: 'servicos',
         component: Servicos
     },
@@ -66,7 +70,7 @@ export const routes: Routes = [
         component: ListaProdutos
     },
     {
-        path: 'cadastro-produtos',
+        path: 'cadastro-produto',
         component: CadastroProdutos
     }
 ];

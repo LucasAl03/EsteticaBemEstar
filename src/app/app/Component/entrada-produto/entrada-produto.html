@@ -25,7 +25,7 @@
         <input type="date" name="dataentrada" id="dataentrada" required [(ngModel)]="dataEntradaProduto">
 
         <label for="ValorUnitarioEntrada">Valor Unitario de Entrada</label>
-        <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="valorUnitarioEntrada" step="0.1">
+        <input type="number" name="ValorUnitarioEntrada" id="ValorUnitarioEntrada" required [(ngModel)]="valorUnitarioEntrada" step="0.01">
 
         <div id="div-btns">
             <button type="submit" class="btn-submit">{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
@@ -47,8 +47,8 @@
                     <span class="quant-entrada"> Quantidade: {{e.quantidadeEntrada}} </span>
         
                     <div id="btns-card">
-                        <a href="" class="btn-excluir">Excluir</a>
-                        <a href="" class="btn-edita">Editar</a>
+                <button type="button" class="btns-exclui" (click)="excluir(e)">Excluir</button>
+                <button type="button" class="btns-editar" (click)="buscaId(e)">Editar</button>
                     </div>
                 </div>
             } @empty {
