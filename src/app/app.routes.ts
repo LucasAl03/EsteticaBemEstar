@@ -7,6 +7,7 @@ import { EntradaProduto } from './app/Component/entrada-produto/entrada-produto'
 import { Servicos } from './app/Component/Servico/servicos/servicos';
 import { Funcionario } from './app/Component/Funcionario/funcionario/funcionario';
 import { Clientes } from './app/Component/clientes/clientes';
+import { CadastroCategoria } from './app/Component/cadastro-categoria/cadastro-categoria';
 
 export const routes: Routes = [
     {
@@ -49,5 +50,13 @@ export const routes: Routes = [
     {
         path: 'lista-cliente',
         component: Clientes
+    },
+    {
+        path: 'categoria-cadastra',
+        component: CadastroCategoria
+    },
+    {
+        path: 'categoria-cadastra/:idCategoria',
+        component: CadastroCategoria
     }
 ];
