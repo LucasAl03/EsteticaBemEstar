@@ -133,11 +133,11 @@ export class EntradaProduto implements OnInit {
   }
 
   selecionaProduto(){
-    const produto = this.produtos.find(p => p.idItem === this.idItem)
+    const item = this.produtos.find(p => p.idItem === this.idItem)
 
-    if (produto) {
-      this.unidade = produto.unidade
-      this.valorUnitarioEntrada = produto.preco
+    if (item) {
+      this.unidade = item.produto?.unidade ?? ''
+      this.valorUnitarioEntrada = item.preco
     } else {
       this.unidade = ''
       this.valorUnitarioEntrada = null

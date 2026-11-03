@@ -5,9 +5,17 @@
         <input type="text" id="item" name="item" maxlength="40" required>
 
         <label for="descricaoItem">Descrição do Item</label>
-        <input type="text" id="descricaoItem" name="descricaoItem" required>
+        <input type="text" id="descricaoItem" name="descricaoItem" maxlength="200" required>
 
-        <label for="preco">Preço de Venda</label>
+        <label for="idCategoria">Categoria do Produto/Serviço</label>
+        <select name="idCategoria" id="idCategoria" required>
+            <option value="0" selected>Selecione a Categoria</option>
+            @for (c of catego; track c.idCategoria){
+                <option [ngValue]="c.idCategoria">{{c.categoria}}</option>
+            }
+        </select>
+
+        <label for="preco">Preço de Custo</label>
         <input type="number" id="preco" name="preco" step="0.1"  required>
 
         <label for="tipoItem">Tipo</label>
@@ -38,4 +46,41 @@
             </select>
         }
     </form>
+    @let produtos = prodserv.filter(p => p.tipoItem === 'P');
+    <h4>Quantidade de Produtos {{produtos.length}}</h4>
+    @let servicos = prodserv.filter(p => p.tipoItem === 'S');
+    <h4>Quantidade de Produtos {{servicos.length}}</h4>
+    <div id="div-cards">
+        <div id="card">
+            @for (p of prodserv; track p.idItem) {
+                <div class="card">
+                    @let c = catego.find(prod => prod.idCategoria === p.idCategoria);
+                    <h3 class="nome-item">{{p.tipoItem === 'P' ? 'Produto:' : 'Serviço:'}} {{p?.item}}</h3>
+
+                    <span class="descricao"><span class="subtitulo">Descrição: </span>{{p.descricaoItem}}</span>
+
+                    <span class="descricao"><span class="subtitulo">Categoria:</span> {{c?.categoria ?? '-'}}</span>
+
+                    <span class="custo-preco"><span class="subtitulo"> {{p.tipoItem === 'P' ? 'Preço de custo:' : 'Preço:'}} R$ </span>{{p.preco | currency: 'BRL'}}</span>
+
+                    <span class="situacao"><span class="subtitulo">Situação: </span>{{p.ativoProdutoServico === 'S' ? 'Ativo' : 'Desativado'}}</span>
+
+                    @if (p.tipoItem === 'P') {
+                    <span class="preco-venda"><span class="subtitulo">Preço de venda: </span>{{p.produto?.precoVenda | currency: 'BRL'}}</span>
+
+                    <span class="unidade"><span class="subtitulo">Unidade de medida: </span>{{p.produto?.unidade ?? '-' }}</span>
+
+                    <span class="codigo"><span class="subtitulo">Código margem de lucro:</span> {{p.produto?.codigoPreco ?? '-' }}</span>
+                    }
+                    <div id="btns-card">
+                        <button type="button" class="btns-exclui" >Excluir</button>
+                        <button type="button" class="btns-editar" >Editar</button>
+                    </div>
+                </div>
+            } @empty {
+                <h3 class="entrada-produto">Nenhuma entrada cadastrada.</h3>
+            }
+        </div>
+        
+    </div>
 </div>

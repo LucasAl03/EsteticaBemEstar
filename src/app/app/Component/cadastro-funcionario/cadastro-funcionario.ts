@@ -94,9 +94,9 @@ export class CadastroFuncionario implements OnInit {
           this.numero = objPessoa.enderecos?.[0]?.numero ?? ''
           this.complemento = objPessoa.enderecos?.[0]?.complemento ?? ''
 
-        // cargo
-        this.cargo = objPessoa.funcionario?.cargo ?? ''
-        this.dataAdmissao = objPessoa.funcionario?.dataAdmissao ?? ''
+          // cargo
+          this.cargo = objPessoa.funcionario?.cargo ?? ''
+          this.dataAdmissao = objPessoa.funcionario?.dataAdmissao ?? ''
 
           this.cdr.detectChanges()
       }, error: (msgErro) =>{
