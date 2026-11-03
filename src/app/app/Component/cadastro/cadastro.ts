@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
@@ -13,7 +13,7 @@ import { FuncionarioService } from '../../Service/FuncionarioService/funcionario
   styleUrl: './cadastro.css',
   templateUrl: './cadastro.html',
 })
-export class Cadastro {
+export class Cadastro implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private funcionarioService: FuncionarioService ){}
 
   // pessoa

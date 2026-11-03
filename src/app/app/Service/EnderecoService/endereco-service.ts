@@ -10,7 +10,7 @@ export class EnderecoService {
     constructor (private http: HttpClient){}
 
     cadastrarEndereco(pessoa: Endereco): Observable<Endereco>{
-        const urlApi = `https://localhost:7169/api/PessoaEndereco`
+        const urlApi = `https://localhost:7169/api/Endereco`
     
         return this.http.post<Endereco>(urlApi, pessoa)
     }

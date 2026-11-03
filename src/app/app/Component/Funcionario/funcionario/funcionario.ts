@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FuncionarioService } from '../../../Service/FuncionarioService/funcionario-service';
 import { PessoaFuncionario } from '../../../Models/PessoaFuncionario';
 import { DatePipe } from '@angular/common';
+import { Endereco } from '../../../Models/Endereco';
+import { EnderecoService } from '../../../Service/EnderecoService/endereco-service';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './funcionario.html',
 })
 export class Funcionario implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router){}
+  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService){}
 
   pessoa: PessoaFuncionario[] = []
 
@@ -32,8 +34,8 @@ export class Funcionario implements OnInit {
   }
 
   buscaId(p: PessoaFuncionario) {
-        this.router.navigate(['/cadastro-funcionario', p.idPessoa])
-      }
+    this.router.navigate(['/cadastro-funcionario', p.idPessoa])
+  }
   
   excluir(p: PessoaFuncionario) {
     if (confirm('Certeza que deseja excluir o registro deste cliente?')) {
@@ -42,5 +44,24 @@ export class Funcionario implements OnInit {
         error: (erro) => console.log('Erro ao excluir', erro)
       })
     }
+  }
+
+  buscaIdEnd(e: Endereco){
+    this.router.navigate(['/endereco-cadastro', e.idEndereco])
+  }
+
+  excluirEnd(e: Endereco){
+    if (confirm('Certeza que deseja excluir este endereço.')){
+      this.enderecoService.excluirEndereco(e.idEndereco).subscribe({
+        next: () => this.carregaFuncionarios(),
+        error: (erro) => console.log('Erro ao excluir o endereço', erro)
+      })
+    }
+  }
+
+  novoEnd(p: PessoaFuncionario){
+    this.router.navigate(['/endereco-cadastro'], {
+      queryParams: { idPessoa: p.idPessoa }
+    });
   }
 }
