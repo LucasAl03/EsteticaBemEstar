@@ -6,6 +6,7 @@ import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 import { entradaService } from '../../Service/EntradaService/entrada-service';
 import { Produto } from '../../Models/Produto';
 import { DatePipe } from '@angular/common';
+import { EstoqueResposta } from '../../Models/EstoqueResposta';
 
 @Component({
   imports: [FormsModule, DatePipe],
@@ -29,6 +30,8 @@ export class EntradaProduto implements OnInit {
 
   entradas: Entrada[] = []
 
+  estoque_resposta: EstoqueResposta[] = []
+
   editar = false
   produtoId = 0
 
@@ -42,6 +45,7 @@ export class EntradaProduto implements OnInit {
 
     this.carregaProdutos()
     this.carregaEntradas()
+    this.carregaEstoque()
   }
 
   exibeDados(){
@@ -152,6 +156,17 @@ export class EntradaProduto implements OnInit {
           this.cdr.detectChanges()
         },
         error: (err) => console.log('Erro ao listar as entradas', err)
+      })
+  }
+
+  carregaEstoque(){
+    this.entradaService.listarEstoque()
+      .subscribe({
+        next: (lista) => {
+          this.estoque_resposta = lista.sort((a,b) => b.idItem - a.idItem)
+          this.cdr.detectChanges()
+        },
+        error: (erro) => console.log('Erro ao listar o estoque.', erro)
       })
   }
 
