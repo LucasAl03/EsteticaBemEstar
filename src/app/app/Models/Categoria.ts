@@ -1,7 +1,6 @@
 import { Produto } from "./Produto"
 
-export interface Categoria {
-    idCategoria: number
-    categoria: string
-    items: Produto[]
+export class Categoria {
+    idCategoria: number = 0
+    categoria: string = ''
 }
