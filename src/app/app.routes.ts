@@ -72,5 +72,9 @@ export const routes: Routes = [
     {
         path: 'cadastro-produto',
         component: CadastroProdutos
+    },
+    {
+        path: 'cadastro-produto/:idItem',
+        component: CadastroProdutos
     }
 ];
