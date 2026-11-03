@@ -28,10 +28,18 @@
       </div>
     </section>
 
+    <label for="filtro-categoria"></label>
+    <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="idCategoria" >
+      <option [ngValue]="0" selected>Filtro de categoria</option>
+        @for (c of catego; track c.idCategoria){
+            <option [ngValue]="c.idCategoria">{{c.categoria}}</option>
+        }
+    </select>
+
     <section class="cards-items">
       <div class="cards-produtos">
         <h2 class="titulo-section">Serviços</h2>
-        @for (p of items; track p.idItem){
+        @for (p of itemsFiltrados; track p.idItem){
           @if (p.tipoItem === 'S'){
         <div class="card">
           <h3 class="item-nome"> {{p.item}} </h3>
@@ -42,11 +50,13 @@
           </div>
         </div>
           }
+        } @empty {
+          Serviços não Disponíveis
         }
       </div>
       <div class="cards-produtos">
         <h2 class="titulo-section">Produtos</h2>
-        @for (p of items; track p.idItem){
+        @for (p of itemsFiltrados; track p.idItem){
           @if (p.tipoItem === 'P') {
         <div class="card">
           <h3 class="item-nome">{{p.item}}</h3>
@@ -57,6 +67,8 @@
           </div>
         </div>
           }
+        } @empty {
+          Produtos Não Disponíveis
         }
       </div>
     </section>
