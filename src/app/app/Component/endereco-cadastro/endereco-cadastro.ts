@@ -4,6 +4,7 @@ import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnderecoService } from '../../Service/EnderecoService/endereco-service';
 import { Endereco } from '../../Models/Endereco';
+import { Pessoa } from '../../Models/Pessoa';
 
 @Component({
   imports: [FormsModule],
@@ -12,7 +13,7 @@ import { Endereco } from '../../Models/Endereco';
   templateUrl: './endereco-cadastro.html',
 })
 export class EnderecoCadastro implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService){}
+  constructor (private cdr: ChangeDetectorRef, private funcionarioService: PessoaService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, ){}
 
   idEndereco = 0
   idPessoa = 0
@@ -22,6 +23,8 @@ export class EnderecoCadastro implements OnInit {
 
   editar = false
   enderecoId = 0
+
+  pessoa: Pessoa[] = []
 
   limparCampos(){
     this.cep = ''
@@ -37,6 +40,8 @@ export class EnderecoCadastro implements OnInit {
       this.editar = true
       this.carregaCampo(this.enderecoId)
     }
+
+    this.carregaPessoa();
   }
 
   carregaCampo(enderecoId: number){
@@ -99,6 +104,18 @@ export class EnderecoCadastro implements OnInit {
         }, error: (msgErro) => {
           console.log("Erro ao listar as endereços", msgErro)
         }
+      })
+  }
+
+  carregaPessoa(){
+    this.funcionarioService.listarPessoas()
+      .subscribe({
+        next: (lista) => {
+          this.pessoa = lista
+          console.log(lista)
+          this.cdr.detectChanges
+        },
+        error: (erro) => console.log('Erro ao lista as pessoas', erro)
       })
   }
   
