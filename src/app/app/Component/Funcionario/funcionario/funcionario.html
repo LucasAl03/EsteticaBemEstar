@@ -20,12 +20,20 @@
                 <span><strong>Telefone:</strong> {{ p.telefone }}</span>
             </div>
 
+            <h4> Button novo-end - Novo Endereço </h4>
+            <button type="button" class="novo-end">+</button>
+            
             @for (end of p.enderecos; track end.idEndereco; let i = $index) {
             <h5 class="endereco-titulo">Endereço {{ i + 1 }}</h5>
             <div class="endereco-info">
                 <span class="endereco-cep">{{ end.cep }}</span>
                 <span class="endereco-numero">{{ end.numero }}</span>
                 <span class="endereco-comple">{{ end.complemento }}</span>
+
+                <div class="end-btns">
+                    <button type="button" class="editar-end" >Editar</button>
+                    <button type="button" class="excluir-end">Excluir</button>
+                </div>
             </div>
             }
 
