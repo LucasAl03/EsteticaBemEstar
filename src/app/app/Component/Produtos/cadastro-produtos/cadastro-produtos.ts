@@ -169,4 +169,31 @@ export class CadastroProdutos implements OnInit {
       })
     }
   }
+
+  private readonly margens: Record<number, number> = {
+    1: 0.04,
+    2: 0.08,
+    3: 0.10
+  }
+
+  calculaPrecoVenda() {
+    const margem = this.margens[Number(this.codigoPreco)]
+
+    if (this.preco == null || margem === undefined) {
+      this.precoVenda = null
+      return
+    }
+
+    this.precoVenda = Math.round(this.preco * (1 + margem) * 100) / 100
+  }
+
+  precoChange(valor: number) {
+    this.preco = valor
+    this.calculaPrecoVenda()
+  }
+
+  codigoPrecoChange(valor: number) {
+    this.codigoPreco = valor === null ? null : Number(valor)
+    this.calculaPrecoVenda()
+  }
 }

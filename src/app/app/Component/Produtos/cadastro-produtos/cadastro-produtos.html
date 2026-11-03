@@ -16,7 +16,7 @@
         </select>
 
         <label for="preco">Preço de Custo</label>
-        <input type="number" id="preco" name="preco" step="0.1" [(ngModel)]="preco" required>
+        <input type="number" id="preco" name="preco" step="0.1" [(ngModel)]="preco" (ngModelChange)="precoChange($event)" required>
 
         <label for="tipoItem">Tipo</label>
         <select name="tipoItem" id="tipoItem" [(ngModel)]="tipoItem" [(ngModel)]="tipoItem" required>
@@ -38,7 +38,7 @@
             </select>
 
             <label for="codigoPreco">Código de Preço</label>
-            <select name="codigoPreco" id="codigoPreco" [(ngModel)]="codigoPreco" required>
+            <select name="codigoPreco" id="codigoPreco" [(ngModel)]="codigoPreco" (ngModelChange)="codigoPrecoChange($event)" required>
                 <option value="0" selected>Selecione o código</option>
                 <option value="1">1 - 4% de lucro</option>
                 <option value="2">2 - 8% de lucro</option>
