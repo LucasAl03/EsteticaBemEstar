@@ -53,7 +53,7 @@
 }
 
 .data-atendimento,
-.id-pedido {
+.id-pedido, .status {
     color: #555;
     font-size: 0.95rem;
 }
