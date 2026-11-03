@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../Service/CategoriaService/categoria-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from '../../Models/Categoria';
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './cadastro-categoria.html',
 })
 export class CadastroCategoria implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private categoriaService: CategoriaService ){}
+  constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router ){}
 
   idCategoria = 0
   categoria = ''
@@ -21,15 +21,21 @@ export class CadastroCategoria implements OnInit {
 
   catego: Categoria[] = []
 
-  ngOnInit(): void {
-      this.categoriaId = Number(this.route.snapshot.paramMap.get('idCategoria'))
+  ngOnInit() {
+    this.carregaCategorias()
 
-      if(this.categoriaId > 0){
+    this.route.paramMap.subscribe(params => {
+      this.categoriaId = Number(params.get('idCategoria'))
+
+      if (this.categoriaId > 0) {
         this.editar = true
         this.carregaCampo(this.categoriaId)
+      } else {
+        this.editar = false
+        this.idCategoria = 0
+        this.limparCampos()
       }
-
-      this.carregaCategorias();
+    })
   }
 
   limparCampos(){
@@ -42,6 +48,7 @@ export class CadastroCategoria implements OnInit {
         next: (objCategoria) => {
           this.idCategoria = objCategoria.idCategoria
           this.categoria = objCategoria.categoria
+          console.log(objCategoria)
 
           this.cdr.detectChanges();
         }, error: (msgErro) => {
@@ -59,6 +66,8 @@ export class CadastroCategoria implements OnInit {
           .subscribe({
             next: (resposta) => {
               console.log(resposta)
+              this.carregaCategorias()
+              this.limparCampos()
             }, error: (msgErro) => {
               console.log("Erro ao cadastrar a nova categoria.", msgErro)
             }
@@ -69,21 +78,22 @@ export class CadastroCategoria implements OnInit {
         this.categoriaService.alterarCategoria(catego)
           .subscribe({
             next: (resposta) => {
-              console.log(catego)
               console.log(resposta)
+              this.carregaCategorias()
+              this.limparCampos()
+              this.router.navigate(['/categoria-cadastra'])
             }, error: (msgErro) => {
               console.log("Erro ao alterar a categoria", msgErro)
             }
           })
       }
-      this.limparCampos();
     }
 
     listarCategoria(categoriaId: number){
       this.categoriaService.listarCategoria(categoriaId)
         .subscribe({
-          next: (dados) => {
-            console.table(dados)
+          next: () => {
+            console.log()
           }, error: (msgErro) => {
             console.log("Erro ao listar a categoria", msgErro)
           }
@@ -94,11 +104,24 @@ export class CadastroCategoria implements OnInit {
     this.categoriaService.listarCategorias()
       .subscribe({
         next: (lista) => {
-          console.log(lista)
           this.catego = lista.sort((a,b) => b.idCategoria - a.idCategoria)
           this.cdr.detectChanges()
         },
         error: (err) => console.log('Erro ao listar as categorias', err)
       })
+    }
+
+  buscaId(c: Categoria) {
+    this.router.navigate(['/categoria-cadastra', c.idCategoria])
+  }
+  
+  excluir(c: Categoria) {
+    if (confirm('Certeza que deseja excluir o esta categoria?')) {
+      this.categoriaService.excluirCategoria(c.idCategoria)
+        .subscribe({
+          next: () => this.carregaCategorias(),
+          error: (erro) => console.log('Existem produtos e serviços ligados a esta categoria.', erro)
+        })
+    }
   }
 }
