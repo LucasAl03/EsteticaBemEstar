@@ -12,6 +12,7 @@ import { ListaProdutos } from './app/Component/Produtos/lista-produtos/lista-pro
 import { CadastroProdutos } from './app/Component/Produtos/cadastro-produtos/cadastro-produtos';
 import { EnderecoCadastro } from './app/Component/endereco-cadastro/endereco-cadastro';
 import { Carrinho } from './app/Component/carrinho/carrinho';
+import { PedidosComponent } from './app/Component/pedidos-component/pedidos-component';
 
 export const routes: Routes = [
     {
@@ -90,5 +91,9 @@ export const routes: Routes = [
     {
         path: 'carrinho',
         component: Carrinho
+    },
+    {
+        path: 'pedido-component',
+        component: PedidosComponent
     }
 ];
