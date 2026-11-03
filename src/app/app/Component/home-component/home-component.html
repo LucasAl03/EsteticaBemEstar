@@ -10,23 +10,8 @@
         Oferecemos os melhores produtos no mercado e possuímos os profissionais mais qualificados para os seus procedimentos.
       </p>
     </section>
-  
-    <section class="home-info">
-      <div class="info-card">
-        <h2> </h2>
-        <p></p>
-      </div>
-  
-      <div class="info-card">
-        <h2> Seu carrinho</h2>
-        <a routerLink="/carrinho" ><img src="/public/carrinho.png" alt=""></a>
-      </div>
-  
-      <div class="info-card">
-        <h2>Pedidos</h2>
-        <a routerLink="/pedido-component">Página de pedidos</a>
-      </div>
-    </section>
+    <label for="pesquisa">Pesquisa</label>
+    <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
 
     <label for="filtro-categoria"></label>
     <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="idCategoria" >

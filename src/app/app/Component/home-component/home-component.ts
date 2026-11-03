@@ -21,6 +21,7 @@ export class HomeComponent {
   catego: Categoria[] = [];
 
   idCategoria = 0
+  pesquisa: string = ''
 
   ngOnInit(){
     this.carregaItem();
@@ -50,7 +51,12 @@ export class HomeComponent {
   }
 
   get itemsFiltrados(): Produto[] {
-    if (!this.idCategoria) return this.items;
-    return this.items.filter(p => p.idCategoria === this.idCategoria);
+    const texto = this.pesquisa.trim().toLocaleLowerCase()
+    
+    return this.items.filter(p => {
+      const filtraCategoria = !this.idCategoria || p.idCategoria === this.idCategoria
+      const filtraTexto = !texto || p.item.toLocaleLowerCase().includes(texto)
+      return filtraCategoria && filtraTexto
+    })
   }
 }
