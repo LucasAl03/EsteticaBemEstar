@@ -16,13 +16,20 @@
         </select>
 
         <label for="preco">Preço de Custo</label>
-        <input type="number" id="preco" name="preco" step="0.1" [(ngModel)]="preco" (ngModelChange)="precoChange($event)" required>
+        <input type="number" id="preco" name="preco" step="0.01" [(ngModel)]="preco" (ngModelChange)="precoChange($event)" required>
 
         <label for="tipoItem">Tipo</label>
         <select name="tipoItem" id="tipoItem" [(ngModel)]="tipoItem" [(ngModel)]="tipoItem" required>
             <option value="0" selected>Selecione o tipo do item</option>
             <option value="P">Produto</option>
             <option value="S">Serviço</option>
+        </select>
+
+        <label for="ativoProdutoServico">Situação</label>
+        <select name="ativoProdutoServico" id="ativoProdutoServico" [(ngModel)]="ativoProdutoServico" required>
+            <option value="" selected>Selecione a situação do item</option>
+            <option value="S">Ativo</option>
+            <option value="N">Desativado</option>
         </select>
 
         @if(tipoItem == 'P'){
@@ -51,10 +58,12 @@
         </div>
         
     </form>
+
     @let produtos = prodserv.filter(p => p.tipoItem === 'P');
     <h4>Quantidade de Produtos {{produtos.length}}</h4>
     @let servicos = prodserv.filter(p => p.tipoItem === 'S');
     <h4>Quantidade de Produtos {{servicos.length}}</h4>
+
     <div id="div-cards">
         <div id="card">
             @for (p of prodserv; track p.idItem) {
