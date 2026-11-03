@@ -10,6 +10,7 @@ import { Clientes } from './app/Component/clientes/clientes';
 import { CadastroCategoria } from './app/Component/cadastro-categoria/cadastro-categoria';
 import { ListaProdutos } from './app/Component/Produtos/lista-produtos/lista-produtos';
 import { CadastroProdutos } from './app/Component/Produtos/cadastro-produtos/cadastro-produtos';
+import { EnderecoCadastro } from './app/Component/endereco-cadastro/endereco-cadastro';
 
 export const routes: Routes = [
     {
@@ -76,5 +77,13 @@ export const routes: Routes = [
     {
         path: 'cadastro-produto/:idItem',
         component: CadastroProdutos
+    },
+    {
+        path: 'endereco-cadastro',
+        component: EnderecoCadastro
+    },
+    {
+        path: 'endereco-cadastro/:idEndereco',
+        component: EnderecoCadastro
     }
 ];
