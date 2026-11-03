@@ -46,7 +46,6 @@ export class EnderecoCadastro implements OnInit {
     }
 
     this.carregaPessoa();
-    this.carregaFuncionarios();
   }
 
   carregaCampo(enderecoId: number){
@@ -79,7 +78,6 @@ export class EnderecoCadastro implements OnInit {
           next: (resposta) => {
             console.log(resposta)
             this.limparCampos();
-            this.router.navigate(['/funcionario-lista'])
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar o novo endereço.", msgErro)
           }
@@ -93,7 +91,6 @@ export class EnderecoCadastro implements OnInit {
             this.limparCampos();
             console.log(ende)
             console.log(resposta)
-            this.router.navigate(['/funcionario-lista'])
           }, error: (msgErro) => {
             console.log("Erro ao alterar a pessoa", msgErro)
           }
@@ -123,16 +120,4 @@ export class EnderecoCadastro implements OnInit {
         error: (erro) => console.log('Erro ao lista as pessoas', erro)
       })
   }
-
-  carregaFuncionarios(){
-    this.funcionarioService.listarFuncionarios()
-      .subscribe({
-        next: (lista) => {
-          this.funcionario = lista
-          this.cdr.detectChanges
-        },
-        error: (erro) => console.log('Erro ao listar os funcionarios', erro)
-      })
-  }
-  
 }
