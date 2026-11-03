@@ -27,7 +27,7 @@ export class AtendimentoService {
         return this.http.get<Atendimento>(urlApi)
     }
     
-    alterarAtendimento(atendimento: Atendimento): Observable<Endereco>{
+    alterarAtendimento(atendimento: Atendimento): Observable<Atendimento>{
         const urlApi = `https://localhost:7169/api/Atendimento/${atendimento.idAtendimento}`
     
         return this.http.put<Atendimento>(urlApi, atendimento)
