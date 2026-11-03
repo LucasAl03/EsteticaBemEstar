@@ -64,9 +64,15 @@
     @let servicos = prodserv.filter(p => p.tipoItem === 'S');
     <h4>Quantidade de Produtos {{servicos.length}}</h4>
 
+    <select name="filto_situacao" id="filto_situacao" [(ngModel)]="filtro_situacao">
+        <option value="">Filtro</option>
+        <option value="S">Ativo</option>
+        <option value="N">Desativado</option>
+    </select>
+    
     <div id="div-cards">
         <div id="card">
-            @for (p of prodserv; track p.idItem) {
+            @for (p of itemsFiltrados; track p.idItem) {
                 <div class="card">
                     @let c = catego.find(prod => prod.idCategoria === p.idCategoria);
                     <h3 class="nome-item">{{p.tipoItem === 'P' ? 'Produto:' : 'Serviço:'}} {{p?.item}}</h3>

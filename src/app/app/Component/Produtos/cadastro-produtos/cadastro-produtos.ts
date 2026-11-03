@@ -33,6 +33,8 @@ export class CadastroProdutos implements OnInit {
   produtoId = 0
   editar = false
 
+  filtro_situacao: string = ''
+
   limparCampos(){
     this.idCategoria = 0
     this.item = ''
@@ -195,5 +197,12 @@ export class CadastroProdutos implements OnInit {
   codigoPrecoChange(valor: number) {
     this.codigoPreco = valor === null ? null : Number(valor)
     this.calculaPrecoVenda()
+  }
+
+  get itemsFiltrados(): Produto[] {
+    return this.prodserv.filter(p => {
+      const filtraSituacao = !this.filtro_situacao || p.ativoProdutoServico === this.filtro_situacao
+    return filtraSituacao;
+    })
   }
 }
