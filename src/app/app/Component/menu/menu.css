@@ -35,15 +35,18 @@
 #logo a {
   display: flex;
   align-items: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--verde-700);
+  text-decoration: none;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
-#logo img {
-  display: block;
-  height: 44px;
-  width: auto;
-  min-width: 44px;
-  color: var(--verde-700); /* cor do texto "logo" enquanto não há imagem */
-  font-weight: 600;
+#logo a:hover {
+  color: var(--verde-600);
+  letter-spacing: 1.5px;
 }
 
 /* ===== Navegação ===== */
