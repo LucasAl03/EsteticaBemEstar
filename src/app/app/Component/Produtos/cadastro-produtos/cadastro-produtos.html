@@ -58,6 +58,9 @@
         </div>
         
     </form>
+    
+    <label for="pesquisa">Pesquisa</label>
+    <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
 
     @let produtos = prodserv.filter(p => p.tipoItem === 'P');
     <h4>Quantidade de Produtos {{produtos.length}}</h4>
@@ -68,6 +71,14 @@
         <option value="">Filtro</option>
         <option value="S">Ativo</option>
         <option value="N">Desativado</option>
+    </select>
+
+    <label for="filtro-categoria"></label>
+    <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="filtroCatego" >
+      <option [ngValue]="0" selected>Filtro de categoria</option>
+        @for (c of catego; track c.idCategoria){
+            <option [ngValue]="c.idCategoria">{{c.categoria}}</option>
+        }
     </select>
     
     <div id="div-cards">
