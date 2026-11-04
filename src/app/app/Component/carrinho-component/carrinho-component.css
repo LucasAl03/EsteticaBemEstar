@@ -1,0 +1,57 @@
+.carrinho-container { 
+    max-width: 800px; 
+    margin: 2rem auto; 
+    padding: 0 1rem; 
+}
+
+.carrinho-item { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 1rem; 
+    padding: 1rem; 
+    margin-bottom: .75rem; 
+    background: #fff;
+    border-radius: 10px; 
+    border-left: 4px solid #2f9e44; 
+    box-shadow: 0 2px 6px rgba(0,0,0,.08); 
+}
+
+.info { 
+    display: flex; 
+    flex-direction: column; 
+    flex: 1; 
+}
+
+.quantidade { 
+    display: flex; 
+    align-items: center; 
+    gap: .5rem; 
+}
+
+.quantidade button { 
+    width: 28px; 
+    height: 28px; 
+    cursor: pointer; 
+}
+
+.remover { 
+    cursor: pointer; 
+    background: none; 
+    border: none; 
+    color: #c92a2a; 
+}
+
+.resumo { 
+    text-align: right; 
+    margin-top: 1.5rem; 
+}
+
+.finalizar { 
+    background: #2f9e44; 
+    color: #fff; 
+    border: none; 
+    border-radius: 6px;
+    padding: .5rem 1rem; 
+    cursor: pointer; 
+}

@@ -11,7 +11,7 @@ import { CadastroCategoria } from './app/Component/cadastro-categoria/cadastro-c
 import { ListaProdutos } from './app/Component/Produtos/lista-produtos/lista-produtos';
 import { CadastroProdutos } from './app/Component/Produtos/cadastro-produtos/cadastro-produtos';
 import { EnderecoCadastro } from './app/Component/endereco-cadastro/endereco-cadastro';
-import { Carrinho } from './app/Component/carrinho/carrinho';
+import { Carrinho, CarrinhoComponent } from './app/Component/carrinho-component/carrinho-component';
 import { PedidosComponent } from './app/Component/pedidos-component/pedidos-component';
 
 export const routes: Routes = [
@@ -89,8 +89,8 @@ export const routes: Routes = [
         component: EnderecoCadastro
     },
     {
-        path: 'carrinho',
-        component: Carrinho
+        path: 'carrinho-component',
+        component: CarrinhoComponent
     },
     {
         path: 'pedido-component',
