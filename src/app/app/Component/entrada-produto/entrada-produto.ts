@@ -35,6 +35,8 @@ export class EntradaProduto implements OnInit {
   editar = false
   produtoId = 0
 
+  dataFilter: string = ''
+
   ngOnInit(){
     this.produtoId = Number(this.route.snapshot.paramMap.get('idEntradaProduto'))
 
@@ -184,5 +186,12 @@ export class EntradaProduto implements OnInit {
         error: (erro) => console.log('Erro ao excluir', erro)
       })
     }
+  }
+
+  get itemsFiltrados(): Entrada[] {
+    return this.entradas.filter(p => {
+      const filtraData = !this.dataFilter || p.dataEntradaProduto === this.dataFilter
+      return filtraData;
+    })
   }
 }

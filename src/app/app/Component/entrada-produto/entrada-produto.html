@@ -39,10 +39,13 @@
             </div>
 
         </form>
+
+        <label for="dataFilter">Filtrar por data:</label>
+        <input type="date" name="dataFilter" id="dataFilter" [(ngModel)]="dataFilter">
         
         <div id="div-cards">
             <div id="card">
-                @for (e of entradas; track e.idEntradaProduto) {
+                @for (e of itemsFiltrados; track e.idEntradaProduto) {
                     @let p = produtos.find(prod => prod.idItem === e.idItem);
                     <div class="card">
 
