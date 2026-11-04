@@ -5,7 +5,6 @@ import { Endereco } from '../../Models/Endereco';
 import { FuncionarioCargo } from '../../Models/FuncionarioCargo';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
-import { cp } from 'fs';
 
 
 @Component({

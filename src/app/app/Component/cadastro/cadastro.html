@@ -36,6 +36,14 @@
         <label for="complemento">Complemento</label>
         <input type="text" id="complemento" name="complemento" maxlength="11" [(ngModel)]="complemento" required>
 
+        @if (editar) {
+            <label for="ativoPessoa">Situação do cadastro</label>
+            <select name="ativoPessoa" id="ativoPessoa" [(ngModel)]="ativoPessoa">
+                <option value="S">Ativo</option>
+                <option value="N">Desativado</option>
+            </select>
+        }
+
         <div id="div-btns">
             <button type="submit" [disabled]="cpfExiste" >{{editar ? "Salvar Alterações" : "Cadastrar"}}</button>
             <button type="reset">Limpar</button>
