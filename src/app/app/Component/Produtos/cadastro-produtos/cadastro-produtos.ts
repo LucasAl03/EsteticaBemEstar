@@ -35,6 +35,10 @@ export class CadastroProdutos implements OnInit {
 
   filtro_situacao: string = ''
 
+  pesquisa: string = ''
+
+  filtroCatego: number = 0
+
   limparCampos(){
     this.idCategoria = 0
     this.item = ''
@@ -200,9 +204,13 @@ export class CadastroProdutos implements OnInit {
   }
 
   get itemsFiltrados(): Produto[] {
+    const texto = this.pesquisa.trim().toLocaleLowerCase();
+
     return this.prodserv.filter(p => {
       const filtraSituacao = !this.filtro_situacao || p.ativoProdutoServico === this.filtro_situacao
-    return filtraSituacao;
+      const filtraTexto = !texto || p.item.toLocaleLowerCase().includes(texto)
+      const filtraCategoria = !this.filtroCatego || p.idCategoria === this.filtroCatego
+    return filtraSituacao && filtraTexto && filtraCategoria;
     })
   }
 }
