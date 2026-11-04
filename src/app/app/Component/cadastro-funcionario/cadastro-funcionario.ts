@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Endereco } from '../../Models/Endereco';
 import { FuncionarioCargo } from '../../Models/FuncionarioCargo';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
@@ -14,7 +14,7 @@ import { FuncionarioService } from '../../Service/FuncionarioService/funcionario
   templateUrl: './cadastro-funcionario.html',
 })
 export class CadastroFuncionario implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private pessoaService: FuncionarioService, private route: ActivatedRoute){}
+  constructor(private cdr: ChangeDetectorRef, private pessoaService: FuncionarioService, private route: ActivatedRoute, private router: Router){}
 
   // pessoa
   idPessoa = 0
@@ -131,6 +131,7 @@ export class CadastroFuncionario implements OnInit {
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
+            this.router.navigate(['/cadastro-funcionario'])
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar a pessoa.", msgErro)
           }
@@ -143,6 +144,7 @@ export class CadastroFuncionario implements OnInit {
           next: (resposta) => {
             console.log(pessoa)
             console.log(resposta)
+            this.router.navigate(['/funcionario-lista'])
           }, error: (msgErro) => {
             console.log("Erro ao alterar a pessoa", msgErro)
           }

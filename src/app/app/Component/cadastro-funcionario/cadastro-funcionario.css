@@ -45,6 +45,24 @@
   box-shadow: var(--sombra);
 }
 
+#pessoa-form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 36px 10px 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--cor-texto);
+  background-color: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' fill='none' stroke='%2316a34a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
 /* Seções: Endereço e Função na Empresa */
 #pessoa-form h2 {
   margin: 24px 0 4px;
@@ -90,9 +108,30 @@
   box-shadow: 0 0 0 3px var(--verde-100);
 }
 
-/* Erro só depois que o usuário mexeu no campo */
 #pessoa-form input.ng-invalid.ng-touched:not([type="radio"]) {
   border-color: var(--cor-erro);
+}
+
+#pessoa-form select:hover {
+  border-color: var(--verde-600);
+}
+
+#pessoa-form select:focus {
+  outline: none;
+  border-color: var(--verde-600);
+  box-shadow: 0 0 0 3px var(--verde-100);
+}
+
+#pessoa-form select option {
+  color: var(--cor-texto);
+  background: #ffffff;
+}
+
+/* ===== Cpf Erro ===== */
+.msg-erro {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--cor-erro);
 }
 
 /* ===== Sexo (radio) ===== */

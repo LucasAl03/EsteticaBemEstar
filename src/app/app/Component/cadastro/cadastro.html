@@ -17,9 +17,11 @@
         <input type="date" id="data_nascimento" name="data_nascimento" [(ngModel)]="dataNascimento" required>
 
         <label>Sexo</label>
-        <input type="radio" name="sexo" id="sexoM" class="btnSelecao" value="M" [(ngModel)]="sexo" required> Masculino
-        <input type="radio" name="sexo" id="sexoF" class="btnSelecao" value="F" [(ngModel)]="sexo" required> Feminino
-        <input type="radio" name="sexo" id="sexoN" class="btnSelecao" value="N" [(ngModel)]="sexo" required> Não se Identificar
+        <div class="grupo-radio">
+            <label><input type="radio" name="sexo" class="btnSelecao" value="M" [(ngModel)]="sexo" required> Masculino</label>
+            <label><input type="radio" name="sexo" class="btnSelecao" value="F" [(ngModel)]="sexo" required> Feminino</label>
+            <label><input type="radio" name="sexo" class="btnSelecao" value="N" [(ngModel)]="sexo" required> Não se Identificar</label>
+        </div>
         
         <label for="email">Email</label>
         <input type="text" id="email" name="email" maxlength="120" [(ngModel)]="email" required>
