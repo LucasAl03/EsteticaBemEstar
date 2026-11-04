@@ -7,6 +7,7 @@ import { Endereco } from '../../Models/Endereco';
 import { Pessoa } from '../../Models/Pessoa';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
+import { Location } from '@angular/common';
 
 @Component({
   imports: [FormsModule],
@@ -15,7 +16,7 @@ import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
   templateUrl: './endereco-cadastro.html',
 })
 export class EnderecoCadastro implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, private pessoaService: PessoaService){}
+  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, private pessoaService: PessoaService, private location: Location){}
 
   idEndereco = 0
   idPessoa = 0
@@ -78,6 +79,7 @@ export class EnderecoCadastro implements OnInit {
           next: (resposta) => {
             console.log(resposta)
             this.limparCampos();
+            this.location.back();
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar o novo endereço.", msgErro)
           }
@@ -91,6 +93,7 @@ export class EnderecoCadastro implements OnInit {
             this.limparCampos();
             console.log(ende)
             console.log(resposta)
+            this.location.back();
           }, error: (msgErro) => {
             console.log("Erro ao alterar a pessoa", msgErro)
           }

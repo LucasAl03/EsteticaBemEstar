@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Produto, DetalheProduto } from '../../../Models/Produto';
 import { Categoria } from '../../../Models/Categoria';
 import { CategoriaService } from '../../../Service/CategoriaService/categoria-service';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, Location } from '@angular/common';
 
 @Component({
   imports: [FormsModule, CurrencyPipe],
@@ -14,7 +14,7 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './cadastro-produtos.html',
 })
 export class CadastroProdutos implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private produtoService: ProdutoItem, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router){}
+  constructor (private cdr: ChangeDetectorRef, private produtoService: ProdutoItem, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router, private location: Location){}
 
   catego: Categoria[] = []
   prodserv: Produto[] = []
@@ -102,8 +102,8 @@ export class CadastroProdutos implements OnInit {
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
-            this.router.navigate(['/cadastro-produto'])
             this.limparCampos();
+            this.location.back()
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar o serviço/produto.", msgErro)
           }
@@ -116,8 +116,8 @@ export class CadastroProdutos implements OnInit {
           next: (resposta) => {
             console.log(item)
             console.log(resposta)
-            this.router.navigate(['/cadastro-produto'])
             this.limparCampos();
+            this.location.back()
           }, error: (msgErro) => {
             console.log("Erro ao alterar o serviço/produto", msgErro)
           }

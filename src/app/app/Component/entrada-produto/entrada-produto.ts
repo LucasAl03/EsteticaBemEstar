@@ -94,6 +94,7 @@ export class EntradaProduto implements OnInit {
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
+            this.ngOnInit();
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar a entrada.", msgErro)
           }
@@ -106,6 +107,7 @@ export class EntradaProduto implements OnInit {
           next: (resposta) => {
             console.log(produto)
             console.log(resposta)
+            this.ngOnInit();
           }, error: (msgErro) => {
             console.log("Erro ao alterar a entrada", msgErro)
           }
