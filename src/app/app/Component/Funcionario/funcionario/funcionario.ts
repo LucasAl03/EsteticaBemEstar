@@ -5,10 +5,11 @@ import { PessoaFuncionario } from '../../../Models/PessoaFuncionario';
 import { DatePipe } from '@angular/common';
 import { Endereco } from '../../../Models/Endereco';
 import { EnderecoService } from '../../../Service/EnderecoService/endereco-service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  imports: [DatePipe],
+  imports: [DatePipe, FormsModule],
   selector: 'app-funcionario',
   styleUrl: './funcionario.css',
   templateUrl: './funcionario.html',
@@ -17,6 +18,10 @@ export class Funcionario implements OnInit {
   constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService){}
 
   pessoa: PessoaFuncionario[] = []
+
+  pesquisa: string = ''
+
+  itemAtivo: string = ''
 
   ngOnInit(){
     this.carregaFuncionarios();
@@ -63,5 +68,15 @@ export class Funcionario implements OnInit {
     this.router.navigate(['/endereco-cadastro'], {
       queryParams: { idPessoa: p.idPessoa }
     });
+  }
+
+  get pessoasFiltradas(): PessoaFuncionario[] {
+    const texto = this.pesquisa.trim().toLocaleLowerCase()
+
+    return this.pessoa.filter(p => {
+      const filtraTexto = !texto || p.nome.toLocaleLowerCase().includes(texto)
+      const filtroSituacao = !this.itemAtivo || p.ativoPessoa === this.itemAtivo
+      return filtraTexto && filtroSituacao;
+    })
   }
 }

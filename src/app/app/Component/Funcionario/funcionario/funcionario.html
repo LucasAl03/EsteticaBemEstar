@@ -1,10 +1,20 @@
 <div id="funcionarios">
     <h3 class="lista">Funcionários <span class="contador">{{ pessoa.length }}</span></h3>
+    
+    <label for="pesquisa">Pesquisa</label>
+    <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
+
+    <select name="itemAtivo" id="itemAtivo" [(ngModel)]="itemAtivo">
+        <option value="S" selected>Ativo</option>
+        <option value="N">Desativados</option>
+    </select>
 
     <div class="cards">
-        @for (p of pessoa; track p.idPessoa) {
+        @for (p of pessoasFiltradas; track p.idPessoa) {
         <div class="card">
             <h4 class="card-nome">{{ p.nome }}</h4>
+
+            <span><strong>Situação:</strong> {{p.ativoPessoa === 'S' ? 'Ativo' : 'Desativado'}} </span>
 
             @if (p.funcionario) {
             <div class="cargo-info">
