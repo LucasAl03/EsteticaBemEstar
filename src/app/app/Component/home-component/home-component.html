@@ -10,17 +10,23 @@
         Oferecemos os melhores produtos no mercado e possuímos os profissionais mais qualificados para os seus procedimentos.
       </p>
     </section>
-    <label for="pesquisa">Pesquisa</label>
-    <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
 
-    <label for="filtro-categoria"></label>
-    <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="idCategoria" >
-      <option [ngValue]="0" selected>Filtro de categoria</option>
-        @for (c of catego; track c.idCategoria){
-            <option [ngValue]="c.idCategoria">{{c.categoria}}</option>
-        }
-    </select>
+    <div class="filtros">
+      <div class="campo">
+        <label for="pesquisa">Pesquisa</label>
+        <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
+      </div>
 
+      <div class="campo">
+        <label for="filtro-categoria"></label>
+        <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="idCategoria" >
+          <option [ngValue]="0" selected>Filtro de categoria</option>
+            @for (c of catego; track c.idCategoria){
+                <option [ngValue]="c.idCategoria">{{c.categoria}}</option>
+            }
+        </select>
+      </div>
+  </div>
     <section class="cards-items">
       <div class="cards-produtos">
         <div class="cabecalho-section">
