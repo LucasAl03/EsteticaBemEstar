@@ -1,16 +1,27 @@
 <div id="funcionarios">
     <h3 class="lista">Clientes <span class="contador">{{ pessoa.length }}</span></h3>
+    
+    <label for="pesquisa">Pesquisa</label>
+    <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
+
+    <select name="itemAtivo" id="itemAtivo" [(ngModel)]="itemAtivo">
+        <option value="S" selected>Ativo</option>
+        <option value="N">Desativados</option>
+    </select>
 
     <div class="cards">
-        @for (p of pessoa; track p.idPessoa) {
+        @for (p of pessoasFiltradas; track p.idPessoa) {
         <div class="card">
             <h4 class="card-nome">{{ p.nome }}</h4>
+
+            <span><strong>Situação:</strong> {{p.ativoPessoa === 'S' ? 'Ativo' : 'Desativado'}} </span>
 
             <div class="dados-pessoa">
                 <span><strong>CPF:</strong> {{ p.cpf }}</span>
                 <span><strong>Sexo:</strong> {{ p.sexo === 'F' ? 'Feminino' : p.sexo === 'M' ? 'Masculino' : 'Não informado' }}</span>
                 <span><strong>Email:</strong> {{ p.email }}</span>
                 <span><strong>Telefone:</strong> {{ p.telefone }}</span>
+                <span><strong>Data de Nascimento:</strong> {{ p.dataNascimento | date: 'dd/MM/yyyy' }}</span>
             </div>
 
             <div class="enderecos-cabecalho">

@@ -4,9 +4,11 @@ import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
 import { Endereco } from '../../Models/Endereco';
 import { EnderecoService } from '../../Service/EnderecoService/endereco-service';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [FormsModule, DatePipe],
   selector: 'app-clientes',
   styleUrl: './clientes.css',
   templateUrl: './clientes.html',
@@ -15,6 +17,10 @@ export class Clientes implements OnInit {
   constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService){}
 
   pessoa: Pessoa[] = []
+
+  itemAtivo: string = ''
+
+  pesquisa: string = ''
   
     ngOnInit(){
       this.carregaPessoa();
@@ -61,5 +67,15 @@ export class Clientes implements OnInit {
     this.router.navigate(['/endereco-cadastro'], {
       queryParams: { idPessoa: p.idPessoa }
     });
+  }
+
+  get pessoasFiltradas(): Pessoa[] {
+    const texto = this.pesquisa.trim().toLocaleLowerCase()
+
+    return this.pessoa.filter(p => {
+      const filtraTexto = !texto || p.nome.toLocaleLowerCase().includes(texto)
+      const filtroSituacao = !this.itemAtivo || p.ativoPessoa === this.itemAtivo
+      return filtraTexto && filtroSituacao;
+    })
   }
 }
