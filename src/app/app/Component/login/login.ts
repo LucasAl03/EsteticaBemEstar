@@ -75,7 +75,3 @@ export class Login implements OnInit {
     this.router.navigate(['/cadastro'], { state: { origem: 'login' } });
   }
 }
-
-/*
-
-*/
