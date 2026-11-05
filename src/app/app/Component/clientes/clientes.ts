@@ -18,7 +18,7 @@ export class Clientes implements OnInit {
 
   pessoa: Pessoa[] = []
 
-  itemAtivo: string = ''
+  itemAtivo: string = 'S'
 
   pesquisa: string = ''
   

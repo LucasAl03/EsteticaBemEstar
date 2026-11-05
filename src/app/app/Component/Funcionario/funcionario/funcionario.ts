@@ -21,7 +21,7 @@ export class Funcionario implements OnInit {
 
   pesquisa: string = ''
 
-  itemAtivo: string = ''
+  itemAtivo: string = 'S'
 
   ngOnInit(){
     this.carregaFuncionarios();
