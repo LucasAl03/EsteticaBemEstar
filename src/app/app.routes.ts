@@ -13,11 +13,12 @@ import { CadastroProdutos } from './app/Component/Produtos/cadastro-produtos/cad
 import { EnderecoCadastro } from './app/Component/endereco-cadastro/endereco-cadastro';
 import { PedidosComponent } from './app/Component/pedidos-component/pedidos-component';
 import { CarrinhoComponent } from './app/Component/carrinho-component/carrinho-component';
+import { Login } from './app/Component/login/login';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'login',
         pathMatch: 'full'
     },
     {
@@ -95,5 +96,9 @@ export const routes: Routes = [
     {
         path: 'carrinho-component',
         component: CarrinhoComponent
+    },
+    {
+        path: 'login',
+        component: Login
     }
 ];

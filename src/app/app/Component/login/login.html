@@ -1,0 +1,37 @@
+<div id="pagina-login">
+    <div class="login-card">
+        <h2 class="login-titulo">Estética & Bem-Estar</h2>
+
+        <form class="login" (ngSubmit)="entrar()" ngNativeValidate>
+            <label for="cpfLogin">Faça o Login com o CPF</label>
+            <input
+                type="text"
+                id="cpfLogin"
+                name="cpfLogin"
+                inputmode="numeric"
+                placeholder="Somente números"
+                maxlength="11"
+                minlength="11"
+                [(ngModel)]="cpfLogin"
+                (ngModelChange)="erroLogin = ''"
+                required>
+
+            @if (erroLogin) {
+                <span class="msg-erro">{{ erroLogin }}</span>
+            }
+
+            <div class="btns-login">
+                <button type="submit" class="btn-entrar" [disabled]="carregando">
+                    {{ carregando ? 'Carregando...' : 'Login' }}
+                </button>
+                <button type="reset" class="btn-limpa" (click)="limparCampos()">Limpar</button>
+            </div>
+        </form>
+
+        <div class="cadastro-box">
+            <h4 class="nao-login">Não possui cadastro?</h4>
+            <span>Faça o seu cadastro aqui!</span>
+            <button type="button" class="btn-naologin" (click)="cadastroBtn()">Clique aqui!</button>
+        </div>
+    </div>
+</div>

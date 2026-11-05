@@ -5,6 +5,7 @@ import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { Pessoa } from '../../Models/Pessoa';
 import { Endereco } from '../../Models/Endereco';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { FuncionarioService } from '../../Service/FuncionarioService/funcionario
   templateUrl: './cadastro.html',
 })
 export class Cadastro implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private funcionarioService: FuncionarioService, private router: Router){}
+  constructor(private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private funcionarioService: FuncionarioService, private router: Router, private location: Location){}
 
   // pessoa
   idPessoa = 0
@@ -113,7 +114,7 @@ export class Cadastro implements OnInit {
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
-            this.router.navigate(['/cadastro'])
+            this.aposSalvar();
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar a pessoa.", msgErro)
           }
@@ -126,7 +127,7 @@ export class Cadastro implements OnInit {
           next: (resposta) => {
             console.log(pessoa)
             console.log(resposta)
-            this.router.navigate(['/lista-cliente'])
+            this.aposSalvar();
           }, error: (msgErro) => {
             console.log("Erro ao alterar a pessoa", msgErro)
           }
@@ -167,5 +168,17 @@ export class Cadastro implements OnInit {
     }
     // na edição, ignora o CPF da própria pessoa
     this.cpfExiste = this.cpfsCadastrados.includes(valor) && valor !== this.cpfOriginal
+  }
+
+  private origemLogin(): boolean{
+    return this.location.getState() !== null && (this.location.getState() as any).origem === 'login';
+  }
+
+  private aposSalvar() {
+    if (this.origemLogin()) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/lista-cliente']);
+    }
   }
 }

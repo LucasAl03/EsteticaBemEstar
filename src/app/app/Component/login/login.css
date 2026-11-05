@@ -1,0 +1,187 @@
+/* ===== Paleta branco + verde ===== */
+:host {
+    --verde-700: #15803d;
+    --verde-600: #16a34a;
+    --verde-100: #dcfce7;
+    --verde-50:  #f0fdf4;
+  
+    --cor-texto: #1f2937;
+    --cor-texto-suave: #5b6b61;
+    --cor-borda: #d9efe1;
+    --cor-erro: #dc2626;
+    --sombra: 0 2px 10px rgba(22, 101, 52, 0.08);
+  
+    display: block;
+    background: linear-gradient(120deg, #f0fdf4, #ffffff);
+    color: var(--cor-texto);
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  }
+  
+  /* ===== Página ===== */
+  #pagina-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 24px 16px;
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 28px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid var(--cor-borda);
+    border-top: 4px solid var(--verde-600);
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+  }
+  
+  .login-titulo {
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--verde-700);
+    border-bottom: 3px solid var(--verde-600);
+  }
+  
+  /* ===== Formulário ===== */
+  .login {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .login label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--verde-700);
+  }
+  
+  .login input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: var(--cor-texto);
+    background: #ffffff;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .login input::placeholder {
+    letter-spacing: normal;
+    color: #9ca3af;
+  }
+  
+  .login input:hover {
+    border-color: var(--verde-600);
+  }
+  
+  .login input:focus {
+    outline: none;
+    border-color: var(--verde-600);
+    box-shadow: 0 0 0 3px var(--verde-100);
+  }
+  
+  .msg-erro {
+    font-size: 0.85rem;
+    color: var(--cor-erro);
+  }
+  
+  /* ===== Botões ===== */
+  .btns-login {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  
+  .btns-login button {
+    flex: 1;
+    padding: 11px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid var(--verde-600);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  
+  .btn-entrar {
+    color: #ffffff;
+    background: var(--verde-600);
+  }
+  
+  .btn-entrar:hover:not(:disabled) {
+    background: var(--verde-700);
+  }
+  
+  .btn-entrar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .btn-limpa {
+    color: var(--verde-700);
+    background: #ffffff;
+  }
+  
+  .btn-limpa:hover {
+    background: var(--verde-50);
+  }
+  
+  /* ===== Cadastro ===== */
+  .cadastro-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    padding: 16px;
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--cor-texto-suave);
+    background: var(--verde-50);
+    border-left: 3px solid var(--verde-600);
+    border-radius: 6px;
+  }
+  
+  .nao-login {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--verde-700);
+  }
+  
+  .btn-naologin {
+    margin-top: 6px;
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--verde-700);
+    background: #ffffff;
+    border: 1px solid var(--verde-600);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  
+  .btn-naologin:hover {
+    color: #ffffff;
+    background: var(--verde-600);
+  }
+  
+  /* ===== Mobile ===== */
+  @media (max-width: 480px) {
+    .login-card {
+      padding: 18px;
+    }
+  }
