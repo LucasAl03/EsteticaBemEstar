@@ -59,27 +59,38 @@
         
     </form>
     
-    <label for="pesquisa">Pesquisa</label>
-    <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
+    <div class="filtros">
+        <div class="campo">
+            <label for="pesquisa">Pesquisa</label>
+            <input type="search" name="pesquisa" id="pesquisa" placeholder="Buscar item..." [(ngModel)]="pesquisa">
+        </div>
 
-    @let produtos = prodserv.filter(p => p.tipoItem === 'P');
-    <h4>Quantidade de Produtos {{produtos.length}}</h4>
-    @let servicos = prodserv.filter(p => p.tipoItem === 'S');
-    <h4>Quantidade de Produtos {{servicos.length}}</h4>
+        <div class="campo">
+            <label for="filtro_situacao">Situação</label>
+            <select name="filtro_situacao" id="filtro_situacao" [(ngModel)]="filtro_situacao">
+            <option value="" selected>Todas</option>
+            <option value="S">Ativo</option>
+            <option value="N">Desativado</option>
+            </select>
+        </div>
 
-    <select name="filto_situacao" id="filto_situacao" [(ngModel)]="filtro_situacao">
-        <option value="">Filtro</option>
-        <option value="S">Ativo</option>
-        <option value="N">Desativado</option>
-    </select>
-
-    <label for="filtro-categoria"></label>
-    <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="filtroCatego" >
-      <option [ngValue]="0" selected>Filtro de categoria</option>
-        @for (c of catego; track c.idCategoria){
-            <option [ngValue]="c.idCategoria">{{c.categoria}}</option>
-        }
-    </select>
+        <div class="campo">
+            <label for="filtro-categoria">Categoria</label>
+            <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="filtroCatego">
+                <option [ngValue]="0">Todas as categorias</option>
+            @for (c of catego; track c.idCategoria) {
+                <option [ngValue]="c.idCategoria">{{ c.categoria }}</option>
+            }
+            </select>
+        </div>
+    </div>
+      
+    <div class="contadores">
+        @let produtos = itemsFiltrados.filter(p => p.tipoItem === 'P');
+        @let servicos = itemsFiltrados.filter(p => p.tipoItem === 'S');
+        <h4>Produtos: {{ produtos.length }}</h4>
+        <h4>Serviços: {{ servicos.length }}</h4>
+      </div>
     
     <div id="div-cards">
         <div id="card">
