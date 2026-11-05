@@ -57,7 +57,7 @@ export class HomeComponent {
     const texto = this.pesquisa.trim().toLocaleLowerCase()
     
     return this.items.filter(p => {
-      const filtraCategoria = !this.idCategoria || p.idCategoria === this.idCategoria
+      const filtraCategoria = !this.idCategoria || p.idCategoria === this.idCategoria && p.ativoProdutoServico === 'S'
       const filtraTexto = !texto || p.item.toLocaleLowerCase().includes(texto)
       return filtraCategoria && filtraTexto
     })
