@@ -4,17 +4,7 @@
 
         <form class="login" (ngSubmit)="entrar()" ngNativeValidate>
             <label for="cpfLogin">Faça o Login com o CPF</label>
-            <input
-                type="text"
-                id="cpfLogin"
-                name="cpfLogin"
-                inputmode="numeric"
-                placeholder="Somente números"
-                maxlength="11"
-                minlength="11"
-                [(ngModel)]="cpfLogin"
-                (ngModelChange)="erroLogin = ''"
-                required>
+            <input type="text" id="cpfLogin" name="cpfLogin" inputmode="numeric" placeholder="Somente números" maxlength="11" minlength="11" [(ngModel)]="cpfLogin" (ngModelChange)="erroLogin = ''" required>
 
             @if (erroLogin) {
                 <span class="msg-erro">{{ erroLogin }}</span>
