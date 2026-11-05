@@ -2,12 +2,12 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './app/Component/home-component/home-component';
 import { Cadastro } from './app/Component/cadastro/cadastro';
-import { CadastroFuncionario } from './app/Component/cadastro-funcionario/cadastro-funcionario';
-import { EntradaProduto } from './app/Component/entrada-produto/entrada-produto';
+import { CadastroFuncionario } from './app/Component/administrador/2Funcionario/cadastro-funcionario/cadastro-funcionario';
+import { EntradaProduto } from './app/Component/administrador/entrada-produto/entrada-produto';
 import { Servicos } from './app/Component/Servico/servicos/servicos';
-import { Funcionario } from './app/Component/Funcionario/funcionario/funcionario';
-import { Clientes } from './app/Component/clientes/clientes';
-import { CadastroCategoria } from './app/Component/cadastro-categoria/cadastro-categoria';
+import { Funcionario } from './app/Component/administrador/2Funcionario/funcionario/funcionario';
+import { Clientes } from './app/Component/administrador/clientes/clientes';
+import { CadastroCategoria } from './app/Component/administrador/cadastro-categoria/cadastro-categoria';
 import { ListaProdutos } from './app/Component/Produtos/lista-produtos/lista-produtos';
 import { CadastroProdutos } from './app/Component/Produtos/cadastro-produtos/cadastro-produtos';
 import { EnderecoCadastro } from './app/Component/endereco-cadastro/endereco-cadastro';

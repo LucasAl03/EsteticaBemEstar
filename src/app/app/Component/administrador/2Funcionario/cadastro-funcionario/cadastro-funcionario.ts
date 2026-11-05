@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Endereco } from '../../Models/Endereco';
-import { FuncionarioCargo } from '../../Models/FuncionarioCargo';
-import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
-import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
+import { Endereco } from '../../../../Models/Endereco';
+import { FuncionarioCargo } from '../../../../Models/FuncionarioCargo';
+import { PessoaFuncionario } from '../../../../Models/PessoaFuncionario';
+import { FuncionarioService } from '../../../../Service/FuncionarioService/funcionario-service';
 
 
 @Component({

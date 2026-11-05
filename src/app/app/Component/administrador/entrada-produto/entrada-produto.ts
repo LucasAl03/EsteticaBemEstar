@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Entrada } from '../../Models/Entrada';
-import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
-import { entradaService } from '../../Service/EntradaService/entrada-service';
-import { Produto } from '../../Models/Produto';
+import { Entrada } from '../../../Models/Entrada';
+import { ProdutoItem } from '../../../Service/ProdutoItem/produto-item';
+import { entradaService } from '../../../Service/EntradaService/entrada-service';
+import { Produto } from '../../../Models/Produto';
 import { DatePipe } from '@angular/common';
-import { EstoqueResposta } from '../../Models/EstoqueResposta';
+import { EstoqueResposta } from '../../../Models/EstoqueResposta';
 
 @Component({
   imports: [FormsModule, DatePipe],

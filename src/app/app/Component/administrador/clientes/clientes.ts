@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PessoaService } from '../../Service/PessoaService/pessoa-service';
-import { Pessoa } from '../../Models/Pessoa';
-import { Endereco } from '../../Models/Endereco';
-import { EnderecoService } from '../../Service/EnderecoService/endereco-service';
+import { PessoaService } from '../../../Service/PessoaService/pessoa-service';
+import { Pessoa } from '../../../Models/Pessoa';
+import { Endereco } from '../../../Models/Endereco';
+import { EnderecoService } from '../../../Service/EnderecoService/endereco-service';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 

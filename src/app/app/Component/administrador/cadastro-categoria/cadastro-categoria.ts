@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { CategoriaService } from '../../Service/CategoriaService/categoria-service';
+import { CategoriaService } from '../../../Service/CategoriaService/categoria-service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Categoria } from '../../Models/Categoria';
+import { Categoria } from '../../../Models/Categoria';
 import { FormsModule } from '@angular/forms';
 
 @Component({
