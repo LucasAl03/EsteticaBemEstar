@@ -45,6 +45,19 @@
   box-shadow: var(--sombra);
 }
 
+#pessoa-form h2 {
+  margin: 24px 0 4px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--verde-700);
+  background: var(--verde-50);
+  border-left: 4px solid var(--verde-600);
+  border-radius: 6px;
+}
+
 /* ===== Labels e campos ===== */
 #pessoa-form > label {
   margin-top: 10px;
