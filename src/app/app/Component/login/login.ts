@@ -6,20 +6,20 @@ import { Pessoa } from '../../Models/Pessoa';
 import { PessoaService } from '../../Service/PessoaService/pessoa-service';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
+import { SessaoService } from '../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [FormsModule],
   selector: 'app-login',
   styleUrl: './login.css',
-  templateUrl: './login.html',
+  templateUrl: './login.html', 
 })
 export class Login implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private router: Router, private pessoaService: PessoaService, private funcionarioService: FuncionarioService) {}
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private pessoaService: PessoaService, private funcionarioService: FuncionarioService, private sessaoService: SessaoService) {}
 
   cpfLogin = '';
   erroLogin = '';
   carregando = true;
-  ehFuncionario = false;
 
   pessoa: Pessoa[] = [];
   funcionariop: PessoaFuncionario[] = [];
@@ -78,12 +78,17 @@ export class Login implements OnInit {
       return;
     }
 
-    this.ehFuncionario = !!func;
     this.erroLogin = '';
 
-    this.router.navigate(['/home'], {
-      queryParams: { idPessoa: encontrada.idPessoa },
+    // Salva a sessão (storage + signal) para o menu e os guards lerem
+    this.sessaoService.iniciarSessao({
+      idPessoa: encontrada.idPessoa,
+      nome: encontrada.nome,
+      funcionario: !!func,
+      cargo: func?.funcionario?.cargo ?? null,
     });
+
+    this.router.navigate(['/home']);
   }
 
   limparCampos() {

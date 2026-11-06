@@ -6,17 +6,35 @@
 
         <nav id="nav-menu">
             <ul id="lista-menu">
+                <!-- Links para todos -->
                 <li>
                     <a routerLink="/home" routerLinkActive="ativo" class="rota-lnk">Home</a>
                 </li>
+
+                <!-- Cadastro: visitante (novo cliente) e funcionário (cadastrando cliente) -->
+                @if (!sessao.logado() || sessao.ehFuncionario()) {
                 <li>
                     <a routerLink="/cadastro" routerLinkActive="ativo" class="rota-lnk">Cadastro</a>
                 </li>
-                <li>
-                    <a routerLink="/cadastro-funcionario" routerLinkActive="ativo">Cadastro Funcionário</a>
-                </li>
+                }
+
+                <!-- Links de quem está logado (cliente ou funcionário) -->
+                @if (sessao.logado()) {
                 <li>
                     <a routerLink="/servicos" routerLinkActive="ativo">Serviços</a>
+                </li>
+                <li>
+                    <a routerLink="/lista-produtos" routerLinkActive="ativo">Produtos</a>
+                </li>
+                <li>
+                    <a routerLink="/carrinho-component" routerLinkActive="ativo">Carrinho</a>
+                </li>
+                }
+
+                <!-- Links administrativos: só funcionário -->
+                @if (sessao.ehFuncionario()) {
+                <li>
+                    <a routerLink="/cadastro-funcionario" routerLinkActive="ativo">Cadastro Funcionário</a>
                 </li>
                 <li>
                     <a routerLink="/entrada" routerLinkActive="ativo">Entrada Produto</a>
@@ -33,15 +51,20 @@
                 <li>
                     <a routerLink="/cadastro-produto" routerLinkActive="ativo">Cadastro Produtos & Serviços</a>
                 </li>
-                <li>
-                    <a routerLink="/lista-produtos" routerLinkActive="ativo">Produtos</a>
-                </li>
-                <li>
-                    <a routerLink="/carrinho-component" routerLinkActive="ativo">Carrinho</a>
-                </li>
+                }
             </ul>
+
             <ul id="lista-icon">
-                
+                @if (sessao.logado()) {
+                <li>
+                    <h4 class="nomeLog"> {{sessao.sessao()?.nome}} </h4>
+                    <button type="button" class="btn-sair" (click)="sair()">Sair</button>
+                </li>
+                } @else {
+                <li>
+                    <a routerLink="/login" routerLinkActive="ativo" class="rota-lnk">Login</a>
+                </li>
+                }
             </ul>
         </nav>
     </div>
