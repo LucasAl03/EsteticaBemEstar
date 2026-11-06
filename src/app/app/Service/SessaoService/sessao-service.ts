@@ -21,7 +21,8 @@ export class SessaoService {
   readonly logado = computed(() => this.sessaoAtual() !== null);
   readonly ehFuncionario = computed(() => this.sessaoAtual()?.funcionario === true);
   readonly cargo = computed(() => this.sessaoAtual()?.cargo ?? null);
-  readonly nome = computed(() => this.sessaoAtual() ?? null)
+  readonly nome = computed(() => this.sessaoAtual()?.nome ?? null)  
+  
 
   iniciarSessao(dados: Sessao): void {
     try {
@@ -50,7 +51,7 @@ export class SessaoService {
       const dados = JSON.parse(texto) as Sessao;
 
       // Descarta se o conteúdo estiver corrompido ou adulterado
-      if (typeof dados?.idPessoa !== 'number' || typeof dados?.funcionario !== 'boolean' || dados.nome !== 'string') {
+      if (typeof dados?.idPessoa !== 'number' || typeof dados?.funcionario !== 'boolean' || typeof dados.nome !== 'string') {
         sessionStorage.removeItem(this.CHAVE);
         return null;
       }

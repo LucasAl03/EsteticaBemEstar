@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SessaoService } from '../../Service/SessaoService/sessao-service';
+import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service';
+
 @Component({
   imports: [RouterLink, RouterLinkActive],
   selector: 'app-menu',
@@ -15,4 +17,6 @@ export class Menu {
     // replaceUrl evita que o botão Voltar retorne a uma página da sessão encerrada
     this.router.navigate(['/login'], { replaceUrl: true });
   }
+
+  carrinho = inject(CarrinhoService)
 }

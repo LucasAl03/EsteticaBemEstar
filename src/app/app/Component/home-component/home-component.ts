@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Produto } from '../../Models/Produto';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
@@ -6,6 +6,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Categoria } from '../../Models/Categoria';
 import { CategoriaService } from '../../Service/CategoriaService/categoria-service';
 import { FormsModule } from '@angular/forms';
+import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service';
 
 @Component({
   imports: [CurrencyPipe, RouterLink, FormsModule],
@@ -77,5 +78,14 @@ export class HomeComponent {
 
   alternarProdutos(){
     this.produtosAbertos = !this.produtosAbertos
+  }
+
+  private carrinhoService = inject(CarrinhoService)   // ou no construtor
+
+  adicionarAoCarrinho(p: Produto) {
+    this.carrinhoService.adicionar(p);
+
+    console.log('Item adicionado:', p);
+    console.log('Carrinho atualizado:', this.carrinhoService.itens());
   }
 }

@@ -1,78 +1,81 @@
 <main class="home-container">
-    <section class="home-banner">
-      
-  
-      <h2>Bem-vindo à Clínica</h2>
-      <b></b>
-      <h1>Estética & Bem-Estar </h1>
-  
-      <p>
-        Oferecemos os melhores produtos no mercado e possuímos os profissionais mais qualificados para os seus procedimentos.
-      </p>
-    </section>
 
-    <div class="filtros">
-      <div class="campo">
-        <label for="pesquisa">Pesquisa</label>
-        <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
-      </div>
+  <section class="home-banner">
+    <h2>Bem-vindo à Clínica</h2>
+    <b></b>
+    <h1>Estética & Bem-Estar</h1>
 
-      <div class="campo">
-        <label for="filtro-categoria"></label>
-        <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="idCategoria" >
-          <option [ngValue]="0" selected>Filtro de categoria</option>
-            @for (c of catego; track c.idCategoria){
-                <option [ngValue]="c.idCategoria">{{c.categoria}}</option>
-            }
-        </select>
-      </div>
+    <p> Oferecemos os melhores produtos no mercado e possuímos
+      os profissionais mais qualificados para os seus procedimentos. </p>
+  </section>
+
+  <div class="filtros">
+
+    <div class="campo">
+      <label for="pesquisa">Pesquisa</label>
+      <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-categoria"></label>
+      <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="idCategoria">
+        <option [ngValue]="0">Filtro de categoria</option>
+        @for (c of catego; track c.idCategoria) {
+          <option [ngValue]="c.idCategoria"> {{ c.categoria }}  </option>
+        }
+      </select>
+    </div>
   </div>
-    <section class="cards-items">
-      <div class="cards-produtos">
-        <div class="cabecalho-section">
-        <h2 class="titulo-section" routerLink="/servicos">Serviços</h2>
-        <button type="button" class="btn-recolhe" (click)="alternarServicos()" [attr.aria-expanded]="servicosAbertos">{{ servicosAbertos ? 'Recolher ▲' : 'Expandir ▼' }}</button>
+
+  <section class="cards-items">
+
+    <!-- SERVIÇOS -->
+    <div class="cards-produtos">
+
+      <div class="cabecalho-section">
+
+        <h2 class="titulo-section" routerLink="/servicos"> Serviços </h2>
+
+        <button type="button" class="btn-recolhe" (click)="alternarServicos()" [attr.aria-expanded]="servicosAbertos"> {{ servicosAbertos ? 'Recolher ▲' : 'Expandir ▼' }}</button>
       </div>
+
       @if (servicosAbertos) {
-        @for (p of servicos; track p.idItem){
-          @if (p.tipoItem === 'S'){
-        <div class="card">
-          <h3 class="item-nome"> {{p.item}} </h3>
-          <span class="preco-card"> {{p.preco | currency: 'BRL'}} </span>
-
-          <div class="btns-card">
-            <button class="carrinho-btn">Adicionar ao carrinho</button>
+        @for (p of servicos; track p.idItem) {
+          <div class="card">
+            <h3 class="item-nome"> {{ p.item }} </h3> 
+            <span class="preco-card"> {{ p.preco | currency:'BRL' }} </span>
+            <div class="btns-card">
+              <button type="button" class="carrinho-btn" (click)="adicionarAoCarrinho(p)"> Adicionar ao carrinho </button>
+            </div>
           </div>
-        </div>
-          }
         } @empty {
-          Serviços não Disponíveis
+          <p>Serviços não disponíveis.</p>
         }
       }
+    </div>
+
+    <!-- PRODUTOS -->
+    <div class="cards-produtos"> 
+      <div class="cabecalho-section"> 
+        <h2 class="titulo-section" routerLink="/lista-produtos"> Produtos </h2>
+        <button
+          type="button" class="btn-recolhe" (click)="alternarProdutos()" [attr.aria-expanded]="produtosAbertos"> {{ produtosAbertos ? 'Recolher ▲' : 'Expandir ▼' }} </button> 
       </div>
-      <div class="cards-produtos">
-        <div class="cabecalho-section">
-          <h2 class="titulo-section" routerLink="/lista-produtos">Produtos</h2>
 
-          <button type="button" class="btn-recolhe" (click)="alternarProdutos()" [attr.aria-expanded]="produtosAbertos"> {{ produtosAbertos ? 'Recolher ▲' : 'Expandir ▼' }}</button>
-        </div>
-      @if (produtosAbertos) {
-        @for (p of itemsFiltrados; track p.idItem){
-          @if (p.tipoItem === 'P') {
-        <div class="card">
-          <h3 class="item-nome">{{p.item}}</h3>
-          <span class="preco-card">{{p.produto?.precoVenda | currency: 'BRL'}}</span>
-
-          <div class="btns-card">
-            <button class="carrinho-btn">Adicionar ao carrinho</button>
+      @if (produtosAbertos) { 
+        @for (p of produtos; track p.idItem) { 
+          <div class="card">
+            <h3 class="item-nome"> {{ p.item }} </h3>
+            <span class="preco-card"> {{ p.produto?.precoVenda | currency:'BRL' }} </span>
+            <div class="btns-card">
+              <button type="button" class="carrinho-btn" (click)="adicionarAoCarrinho(p)">
+                Adicionar ao carrinho </button>
+            </div>
           </div>
-        </div>
-          }
         } @empty {
-          Produtos Não Disponíveis
+          <p>Produtos não disponíveis.</p>
         }
       }
-      </div>
-    </section>
-  </main>
-  
+    </div>
+  </section>
+</main>
