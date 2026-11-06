@@ -3,9 +3,7 @@
   <h1>Meu Carrinho</h1>
 
   @if (carrinho.itens().length > 0) {
-
     <div class="tabela-container">
-
       <table class="tabela-carrinho">
 
         <thead>
@@ -20,13 +18,9 @@
         </thead>
 
         <tbody>
-
           @for (i of carrinho.itens(); track i.idItem) {
-
             <tr>
-
               <td>{{ i.item }}</td>
-
               <td>
                 {{ i.tipoItem === 'P' ? 'Produto' : 'Serviço' }}
               </td>
@@ -36,13 +30,7 @@
               </td>
 
               <td>
-                <input
-                  type="number"
-                  min="1"
-                  step="1"
-                  [ngModel]="i.quantidade"
-                  (ngModelChange)="alterarQuantidade(i.idItem, $event)"
-                >
+                <input type="number" min="1" step="1" [ngModel]="i.quantidade" (ngModelChange)="alterarQuantidade(i.idItem, $event)">
               </td>
 
               <td>
@@ -50,49 +38,23 @@
               </td>
 
               <td>
-                <button
-                  type="button"
-                  class="btn-remover"
-                  (click)="removerItem(i.idItem)">
-                  Remover
-                </button>
+                <button type="button" class="btn-remover" (click)="removerItem(i.idItem)"> Remover </button>
               </td>
-
             </tr>
-
           }
-
         </tbody>
-
       </table>
-
     </div>
 
     <section class="resumo-carrinho">
 
       <h2>Resumo do pedido</h2>
 
-      <p>
-        Quantidade de itens:
-        <strong>{{ carrinho.totalItens() }}</strong>
-      </p>
+      <p> Quantidade de itens: <strong>{{ carrinho.totalItens() }}</strong> </p>
 
-      <p class="total">
-        Valor total:
-        <strong>
-          {{ carrinho.totalValor() | currency:'BRL' }}
-        </strong>
-      </p>
+      <p class="total"> Valor total: <strong> {{ carrinho.totalValor() | currency:'BRL' }} </strong> </p>
 
-      <button
-        type="button"
-        class="btn-confirmar"
-        [disabled]="carregando"
-        (click)="confirmarPedido()">
-
-        {{ carregando ? 'Confirmando...' : 'Confirmar pedido' }}
-
-      </button>
+      <button type="button" class="btn-confirmar" [disabled]="carregando" (click)="confirmarPedido()"> {{ carregando ? 'Confirmando...' : 'Confirmar pedido' }} </button>
 
     </section>
 
