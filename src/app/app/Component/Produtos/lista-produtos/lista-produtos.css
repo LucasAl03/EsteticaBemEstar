@@ -78,6 +78,104 @@
   border-radius: 6px;
 }
 
+/* ===== Filtro e Pesquisa ===== */
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 35px;
+  padding: 18px 20px;
+
+  background: #ffffff;
+  border: 1px solid var(--borda);
+  border-left: 5px solid var(--verde-600);
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+}
+
+.filtros .campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 240px;
+}
+
+.filtros label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--verde-700);
+}
+
+/* Pesquisa com ícone de lupa */
+.filtros input[type="search"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px 10px 38px;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--texto);
+
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filtros input[type="search"]::placeholder {
+  color: #9ca3af;
+}
+
+.filtros input[type="search"]::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* Select de categoria */
+.filtros select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 36px 10px 12px;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--texto);
+
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' fill='none' stroke='%2316a34a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  cursor: pointer;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filtros input[type="search"]:hover,
+.filtros select:hover {
+  border-color: var(--verde-600);
+}
+
+.filtros input[type="search"]:focus,
+.filtros select:focus {
+  outline: none;
+  border-color: var(--verde-600);
+  box-shadow: 0 0 0 3px var(--verde-100);
+}
+
+.filtros select option {
+  color: var(--texto);
+  background: #ffffff;
+}
+
 /* ===== Botão ===== */
 .btns,
 #btns {
