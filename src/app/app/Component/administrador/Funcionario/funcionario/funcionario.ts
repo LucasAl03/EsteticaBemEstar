@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { Endereco } from '../../../../Models/Endereco';
 import { EnderecoService } from '../../../../Service/EnderecoService/endereco-service';
 import { FormsModule } from '@angular/forms';
+import { SessaoService } from '../../../../Service/SessaoService/sessao-service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './funcionario.html',
 })
 export class Funcionario implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService){}
+  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, private sessao: SessaoService){}
 
   pessoa: PessoaFuncionario[] = []
 
@@ -28,6 +29,7 @@ export class Funcionario implements OnInit {
   }
 
   carregaFuncionarios(){
+    if (this.sessao.ehFuncionario()){
     this.funcionarioService.listarFuncionarios()
       .subscribe({
         next: (lista) => {
@@ -36,6 +38,9 @@ export class Funcionario implements OnInit {
         },
         error: (erro) => console.log('Erro ao listar os funcionarios', erro)
       })
+    } else {
+      return alert('Você não possui autorização para ver esta página.');
+    }
   }
 
   buscaId(p: PessoaFuncionario) {

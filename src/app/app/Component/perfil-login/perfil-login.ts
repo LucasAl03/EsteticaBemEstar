@@ -92,6 +92,7 @@ export class PerfilLogin implements OnInit {
           this.salvando = false;
           this.cdr.detectChanges();
           alert('Perfil atualizado com sucesso!');
+          
         },
         error: (erro) => {
           console.log('Erro ao atualizar o perfil do funcionário', erro);
