@@ -38,7 +38,7 @@ export class PerfilLogin implements OnInit {
   ngOnInit(): void {
     this.carregaPerfil();
     if(!this.sessao.sessao()){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/home'])
     }
   }
 

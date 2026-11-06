@@ -47,7 +47,7 @@ export class EntradaProduto implements OnInit {
     }
 
     if(!this.sessao.sessao()){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/home'])
     }
 
     this.carregaProdutos()

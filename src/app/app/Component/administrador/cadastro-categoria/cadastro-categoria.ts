@@ -24,7 +24,7 @@ export class CadastroCategoria implements OnInit {
 
   ngOnInit() {
     if(!this.sessao.ehFuncionario()){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/home'])
     }
 
     this.carregaCategorias()

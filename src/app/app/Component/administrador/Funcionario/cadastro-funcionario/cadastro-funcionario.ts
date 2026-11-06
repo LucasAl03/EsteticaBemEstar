@@ -69,7 +69,7 @@ export class CadastroFuncionario implements OnInit {
     this.pessoaId = Number(this.route.snapshot.paramMap.get('idPessoa'))
 
     if(!this.sessao.ehFuncionario()){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/home'])
     }
 
     this.carregaCpfs()

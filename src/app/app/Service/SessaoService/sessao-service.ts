@@ -7,8 +7,8 @@ export interface Sessao {
   cargo: string | null;
 }
 
-@Injectable({ 
-    providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class SessaoService {
   private readonly CHAVE = 'sessao';
@@ -21,24 +21,35 @@ export class SessaoService {
   readonly logado = computed(() => this.sessaoAtual() !== null);
   readonly ehFuncionario = computed(() => this.sessaoAtual()?.funcionario === true);
   readonly cargo = computed(() => this.sessaoAtual()?.cargo ?? null);
-  readonly nome = computed(() => this.sessaoAtual()?.nome ?? null)  
-  
+  readonly nome = computed(() => this.sessaoAtual()?.nome ?? null);
 
   iniciarSessao(dados: Sessao): void {
+    // Normaliza antes de salvar, assim o que vai pro storage sempre passa na leitura
+    const normalizada = this.normalizar(dados);
+
+    if (!normalizada) {
+      console.warn('Dados de sessão inválidos, sessão não iniciada:', dados);
+      return;
+    }
+
     try {
-      sessionStorage.setItem(this.CHAVE, JSON.stringify(dados));
+      sessionStorage.setItem(this.CHAVE, JSON.stringify(normalizada));
     } catch (erro) {
       console.log('Não foi possível salvar a sessão', erro);
     }
-    this.sessaoAtual.set(dados);
+    this.sessaoAtual.set(normalizada);
   }
 
   encerrarSessao(): void {
     try {
       sessionStorage.removeItem(this.CHAVE);
-      localStorage.removeItem(this.CHAVE)
     } catch (erro) {
       console.log('Não foi possível limpar a sessão', erro);
+    }
+    try {
+      localStorage.removeItem(this.CHAVE);
+    } catch (erro) {
+      console.log('Não foi possível limpar o localStorage', erro);
     }
     this.sessaoAtual.set(null);
   }
@@ -49,16 +60,30 @@ export class SessaoService {
       const texto = sessionStorage.getItem(this.CHAVE);
       if (!texto) return null;
 
-      const dados = JSON.parse(texto) as Sessao;
+      const normalizada = this.normalizar(JSON.parse(texto));
 
-      // Descarta se o conteúdo estiver corrompido ou adulterado
-      if (typeof dados?.idPessoa !== 'number' || typeof dados?.funcionario !== 'boolean' || typeof dados.nome !== 'string') {
+      if (!normalizada) {
+        console.warn('Sessão salva descartada por formato inválido:', texto);
         sessionStorage.removeItem(this.CHAVE);
         return null;
       }
-      return dados;
+      return normalizada;
     } catch {
       return null;
     }
+  }
+
+  // Converte para o formato esperado ou devolve null se faltar o essencial
+  private normalizar(dados: any): Sessao | null {
+    const idPessoa = Number(dados?.idPessoa);
+
+    if (!dados || Number.isNaN(idPessoa)) return null;
+
+    return {
+      idPessoa,
+      nome: String(dados.nome ?? ''),
+      funcionario: Boolean(dados.funcionario),
+      cargo: dados.cargo ?? null,
+    };
   }
 }

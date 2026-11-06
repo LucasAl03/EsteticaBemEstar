@@ -24,12 +24,12 @@ export class PedidosComponent implements OnInit {
   item: Produto[] = []
   
     ngOnInit(){
+      if(!this.sessao.sessao()){
+        this.router.navigate(['/home'])
+      }
+
       this.carregaAtendimento();
       this.carregaItems();
-
-      if(!this.sessao.sessao()){
-        this.router.navigate(['/login'])
-      }
     }
 
     get filtroPedidos(): Atendimento[] {

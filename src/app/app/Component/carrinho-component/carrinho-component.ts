@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service';
@@ -22,6 +22,7 @@ export class CarrinhoComponent {
   sessaoService = inject(SessaoService);
   funcionarioService = inject(FuncionarioService)
   router = inject(Router)
+  location = inject(Location)
 
   funcionarios: PessoaFuncionario[] = []
   idFuncionarioSelect: number | null = null
@@ -29,8 +30,8 @@ export class CarrinhoComponent {
   carregando = false;
 
   ngOnInit(){
-    if(!this.sessaoService.ehFuncionario()){
-      this.router.navigate(['/login'])
+    if(!this.sessaoService.sessao()){
+      this.router.navigate(['/home'])
     }
 
     this.carregaFuncionarios();

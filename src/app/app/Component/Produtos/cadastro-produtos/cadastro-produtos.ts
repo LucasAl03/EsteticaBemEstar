@@ -54,7 +54,7 @@ export class CadastroProdutos implements OnInit {
 
   ngOnInit(){
     if(!this.sessao.sessao()){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/home'])
     }
     
     if(!this.sessao.ehFuncionario()){
