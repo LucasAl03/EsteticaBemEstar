@@ -46,12 +46,12 @@ export class PedidosComponent {
     }
 
     buscaId(a: Atendimento) {
-      this.router.navigate(['/cadastro', a.idAtendimento])
+      this.router.navigate(['/editar-pedidos', a.idAtendimento])
     }
 
   excluir(a: Atendimento) {
     if (confirm('Certeza que deseja excluir o atendimento?')) {
-      this.atendimentoService.excluirAtendimento(a.idPessoa).subscribe({
+      this.atendimentoService.excluirAtendimento(a.idAtendimento).subscribe({
         next: () => this.carregaAtendimento(),
         error: (erro) => console.log('Erro ao excluir', erro)
       })

@@ -11,7 +11,7 @@ export class AtendimentoItem{
     idAtendimento: number = 0
     idItem: number = 0
     item: string = ''
-    idFuncionario: string = ''
+    idFuncionario: number = 0
     nomeFuncionario: string = ''
     cargo: string = ''
     quantidade: number = 0

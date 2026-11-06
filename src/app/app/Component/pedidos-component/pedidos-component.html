@@ -10,7 +10,11 @@
 
             <span class="id-pedido">Id do atendimento: {{a.idAtendimento}} </span>
 
-            <span class="status">Status: {{a.statusAtendimento === 'A' ? 'Ativo' : 'Não Ativo'}} </span>
+            <span class="status">Status: {{a.statusAtendimento === 'A' ? 'Ativo' : a.statusAtendimento === 'C' ? 'Cancelado' : 'Finalizado'}} </span>
+
+            <span class="total-pedido">
+                Valor total: <strong> {{ a.itens.reduce((total, i) => total + (i.quantidade * i.valorUnitario), 0) | currency:'BRL' }} </strong>
+            </span>
             
             <div class="items-cards">
 
@@ -23,19 +27,16 @@
                     <span class="preco-item">Valor: {{i.valorUnitario | currency: 'BRL'}} </span>
                     <span class="funcionario">Funcionário: {{i.nomeFuncionario}} </span>
                     <span class="cargo">Cargo: {{i.cargo}} </span>
-
-                    <button class="remov-item"> Remover </button>
-                    <button class="edita-item"> Editar </button>
                 </div>
                 } @empty {
                     <h3 class="item">Nenhum Item registrado nesse Atendimento.</h3>
                 }
             </div>
-            <button class="exclui-atendi"> Excluir Atendimento </button>
-            <button class="edita-atendi"> Editar Atendimento </button>
+            <button class="exclui-atendi" (click)="excluir(a)" > Excluir Atendimento </button>
+            <button class="edita-atendi" (click)="buscaId(a)"> Editar Atendimento </button>
         </div>
         } @empty{
-            <h3 class="cliente-nome"> Nenhum Atendimento registrado. </h3>
+            <h3 class="cliente-nome"> Nenhum Pedido registrado. </h3>
         }
     </div>
 

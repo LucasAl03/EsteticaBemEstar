@@ -14,6 +14,7 @@ import { EnderecoCadastro } from './app/Component/endereco-cadastro/endereco-cad
 import { PedidosComponent } from './app/Component/pedidos-component/pedidos-component';
 import { CarrinhoComponent } from './app/Component/carrinho-component/carrinho-component';
 import { Login } from './app/Component/login/login';
+import { EditarPedidos } from './app/Component/editar-pedidos/editar-pedidos';
 
 export const routes: Routes = [
     {
@@ -100,5 +101,13 @@ export const routes: Routes = [
     {
         path: 'login',
         component: Login
+    },
+    {
+        path: 'editar-pedidos',
+        component: EditarPedidos
+    },
+        {
+        path: 'editar-pedidos/:idAtendimento',
+        component: EditarPedidos
     }
 ];

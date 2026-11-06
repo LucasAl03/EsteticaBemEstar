@@ -97,6 +97,18 @@
     margin: 0 0 5px;
 }
 
+.total-pedido {
+    display: block;
+    margin: 12px 0;
+    color: #15803d;
+    font-size: 16px;
+}
+
+.total-pedido strong {
+    font-size: 18px;
+    font-weight: 700;
+}
+
 .quantidade-item,
 .preco-item,
 .funcionario,
@@ -106,8 +118,6 @@
 }
 
 /* BOTÕES */
-.remov-item,
-.edita-item,
 .exclui-atendi,
 .edita-atendi {
     border: none;
@@ -119,30 +129,9 @@
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.remov-item:hover,
-.edita-item:hover,
 .exclui-atendi:hover,
 .edita-atendi:hover {
     transform: translateY(-2px);
-}
-
-/* BOTÕES DOS ITENS */
-.remov-item {
-    background: #fde8e7;
-    color: #b42318;
-}
-
-.remov-item:hover {
-    background: #f8cecb;
-}
-
-.edita-item {
-    background: #e3f0e7;
-    color: #176b39;
-}
-
-.edita-item:hover {
-    background: #cce5d4;
 }
 
 /* BOTÕES DO ATENDIMENTO */
@@ -195,8 +184,6 @@
         padding: 10px;
     }
 
-    .remov-item,
-    .edita-item,
     .exclui-atendi,
     .edita-atendi {
         width: 100%;
