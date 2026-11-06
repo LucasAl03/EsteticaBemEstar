@@ -1,0 +1,173 @@
+
+<div id="perfil">
+
+    @if (carregando) {
+        <p>Carregando perfil...</p>
+    } @else if (perfil) {
+
+        <div class="perfil-cabecalho">
+            <h1>Meu Perfil</h1>
+
+            <h2 class="nome">{{ perfil.nome }}</h2>
+
+            @if (sessao.ehFuncionario()) {
+                <span class="tipo-usuario">
+                    Funcionário
+                </span>
+            } @else {
+                <span class="tipo-usuario">
+                    Cliente
+                </span>
+            }
+        </div>
+
+        <div class="dados">
+
+            <h3>Dados pessoais</h3>
+
+            <div class="campo">
+                <label>Nome</label>
+                <input
+                    type="text"
+                    name="nome"
+                    [(ngModel)]="perfil.nome"
+                    [readonly]="!editando">
+            </div>
+
+            <div class="campo">
+                <label>CPF</label>
+                <input
+                    type="text"
+                    name="cpf"
+                    [(ngModel)]="perfil.cpf"
+                    readonly>
+            </div>
+
+            <div class="campo">
+                <label>Data de nascimento</label>
+                <input
+                    type="date"
+                    name="dataNascimento"
+                    [(ngModel)]="perfil.dataNascimento"
+                    [readonly]="!editando">
+            </div>
+
+            <div class="campo">
+                <label>Sexo</label>
+                <input
+                    type="text"
+                    name="sexo"
+                    [(ngModel)]="perfil.sexo"
+                    [readonly]="!editando">
+            </div>
+
+            <div class="campo">
+                <label>E-mail</label>
+                <input
+                    type="email"
+                    name="email"
+                    [(ngModel)]="perfil.email"
+                    [readonly]="!editando">
+            </div>
+
+            <div class="campo">
+                <label>Telefone</label>
+                <input
+                    type="number"
+                    name="telefone"
+                    [(ngModel)]="perfil.telefone"
+                    [readonly]="!editando">
+            </div>
+
+            @if (sessao.ehFuncionario()) {
+                <div class="campo">
+                    <label>Cargo</label>
+                    <input
+                        type="text"
+                        [value]="($any(perfil).funcionario?.cargo || '')"
+                        readonly>
+                </div>
+            }
+
+            @if (!editando) {
+                <button
+                    type="button"
+                    class="editar-perfil"
+                    (click)="editando = true">
+                    Editar Perfil
+                </button>
+            } @else {
+                <div class="botoes-perfil">
+                    <button
+                        type="button"
+                        class="salvar-perfil"
+                        (click)="salvarPerfil()"
+                        [disabled]="salvando">
+                        {{ salvando ? 'Salvando...' : 'Salvar Alterações' }}
+                    </button>
+
+                    <button
+                        type="button"
+                        class="cancelar-perfil"
+                        (click)="cancelarEdicao()">
+                        Cancelar
+                    </button>
+                </div>
+            }
+
+        </div>
+
+        <div class="enderecos">
+
+            <div class="titulo-enderecos">
+                <h3>Meus Endereços</h3>
+
+                <button
+                    type="button"
+                    class="novo-endereco"
+                    (click)="novoEnd()">
+                    + Adicionar Endereço
+                </button>
+            </div>
+
+            @for (end of perfil.enderecos; track end.idEndereco; let i = $index) {
+
+                <div class="endereco-card">
+
+                    <h4>Endereço {{ i + 1 }}</h4>
+
+                    <span>CEP: {{ end.cep }}</span>
+                    <span>Número: {{ end.numero }}</span>
+                    <span>Complemento: {{ end.complemento }}</span>
+
+                    <div class="end-btns">
+                        <button
+                            type="button"
+                            class="editar-end"
+                            (click)="buscaIdEnd(end)">
+                            Editar
+                        </button>
+
+                        <button
+                            type="button"
+                            class="excluir-end"
+                            (click)="excluirEnd(end)">
+                            Excluir
+                        </button>
+                    </div>
+
+                </div>
+
+            } @empty {
+                <p class="sem-endereco">
+                    Você ainda não possui endereços cadastrados.
+                </p>
+            }
+
+        </div>
+
+    } @else {
+        <p>Não foi possível carregar os dados do perfil.</p>
+    }
+
+</div>

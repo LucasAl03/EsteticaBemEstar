@@ -15,6 +15,7 @@ import { PedidosComponent } from './app/Component/pedidos-component/pedidos-comp
 import { CarrinhoComponent } from './app/Component/carrinho-component/carrinho-component';
 import { Login } from './app/Component/login/login';
 import { EditarPedidos } from './app/Component/editar-pedidos/editar-pedidos';
+import { PerfilLogin } from './app/Component/perfil-login/perfil-login';
 
 export const routes: Routes = [
     {
@@ -109,5 +110,9 @@ export const routes: Routes = [
         {
         path: 'editar-pedidos/:idAtendimento',
         component: EditarPedidos
+    },
+    {
+        path: 'perfil-login',
+        component: PerfilLogin
     }
 ];

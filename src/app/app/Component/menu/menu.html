@@ -60,7 +60,7 @@
             <ul id="lista-icon">
                 @if (sessao.logado()) {
                 <li>
-                <h4 class="nomeLog"> {{ sessao.sessao()?.nome }} </h4>
+                <h4 class="nomeLog"> <a routerLink="perfil-login" routerLinkActive="ativo">{{ sessao.sessao()?.nome }} </a> </h4>
 
                 <button type="button" class="btn-sair" (click)="sair()"> Sair </button>
                 </li>
