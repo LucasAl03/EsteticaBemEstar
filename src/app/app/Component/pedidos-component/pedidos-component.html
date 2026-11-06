@@ -3,7 +3,7 @@
 
     <div class="campo">
         <label for="itemAtivo">Status do Pedido</label>
-        <select name="itemAtivo" id="itemAtivo" [(ngModel)]="statusDoPedido">
+        <select name="itemAtivo" id="itemAtivo" [(ngModel)]="statusPedido">
             <option value="A" selected>Ativos</option>
             <option value="C">Cancelado</option>
             <option value="F">Finalizado</option>
@@ -42,7 +42,9 @@
                     <h3 class="item">Nenhum Item registrado nesse Atendimento.</h3>
                 }
             </div>
+            @if(sessao.ehFuncionario()){
             <button class="exclui-atendi" (click)="excluir(a)" > Excluir Atendimento </button>
+            }
             <button class="edita-atendi" (click)="buscaId(a)"> Editar Atendimento </button>
         </div>
         } @empty{

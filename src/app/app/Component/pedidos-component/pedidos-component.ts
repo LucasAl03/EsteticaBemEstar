@@ -6,9 +6,10 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Produto } from '../../Models/Produto';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 import { SessaoService } from '../../Service/SessaoService/sessao-service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  imports: [DatePipe, CurrencyPipe],
+  imports: [DatePipe, CurrencyPipe, FormsModule],
   selector: 'app-pedidos-component',
   styleUrl: './pedidos-component.css',
   templateUrl: './pedidos-component.html',
@@ -18,7 +19,7 @@ export class PedidosComponent {
 
   atendimento: Atendimento[] = []
 
-  statusDoPedido = 'A'
+  statusPedido = 'A'
 
   item: Produto[] = []
   
@@ -35,8 +36,7 @@ export class PedidosComponent {
         return this.atendimento.filter(p => p.idPessoa == idPessoa)
       }
 
-      
-      return pedidos.filter(p => p.statusAtendimento === this.statusDoPedido)
+      return pedidos.filter(p => p.statusAtendimento === this.statusPedido)
     }
   
     carregaAtendimento(){
