@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AtendimentoService } from '../../Service/AtendimentoService/atendimento-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Atendimento } from '../../Models/Atendimento';
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './pedidos-component.css',
   templateUrl: './pedidos-component.html',
 })
-export class PedidosComponent {
+export class PedidosComponent implements OnInit {
   constructor (public sessao: SessaoService, private cdr: ChangeDetectorRef, private atendimentoService: AtendimentoService, private route: ActivatedRoute, private router: Router, private produtoService: ProdutoItem){}
 
   atendimento: Atendimento[] = []

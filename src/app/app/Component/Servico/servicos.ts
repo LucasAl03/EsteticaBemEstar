@@ -8,6 +8,7 @@ import { Categoria } from '../../Models/Categoria';
 import { CategoriaService } from '../../Service/CategoriaService/categoria-service';
 import { FormsModule } from '@angular/forms';
 import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service';
+import { SessaoService } from '../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [CurrencyPipe, FormsModule],
@@ -17,7 +18,7 @@ import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service'
 })
 export class Servicos implements OnInit{
 
-  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem, private categoriaService: CategoriaService){}
+  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem, private categoriaService: CategoriaService, private sessao: SessaoService){}
   
   produtos: Produto[] = []
   catego: Categoria[] = [];
@@ -65,9 +66,13 @@ export class Servicos implements OnInit{
   private carrinhoService = inject(CarrinhoService)  
 
   adicionarAoCarrinho(p: Produto) {
+    if(this.sessao.sessao()){
     this.carrinhoService.adicionar(p);
 
     console.log('Item adicionado:', p);
     console.log('Carrinho atualizado:', this.carrinhoService.itens());
+    } else {
+      alert('Deve estar logado para adicionar itens ao carrinho.')
+    }
   }
 }
