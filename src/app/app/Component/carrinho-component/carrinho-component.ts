@@ -5,6 +5,8 @@ import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service'
 import { AtendimentoService } from '../../Service/AtendimentoService/atendimento-service';
 import { SessaoService } from '../../Service/SessaoService/sessao-service';
 import { Atendimento } from '../../Models/Atendimento';
+import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
+import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 
 @Component({
   imports: [CurrencyPipe, FormsModule],
@@ -17,8 +19,29 @@ export class CarrinhoComponent {
   carrinho = inject(CarrinhoService);
   atendimentoService = inject(AtendimentoService);
   sessaoService = inject(SessaoService);
+  funcionarioService = inject(FuncionarioService)
+
+  funcionarios: PessoaFuncionario[] = []
+  idFuncionarioSelect: number | null = null
 
   carregando = false;
+
+  ngOnInit(){
+    this.carregaFuncionarios();
+  }
+
+  carregaFuncionarios(){
+    this.funcionarioService.listarFuncionarios()
+      .subscribe({
+        next: (lista) => {
+          this.funcionarios = lista.filter(f => f.funcionario !== null)
+        },
+        error: (erro) => {
+          console.log('Erro ao listar os funcionarios', erro)
+          alert('Não foi possivel carregar os funcionarios')
+        }
+      })
+  }
 
   alterarQuantidade(idItem: number, quantidade: number) {
     this.carrinho.alterarQuantidade(idItem, quantidade);
@@ -42,21 +65,27 @@ export class CarrinhoComponent {
       return;
     }
 
+    if (this.idFuncionarioSelect === null) {
+      alert('Selecione um funcionário para confirmar o pedido.');
+      return;
+    }
+
+    const hoje = new Date();
+    const dataAtendimento = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(hoje.getDate()).padStart(2, '0')}`;
+
     const pedido = {
       // busca o idPessoa da sessaoAtual
       idPessoa: sessao.idPessoa,
+      dataAtendimento: dataAtendimento,
+      statusAtendimento: 'A',
 
       itens: this.carrinho.itens().map(i => ({
         idItem: i.idItem,
-        item: i.item,
         quantidade: i.quantidade,
         valorUnitario: i.valorUnitario,
-        idFuncionario: '',
-        nomeFuncionario: '',
-        cargo: '',
-        idAtendimento: 0
+        idFuncionario: this.idFuncionarioSelect!,
       }))
-    } as Atendimento;
+    } as unknown as Atendimento;
 
     this.carregando = true;
 

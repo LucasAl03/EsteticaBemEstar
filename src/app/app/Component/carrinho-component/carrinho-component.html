@@ -54,6 +54,25 @@
 
       <p class="total"> Valor total: <strong> {{ carrinho.totalValor() | currency:'BRL' }} </strong> </p>
 
+      <div class="campo-funcionario">
+        <label for="funcionario">Selecione o funcionário:</label>
+
+        <select
+          id="funcionario"
+          name="funcionario"
+          [(ngModel)]="idFuncionarioSelect">
+
+          <option [ngValue]="null">Selecione um funcionário</option>
+
+          @for (f of funcionarios; track f.idPessoa) {
+            <option [ngValue]="f.idPessoa">
+              {{ f.nome }} - {{ f.funcionario?.cargo }}
+            </option>
+          }
+
+        </select>
+      </div>
+
       <button type="button" class="btn-confirmar" [disabled]="carregando" (click)="confirmarPedido()"> {{ carregando ? 'Confirmando...' : 'Confirmar pedido' }} </button>
 
     </section>
