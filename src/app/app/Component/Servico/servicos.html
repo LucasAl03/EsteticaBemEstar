@@ -2,8 +2,27 @@
 
     <h1>Serviços Disponíveis</h1>
 
+    
+    <div class="filtros">
+
+    <div class="campo">
+      <label for="pesquisa">Pesquisa</label>
+      <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-categoria"></label>
+      <select name="filtro-categoria" id="filtro-categoria" [(ngModel)]="idCategoria">
+        <option [ngValue]="0">Filtro de categoria</option>
+        @for (c of catego; track c.idCategoria) {
+          <option [ngValue]="c.idCategoria"> {{ c.categoria }}  </option>
+        }
+      </select>
+    </div>
+  </div>
+
     <div id="div-cards">
-        @for (p of produtos; track p.idItem){
+        @for (p of itemsFiltrados; track p.idItem){
             <div class="card">
             <h3 class="servico">{{p.item}}</h3>
             
