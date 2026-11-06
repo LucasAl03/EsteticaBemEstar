@@ -5,6 +5,7 @@ import { Atendimento } from '../../Models/Atendimento';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Produto } from '../../Models/Produto';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
+import { SessaoService } from '../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [DatePipe, CurrencyPipe],
@@ -13,7 +14,7 @@ import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
   templateUrl: './pedidos-component.html',
 })
 export class PedidosComponent {
-  constructor (private cdr: ChangeDetectorRef, private atendimentoService: AtendimentoService, private route: ActivatedRoute, private router: Router, private produtoService: ProdutoItem){}
+  constructor (public sessao: SessaoService, private cdr: ChangeDetectorRef, private atendimentoService: AtendimentoService, private route: ActivatedRoute, private router: Router, private produtoService: ProdutoItem){}
 
   atendimento: Atendimento[] = []
 
@@ -22,6 +23,15 @@ export class PedidosComponent {
     ngOnInit(){
       this.carregaAtendimento();
       this.carregaItems();
+    }
+
+    get filtroPedidos(): Atendimento[] {
+      if (this.sessao.ehFuncionario()){
+        return this.atendimento
+      }
+
+      const idPessoa = this.sessao.sessao()?.idPessoa
+      return this.atendimento.filter(p => p.idPessoa == idPessoa)
     }
   
     carregaAtendimento(){
