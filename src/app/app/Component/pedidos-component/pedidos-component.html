@@ -45,7 +45,9 @@
             @if(sessao.ehFuncionario()){
             <button class="exclui-atendi" (click)="excluir(a)" > Excluir Atendimento </button>
             }
+            @if( sessao.ehFuncionario() || a.statusAtendimento !== 'C' ){
             <button class="edita-atendi" (click)="buscaId(a)"> Editar Atendimento </button>
+            }
         </div>
         } @empty{
             <h3 class="cliente-nome"> Nenhum Pedido registrado. </h3>
