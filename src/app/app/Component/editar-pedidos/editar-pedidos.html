@@ -56,8 +56,9 @@
 
             <option value="A">Ativo</option>
             <option value="C">Cancelado</option>
-            <option value="F">Finalizado</option>
-
+            @if (sessao.ehFuncionario()){
+              <option value="F">Finalizado</option>
+            }
           </select>
         </div>
 

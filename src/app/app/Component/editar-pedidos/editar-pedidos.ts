@@ -1,6 +1,6 @@
 
-import { CurrencyPipe, DatePipe } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { ChangeDetectorRef, Component, Inject, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,14 +11,17 @@ import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { AtendimentoService } from '../../Service/AtendimentoService/atendimento-service';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
+import { SessaoService } from '../../Service/SessaoService/sessao-service';
 
 @Component({
-  imports: [FormsModule, CurrencyPipe, DatePipe],
+  imports: [FormsModule, CurrencyPipe],
   selector: 'app-editar-pedidos',
   styleUrl: './editar-pedidos.css',
   templateUrl: './editar-pedidos.html',
 })
 export class EditarPedidos implements OnInit {
+
+  private sessao = inject(SessaoService);
 
   private route = inject(ActivatedRoute);
   private router = inject(Router);

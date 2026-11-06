@@ -18,6 +18,8 @@ export class PedidosComponent {
 
   atendimento: Atendimento[] = []
 
+  statusDoPedido = 'A'
+
   item: Produto[] = []
   
     ngOnInit(){
@@ -26,12 +28,15 @@ export class PedidosComponent {
     }
 
     get filtroPedidos(): Atendimento[] {
-      if (this.sessao.ehFuncionario()){
-        return this.atendimento
+      const pedidos = this.atendimento;
+
+      if (!this.sessao.ehFuncionario()){
+        const idPessoa = this.sessao.sessao()?.idPessoa
+        return this.atendimento.filter(p => p.idPessoa == idPessoa)
       }
 
-      const idPessoa = this.sessao.sessao()?.idPessoa
-      return this.atendimento.filter(p => p.idPessoa == idPessoa)
+      
+      return pedidos.filter(p => p.statusAtendimento === this.statusDoPedido)
     }
   
     carregaAtendimento(){

@@ -1,5 +1,15 @@
 <div id="pedidos">
     <h1 class="pedidos">Pedidos</h1>
+
+    <div class="campo">
+        <label for="itemAtivo">Status do Pedido</label>
+        <select name="itemAtivo" id="itemAtivo" [(ngModel)]="statusDoPedido">
+            <option value="A" selected>Ativos</option>
+            <option value="C">Cancelado</option>
+            <option value="F">Finalizado</option>
+        </select>
+    </div>
+
     <div class="pedidos-cards">
         @for (a of filtroPedidos; track a.idAtendimento){
         <div class="card">
