@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 import { ActivatedRoute } from '@angular/router';
 import { entradaService } from '../../Service/EntradaService/entrada-service';
@@ -7,6 +7,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Categoria } from '../../Models/Categoria';
 import { CategoriaService } from '../../Service/CategoriaService/categoria-service';
 import { FormsModule } from '@angular/forms';
+import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service';
 
 @Component({
   imports: [CurrencyPipe, FormsModule],
@@ -59,5 +60,14 @@ export class Servicos implements OnInit{
       const filtraTexto = !texto || p.item.toLocaleLowerCase().includes(texto)
       return filtraCategoria && filtraTexto
     })
+  }
+
+  private carrinhoService = inject(CarrinhoService)  
+
+  adicionarAoCarrinho(p: Produto) {
+    this.carrinhoService.adicionar(p);
+
+    console.log('Item adicionado:', p);
+    console.log('Carrinho atualizado:', this.carrinhoService.itens());
   }
 }

@@ -29,7 +29,7 @@
             <span class="preco-servico">{{p.preco | currency: 'BRL'}}</span>
 
             <div id="btns">
-                <a href="">adicionar ao carrinho</a>
+                <button (click)="adicionarAoCarrinho(p)">Adicionar ao Carrinho</button>
             </div>
         </div>
         }

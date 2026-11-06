@@ -80,7 +80,7 @@ export class HomeComponent {
     this.produtosAbertos = !this.produtosAbertos
   }
 
-  private carrinhoService = inject(CarrinhoService)   // ou no construtor
+  private carrinhoService = inject(CarrinhoService)  
 
   adicionarAoCarrinho(p: Produto) {
     this.carrinhoService.adicionar(p);

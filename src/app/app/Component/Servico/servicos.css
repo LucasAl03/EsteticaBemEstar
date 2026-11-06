@@ -185,21 +185,30 @@
 }
 
 .btns a,
-#btns a {
+.btns button,
+#btns a,
+#btns button {
   display: block;
+  width: 100%;
+  box-sizing: border-box;
   padding: 10px 12px;
   text-align: center;
   text-decoration: none;
+  font-family: inherit;
   font-size: 0.9rem;
   font-weight: 500;
   color: #ffffff;
   background: var(--verde-600);
+  border: none;
   border-radius: 8px;
+  cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .btns a:hover,
-#btns a:hover {
+.btns button:hover,
+#btns a:hover,
+#btns button:hover {
   background: var(--verde-700);
 }
 
