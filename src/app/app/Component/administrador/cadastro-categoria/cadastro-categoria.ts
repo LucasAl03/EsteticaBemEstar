@@ -3,6 +3,7 @@ import { CategoriaService } from '../../../Service/CategoriaService/categoria-se
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from '../../../Models/Categoria';
 import { FormsModule } from '@angular/forms';
+import { SessaoService } from '../../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [FormsModule],
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './cadastro-categoria.html',
 })
 export class CadastroCategoria implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router ){}
+  constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router, private sessao: SessaoService){}
 
   idCategoria = 0
   categoria = ''
@@ -22,6 +23,10 @@ export class CadastroCategoria implements OnInit {
   catego: Categoria[] = []
 
   ngOnInit() {
+    if(!this.sessao.ehFuncionario()){
+      this.router.navigate(['/login'])
+    }
+
     this.carregaCategorias()
 
     this.route.paramMap.subscribe(params => {

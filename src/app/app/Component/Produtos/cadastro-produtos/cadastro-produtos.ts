@@ -6,6 +6,7 @@ import { Produto, DetalheProduto } from '../../../Models/Produto';
 import { Categoria } from '../../../Models/Categoria';
 import { CategoriaService } from '../../../Service/CategoriaService/categoria-service';
 import { CurrencyPipe, Location } from '@angular/common';
+import { SessaoService } from '../../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [FormsModule, CurrencyPipe],
@@ -14,7 +15,7 @@ import { CurrencyPipe, Location } from '@angular/common';
   templateUrl: './cadastro-produtos.html',
 })
 export class CadastroProdutos implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private produtoService: ProdutoItem, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router, private location: Location){}
+  constructor (private cdr: ChangeDetectorRef, private produtoService: ProdutoItem, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router, private location: Location, private sessao: SessaoService){}
 
   catego: Categoria[] = []
   prodserv: Produto[] = []
@@ -52,12 +53,21 @@ export class CadastroProdutos implements OnInit {
   }
 
   ngOnInit(){
+    if(!this.sessao.sessao()){
+      this.router.navigate(['/login'])
+    }
+    
+    if(!this.sessao.ehFuncionario()){
+      this.router.navigate(['/home'])
+    }
+
     this.produtoId = Number(this.route.snapshot.paramMap.get('idItem'))
 
     if(this.produtoId > 0){
       this.editar = true
       this.carregaCampo(this.produtoId)
     }
+
     this.carregaProdServ();
     this.carregaCategoria();
   }

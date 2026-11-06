@@ -25,6 +25,10 @@ export class Funcionario implements OnInit {
   itemAtivo: string = 'S'
 
   ngOnInit(){
+    if(!this.sessao.ehFuncionario()){
+      this.router.navigate(['/login'])
+    }
+
     this.carregaFuncionarios();
   }
 

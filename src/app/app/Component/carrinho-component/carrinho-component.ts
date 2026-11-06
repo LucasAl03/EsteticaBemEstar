@@ -7,6 +7,7 @@ import { SessaoService } from '../../Service/SessaoService/sessao-service';
 import { Atendimento } from '../../Models/Atendimento';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [CurrencyPipe, FormsModule],
@@ -20,6 +21,7 @@ export class CarrinhoComponent {
   atendimentoService = inject(AtendimentoService);
   sessaoService = inject(SessaoService);
   funcionarioService = inject(FuncionarioService)
+  router = inject(Router)
 
   funcionarios: PessoaFuncionario[] = []
   idFuncionarioSelect: number | null = null
@@ -27,6 +29,10 @@ export class CarrinhoComponent {
   carregando = false;
 
   ngOnInit(){
+    if(!this.sessaoService.ehFuncionario()){
+      this.router.navigate(['/login'])
+    }
+
     this.carregaFuncionarios();
   }
 

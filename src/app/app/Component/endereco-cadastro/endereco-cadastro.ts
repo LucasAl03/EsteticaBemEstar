@@ -8,6 +8,7 @@ import { Pessoa } from '../../Models/Pessoa';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { Location } from '@angular/common';
+import { SessaoService } from '../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [FormsModule],
@@ -16,7 +17,7 @@ import { Location } from '@angular/common';
   templateUrl: './endereco-cadastro.html',
 })
 export class EnderecoCadastro implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, private pessoaService: PessoaService, private location: Location){}
+  constructor (private cdr: ChangeDetectorRef, private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, private pessoaService: PessoaService, private location: Location, private sessao: SessaoService){}
 
   idEndereco = 0
   idPessoa = 0
@@ -44,6 +45,10 @@ export class EnderecoCadastro implements OnInit {
     if(this.enderecoId > 0){
       this.editar = true
       this.carregaCampo(this.enderecoId)
+    }
+
+    if(!this.sessao.sessao()){
+      this.router.navigate(['/login'])
     }
 
     this.carregaPessoa();

@@ -5,6 +5,7 @@ import { Endereco } from '../../../../Models/Endereco';
 import { FuncionarioCargo } from '../../../../Models/FuncionarioCargo';
 import { PessoaFuncionario } from '../../../../Models/PessoaFuncionario';
 import { FuncionarioService } from '../../../../Service/FuncionarioService/funcionario-service';
+import { SessaoService } from '../../../../Service/SessaoService/sessao-service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { FuncionarioService } from '../../../../Service/FuncionarioService/funci
   templateUrl: './cadastro-funcionario.html',
 })
 export class CadastroFuncionario implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private pessoaService: FuncionarioService, private route: ActivatedRoute, private router: Router){}
+  constructor(private cdr: ChangeDetectorRef, private pessoaService: FuncionarioService, private route: ActivatedRoute, private router: Router, private sessao: SessaoService){}
 
   // pessoa
   idPessoa = 0
@@ -66,6 +67,10 @@ export class CadastroFuncionario implements OnInit {
 
   ngOnInit(){
     this.pessoaId = Number(this.route.snapshot.paramMap.get('idPessoa'))
+
+    if(!this.sessao.ehFuncionario()){
+      this.router.navigate(['/login'])
+    }
 
     this.carregaCpfs()
 

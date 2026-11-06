@@ -26,6 +26,10 @@ export class PedidosComponent implements OnInit {
     ngOnInit(){
       this.carregaAtendimento();
       this.carregaItems();
+
+      if(!this.sessao.sessao()){
+        this.router.navigate(['/login'])
+      }
     }
 
     get filtroPedidos(): Atendimento[] {

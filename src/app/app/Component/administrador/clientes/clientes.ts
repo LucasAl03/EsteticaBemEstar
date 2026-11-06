@@ -6,6 +6,7 @@ import { Endereco } from '../../../Models/Endereco';
 import { EnderecoService } from '../../../Service/EnderecoService/endereco-service';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { SessaoService } from '../../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [FormsModule, DatePipe],
@@ -14,7 +15,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './clientes.html',
 })
 export class Clientes implements OnInit {
-  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService){}
+  constructor (private cdr: ChangeDetectorRef, private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router, private enderecoService: EnderecoService, private sessao: SessaoService){}
 
   pessoa: Pessoa[] = []
 
@@ -23,6 +24,8 @@ export class Clientes implements OnInit {
   pesquisa: string = ''
   
     ngOnInit(){
+      if(!this.sessao.ehFuncionario())
+      this.router.navigate(['/login'])
       this.carregaPessoa();
     }
   

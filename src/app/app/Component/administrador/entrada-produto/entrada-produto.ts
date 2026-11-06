@@ -7,6 +7,7 @@ import { entradaService } from '../../../Service/EntradaService/entrada-service'
 import { Produto } from '../../../Models/Produto';
 import { DatePipe } from '@angular/common';
 import { EstoqueResposta } from '../../../Models/EstoqueResposta';
+import { SessaoService } from '../../../Service/SessaoService/sessao-service';
 
 @Component({
   imports: [FormsModule, DatePipe],
@@ -15,7 +16,7 @@ import { EstoqueResposta } from '../../../Models/EstoqueResposta';
   templateUrl: './entrada-produto.html',
 })
 export class EntradaProduto implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem, private router: Router){}
+  constructor(private cdr: ChangeDetectorRef, private entradaService: entradaService, private route: ActivatedRoute, private produtoService: ProdutoItem, private router: Router, private sessao: SessaoService){}
 
   // declaração dos atributos para Entrada
   idEntradaProduto = 0
@@ -43,6 +44,10 @@ export class EntradaProduto implements OnInit {
     if(this.produtoId > 0){
       this.editar = true
       this.carregaCampo(this.produtoId)
+    }
+
+    if(!this.sessao.sessao()){
+      this.router.navigate(['/login'])
     }
 
     this.carregaProdutos()

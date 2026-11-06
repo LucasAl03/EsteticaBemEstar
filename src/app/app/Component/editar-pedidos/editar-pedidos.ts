@@ -42,6 +42,10 @@ export class EditarPedidos implements OnInit {
   ngOnInit(): void {
     this.carregaProdutos();
     this.carregaFuncionarios();
+    
+    if(!this.sessao.sessao()){
+      this.router.navigate(['/login'])
+    }
 
     const id = Number(this.route.snapshot.paramMap.get('idAtendimento'));
 
