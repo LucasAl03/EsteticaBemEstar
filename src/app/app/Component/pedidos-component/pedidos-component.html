@@ -1,7 +1,7 @@
 <div id="pedidos">
     <h1 class="pedidos">Pedidos</h1>
     <div class="pedidos-cards">
-        @for (a of atendimento; track a.idAtendimento){
+        @for (a of filtroPedidos; track a.idAtendimento){
         <div class="card">
             
             <h3 class="cliente-nome">{{a.nomePessoa}}</h3>
