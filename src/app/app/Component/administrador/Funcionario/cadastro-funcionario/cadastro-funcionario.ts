@@ -68,7 +68,7 @@ export class CadastroFuncionario implements OnInit {
   ngOnInit(){
     this.pessoaId = Number(this.route.snapshot.paramMap.get('idPessoa'))
 
-    if(!this.sessao.ehFuncionario()){
+    if(this.sessao.cargo() != 'Administrador'){
       this.router.navigate(['/home'])
     }
 

@@ -43,7 +43,7 @@ export class EditarPedidos implements OnInit {
     this.carregaProdutos();
     this.carregaFuncionarios();
 
-    if(!this.sessao.sessao()){
+    if(this.sessao.cargo() != 'Administrador'){
       this.router.navigate(['/home'])
     }
 

@@ -31,11 +31,12 @@
                 <span><strong>Data de Nascimento:</strong> {{ p.dataNascimento | date: 'dd/MM/yyyy' }}</span>
             </div>
 
+            @if(sessao.cargo() === 'Administrador'){
             <div class="enderecos-cabecalho">
                 <h5 class="endereco-titulo">Adicionar novo Endereço</h5>
                 <button type="button" class="novo-end" title="Novo endereço" (click)="novoEnd(p)">+</button>
             </div>
-
+            }
             @for (end of p.enderecos; track end.idEndereco; let i = $index) {
             <h5 class="endereco-titulo">Endereço {{ i + 1 }}</h5>
             <div class="endereco-info">
@@ -43,16 +44,20 @@
                 <span class="endereco-numero">{{ end.numero }}</span>
                 <span class="endereco-comple">{{ end.complemento }}</span>
                 <div class="end-btns">
+                    @if(sessao.cargo() === 'Administrador'){
                     <button type="button" class="editar-end" (click)="buscaIdEnd(end)" >Editar</button>
                     <button type="button" class="excluir-end" (click)="excluirEnd(end)">Excluir</button>
+                    }
                 </div>
             </div>
             }
 
+            @if(sessao.cargo() === 'Administrador'){
             <div class="btns">
                 <button type="button" class="btns-exclui" (click)="excluir(p)">Excluir</button>
                 <button type="button" class="btns-editar" (click)="buscaId(p)">Editar</button>
             </div>
+            }
         </div>
         } @empty {
             <h4 class="vazio">Nenhum Cliente cadastrado.</h4>

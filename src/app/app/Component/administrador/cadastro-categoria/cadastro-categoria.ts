@@ -25,6 +25,8 @@ export class CadastroCategoria implements OnInit {
   ngOnInit() {
     if(!this.sessao.ehFuncionario()){
       this.router.navigate(['/home'])
+    } else if (this.sessao.cargo() != 'Administrador') {
+      this.router.navigate(['/home'])
     }
 
     this.carregaCategorias()

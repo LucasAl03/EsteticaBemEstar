@@ -54,18 +54,18 @@
 
             <div class="campo">
                 <label>Sexo</label>
-                <input
-                    type="text"
-                    name="sexo"
-                    [(ngModel)]="perfil.sexo"
-                    [readonly]="!editando">
+                <select name="sexo" id="sexo" [(ngModel)]="perfil.sexo" [disabled]="!editando">
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                    <option value="N">Prefiro não informar</option>
+                </select>
             </div>
 
             <div class="campo">
                 <label>E-mail</label>
                 <input
                     type="email"
-                    name="email"
+                    name="email" inputmode="email"
                     [(ngModel)]="perfil.email"
                     [readonly]="!editando">
             </div>
