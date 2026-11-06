@@ -36,6 +36,7 @@ export class SessaoService {
   encerrarSessao(): void {
     try {
       sessionStorage.removeItem(this.CHAVE);
+      localStorage.removeItem(this.CHAVE)
     } catch (erro) {
       console.log('Não foi possível limpar a sessão', erro);
     }

@@ -62,24 +62,15 @@ export class CarrinhoComponent {
 
     this.atendimentoService.cadastrarAtendimento(pedido)
       .subscribe({
-
         next: (resposta) => {
-
           alert('Pedido realizado com sucesso!');
-
           this.carrinho.limpar();
-
           this.carregando = false;
-
           console.log('Atendimento cadastrado:', resposta);
         },
-
         error: (erro) => {
-
           console.log('Erro ao confirmar pedido:', erro);
-
           alert('Não foi possível confirmar o pedido.');
-
           this.carregando = false;
         }
       });
