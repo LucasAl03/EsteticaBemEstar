@@ -1,0 +1,213 @@
+
+<main class="editar-container">
+
+  <header class="editar-header">
+    <div>
+      <h1>Editar atendimento</h1>
+      <p>Atualize as informações do atendimento e seus itens.</p>
+    </div>
+
+    <button type="button" class="btn-voltar" (click)="voltar()">
+      Voltar
+    </button>
+  </header>
+
+  @if (carregando) {
+    <div class="mensagem-carregando">
+      Carregando atendimento...
+    </div>
+  } @else {
+
+    <section class="dados-atendimento">
+
+      <h2>Informações do atendimento</h2>
+
+      <div class="dados-grid">
+
+        <div class="campo">
+          <label>Identificador</label>
+          <input
+            type="text"
+            [value]="atendimento.idAtendimento"
+            disabled>
+        </div>
+
+        <div class="campo">
+          <label>Cliente</label>
+          <input
+            type="text"
+            [value]="atendimento.nomePessoa"
+            disabled>
+        </div>
+
+        <div class="campo">
+          <label>Data do atendimento</label>
+          <input
+            type="date"
+            [(ngModel)]="atendimento.dataAtendimento"
+            name="dataAtendimento">
+        </div>
+
+        <div class="campo">
+          <label>Status</label>
+          <select
+            [(ngModel)]="atendimento.statusAtendimento"
+            name="statusAtendimento">
+
+            <option value="A">Ativo</option>
+            <option value="C">Cancelado</option>
+            <option value="F">Finalizado</option>
+
+          </select>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="itens-atendimento">
+
+      <div class="itens-header">
+        <h2>Itens do atendimento</h2>
+
+        <button
+          type="button"
+          class="btn-adicionar"
+          (click)="adicionarItem()">
+          + Adicionar item
+        </button>
+      </div>
+
+      @if (atendimento.itens.length > 0) {
+
+        <div class="tabela-container">
+          <table>
+
+            <thead>
+              <tr>
+                <th>Produto ou serviço</th>
+                <th>Funcionário</th>
+                <th>Quantidade</th>
+                <th>Valor unitário</th>
+                <th>Subtotal</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (i of atendimento.itens; track $index) {
+                <tr>
+
+                  <td>
+                    <select
+                      [(ngModel)]="i.idItem"
+                      [name]="'produto' + $index"
+                      (ngModelChange)="selecionarProduto(i)">
+
+                      <option [ngValue]="0">
+                        Selecione um item
+                      </option>
+
+                      @for (p of produtos; track p.idItem) {
+                        <option [ngValue]="p.idItem">
+                          {{ p.item }}
+                        </option>
+                      }
+
+                    </select>
+                  </td>
+
+                  <td>
+                    <select
+                      [(ngModel)]="i.idFuncionario"
+                      [name]="'funcionario' + $index">
+
+                      <option [ngValue]="0">
+                        Selecione
+                      </option>
+
+                      @for (f of funcionarios; track f.idPessoa) {
+                        <option [ngValue]="f.idPessoa">
+                          {{ f.nome }}
+                        </option>
+                      }
+
+                    </select>
+                  </td>
+
+                  <td>
+                    <input
+                      type="number"
+                      min="1"
+                      step="1"
+                      [(ngModel)]="i.quantidade"
+                      [name]="'quantidade' + $index">
+                  </td>
+
+                  <td>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      [(ngModel)]="i.valorUnitario"
+                      [name]="'valor' + $index">
+                  </td>
+
+                  <td>
+                    {{ i.quantidade * i.valorUnitario | currency:'BRL' }}
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-remover"
+                      (click)="removerItem($index)">
+                      Remover
+                    </button>
+                  </td>
+
+                </tr>
+              }
+            </tbody>
+
+          </table>
+        </div>
+
+      } @else {
+        <p class="sem-itens">
+          Nenhum item adicionado ao atendimento.
+        </p>
+      }
+
+      <div class="total-atendimento">
+        <span>Total do atendimento:</span>
+
+        <strong>
+          {{ atendimento.itens.reduce((total, i) => total + i.quantidade * i.valorUnitario, 0) | currency:'BRL' }}
+        </strong>
+      </div>
+
+    </section>
+
+    <footer class="acoes">
+      <button
+        type="button"
+        class="btn-cancelar"
+        (click)="voltar()">
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="btn-salvar"
+        [disabled]="salvando || carregando"
+        (click)="salvarAlteracoes()">
+
+        {{ salvando ? 'Salvando...' : 'Salvar alterações' }}
+
+      </button>
+    </footer>
+
+  }
+
+</main>
