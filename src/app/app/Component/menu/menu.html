@@ -37,9 +37,6 @@
                 <!-- Links administrativos: só funcionário -->
                 @if (sessao.ehFuncionario()) {
                 <li>
-                    <a routerLink="/cadastro-funcionario" routerLinkActive="ativo">Cadastro Funcionário</a>
-                </li>
-                <li>
                     <a routerLink="/entrada" routerLinkActive="ativo">Entrada Produto</a>
                 </li>
                 <li>
@@ -49,10 +46,15 @@
                     <a routerLink="/lista-cliente" routerLinkActive="ativo">Clientes</a>
                 </li>
                 <li>
+                    <a routerLink="/cadastro-produto" routerLinkActive="ativo">Cadastro Produtos & Serviços</a>
+                </li>
+                }
+                @if(sessao.cargo() === 'Administrador'){
+                <li>
                     <a routerLink="/categoria-cadastra" routerLinkActive="ativo">Form Categorias</a>
                 </li>
                 <li>
-                    <a routerLink="/cadastro-produto" routerLinkActive="ativo">Cadastro Produtos & Serviços</a>
+                    <a routerLink="/cadastro-funcionario" routerLinkActive="ativo">Cadastro Funcionário</a>
                 </li>
                 }
             </ul>

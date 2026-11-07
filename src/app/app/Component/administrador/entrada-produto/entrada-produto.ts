@@ -37,6 +37,7 @@ export class EntradaProduto implements OnInit {
   produtoId = 0
 
   dataFilter: string = ''
+  pesquisa: string = ''
 
   ngOnInit(){
     this.produtoId = Number(this.route.snapshot.paramMap.get('idEntradaProduto'))
@@ -139,7 +140,7 @@ export class EntradaProduto implements OnInit {
     this.produtoService.listarProdutos()
       .subscribe({
         next: (lista) => {
-          this.produtos = lista.filter(p => p.tipoItem === 'P')
+          this.produtos = lista.filter(p => p.tipoItem === 'P' && p.ativoProdutoServico === 'A')
           this.cdr.detectChanges()
         },
         error: (err) => console.log('Erro ao listar os produtos', err)
@@ -193,9 +194,17 @@ export class EntradaProduto implements OnInit {
     }
   }
 
+  get itemNome(): Produto[]{
+    return this.produtos
+  }
+
+
   get itemsFiltrados(): Entrada[] {
+    const texto = this.pesquisa.trim().toLocaleLowerCase();
+
     return this.entradas.filter(p => {
       const filtraData = !this.dataFilter || p.dataEntradaProduto === this.dataFilter
+      const filtraTexto = !texto || this.itemNome().toLocaleLowerCase().includes(texto)
       return filtraData;
     })
   }
