@@ -45,7 +45,7 @@
           <input
             type="date"
             [(ngModel)]="atendimento.dataAtendimento"
-            name="dataAtendimento">
+            name="dataAtendimento" readonly>
         </div>
 
         <div class="campo">
@@ -55,8 +55,10 @@
             name="statusAtendimento">
 
             <option value="A">Ativo</option>
+            @if(sessao.cargo() === 'Administrador' || !sessao.ehFuncionario()){
             <option value="C">Cancelado</option>
-            @if (sessao.ehFuncionario()){
+            }
+            @if (sessao.ehFuncionario() || sessao.cargo() === 'Administrador'){
               <option value="F">Finalizado</option>
             }
           </select>
@@ -70,13 +72,14 @@
 
       <div class="itens-header">
         <h2>Itens do atendimento</h2>
-
+      @if(podeEditar){
         <button
           type="button"
           class="btn-adicionar"
           (click)="adicionarItem()">
           + Adicionar item
         </button>
+      }
       </div>
 
       @if (atendimento.itens.length > 0) {
@@ -103,7 +106,7 @@
                     <select
                       [(ngModel)]="i.idItem"
                       [name]="'produto' + $index"
-                      (ngModelChange)="selecionarProduto(i)">
+                      (ngModelChange)="selecionarProduto(i)" [disabled]="!podeEditar">
 
                       <option [ngValue]="0">
                         Selecione um item
@@ -121,7 +124,7 @@
                   <td>
                     <select
                       [(ngModel)]="i.idFuncionario"
-                      [name]="'funcionario' + $index">
+                      [name]="'funcionario' + $index" [disabled]="!podeEditar">
 
                       <option [ngValue]="0">
                         Selecione
@@ -142,7 +145,7 @@
                       min="1"
                       step="1"
                       [(ngModel)]="i.quantidade"
-                      [name]="'quantidade' + $index">
+                      [name]="'quantidade' + $index" [disabled]="!podeEditar">
                   </td>
 
                   <td>
@@ -151,7 +154,7 @@
                       min="0"
                       step="0.01"
                       [(ngModel)]="i.valorUnitario"
-                      [name]="'valor' + $index">
+                      [name]="'valor' + $index" disabled>
                   </td>
 
                   <td>
@@ -162,7 +165,7 @@
                     <button
                       type="button"
                       class="btn-remover"
-                      (click)="removerItem($index)">
+                      (click)="removerItem($index)" [disabled]="!podeEditar">
                       Remover
                     </button>
                   </td>

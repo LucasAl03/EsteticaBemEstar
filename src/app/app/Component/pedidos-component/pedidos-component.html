@@ -42,10 +42,10 @@
                     <h3 class="item">Nenhum Item registrado nesse Atendimento.</h3>
                 }
             </div>
-            @if(sessao.cargo() === 'Administrador'){
+            @if(sessao.cargo() === 'Administrador' && a.statusAtendimento === 'A'){
             <button class="exclui-atendi" (click)="excluir(a)" > Excluir Atendimento </button>
             }
-            @if( sessao.ehFuncionario() || a.statusAtendimento !== 'C' ){
+            @if( sessao.ehFuncionario() || a.statusAtendimento !== 'C'){
             <button class="edita-atendi" (click)="buscaId(a)"> Editar Atendimento </button>
             }
         </div>
