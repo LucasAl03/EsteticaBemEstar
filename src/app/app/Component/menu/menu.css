@@ -116,29 +116,82 @@
   outline-offset: 2px;
 }
 
-/* ===== Ícones (lista-icon) ===== */
+/* ===== Área do usuário (lista-icon) ===== */
+#lista-icon {
+  gap: 10px;
+}
+
 #lista-icon li {
   display: flex;
   align-items: center;
 }
 
-#lista-icon a,
-#lista-icon button {
-  display: flex;
+/* Nome do usuário */
+.nome-logado {
+  padding: 8px 12px;
+  color: var(--verde-700);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.nome-logado:hover,
+.nome-logado.ativo {
+  background: var(--verde-100);
+}
+
+/* Botão Sair */
+.btn-sair {
+  padding: 8px 16px;
+  color: var(--verde-700);
+  background: transparent;
+  border: 1.5px solid var(--verde-600);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-sair:hover {
+  background: var(--verde-600);
+  color: #fff;
+}
+
+/* Botão Login */
+.btn-login {
+  padding: 8px 16px;
+  color: #fff;
+  background: var(--verde-600);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btn-login:hover {
+  background: var(--verde-700);
+}
+
+/* Ícone do carrinho (círculo 36x36 só para ele) */
+.icone-carrinho {
+  position: relative;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
   color: var(--verde-700);
-  background: transparent;
-  border: none;
   border-radius: 50%;
-  cursor: pointer;
   transition: background 0.2s ease;
 }
 
-#lista-icon a:hover,
-#lista-icon button:hover {
+.icone-carrinho:hover {
   background: var(--verde-100);
 }
 
