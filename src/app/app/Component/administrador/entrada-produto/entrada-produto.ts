@@ -102,7 +102,9 @@ export class EntradaProduto implements OnInit {
         .subscribe({
           next: (resposta) => {
             console.log(resposta)
-            this.router.navigate(['/entrada'])
+            this.carregaEstoque();
+            this.carregaProdutos();
+            this.carregaEntradas();
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar a entrada.", msgErro)
           }
