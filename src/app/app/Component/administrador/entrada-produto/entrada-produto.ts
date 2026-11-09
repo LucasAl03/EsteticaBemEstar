@@ -140,7 +140,7 @@ export class EntradaProduto implements OnInit {
     this.produtoService.listarProdutos()
       .subscribe({
         next: (lista) => {
-          this.produtos = lista.filter(p => p.tipoItem === 'P' && p.ativoProdutoServico === 'A')
+          this.produtos = lista.filter(p => p.tipoItem === 'P' && p.ativoProdutoServico === 'S')
           this.cdr.detectChanges()
         },
         error: (err) => console.log('Erro ao listar os produtos', err)
@@ -194,8 +194,8 @@ export class EntradaProduto implements OnInit {
     }
   }
 
-  get itemNome(): Produto[]{
-    return this.produtos
+  itemNome(idItem: number): string{
+    return this.produtos.find(p => p.idItem === idItem)?.item ?? ''
   }
 
 
@@ -204,8 +204,8 @@ export class EntradaProduto implements OnInit {
 
     return this.entradas.filter(p => {
       const filtraData = !this.dataFilter || p.dataEntradaProduto === this.dataFilter
-      const filtraTexto = !texto || this.itemNome().toLocaleLowerCase().includes(texto)
-      return filtraData;
+      const filtraTexto = !texto || this.itemNome(p.idItem).toLocaleLowerCase().includes(texto)
+      return filtraData && filtraTexto;
     })
   }
 }
