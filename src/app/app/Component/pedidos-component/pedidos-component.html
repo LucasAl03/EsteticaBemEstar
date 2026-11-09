@@ -1,13 +1,28 @@
 <div id="pedidos">
     <h1 class="pedidos">Pedidos</h1>
 
-    <div class="campo">
-        <label for="itemAtivo">Status do Pedido</label>
-        <select name="itemAtivo" id="itemAtivo" [(ngModel)]="statusPedido">
-            <option value="A" selected>Ativos</option>
-            <option value="C">Cancelado</option>
-            <option value="F">Finalizado</option>
-        </select>
+    <div class="filtros">
+        @if (sessao.ehFuncionario()){
+        <div class="campo">
+        <label for="pesquisa">Pesquisa</label>
+        <input type="search" name="pesquisa" id="pesquisa" [(ngModel)]="pesquisa">
+        </div>
+        }
+
+        <div class="campo">
+            <label for="itemAtivo">Status do Pedido</label>
+            <select name="itemAtivo" id="itemAtivo" [(ngModel)]="statusPedido">
+                <option value="">Todos</option>
+                <option value="A">Ativos</option>
+                <option value="C">Cancelado</option>
+                <option value="F">Finalizado</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="dataFilter">Filtrar por data</label>
+            <input type="date" name="dataFilter" id="dataFilter" [(ngModel)]="dataFilter">
+        </div>
     </div>
 
     <div class="pedidos-cards">
@@ -20,7 +35,12 @@
 
             <span class="id-pedido">Id do atendimento: {{a.idAtendimento}} </span>
 
-            <span class="status">Status: {{a.statusAtendimento === 'A' ? 'Ativo' : a.statusAtendimento === 'C' ? 'Cancelado' : 'Finalizado'}} </span>
+            <span class="status"
+                [class.status-ativo]="a.statusAtendimento === 'A'"
+                [class.status-cancelado]="a.statusAtendimento === 'C'"
+                [class.status-finalizado]="a.statusAtendimento === 'F'">
+                {{a.statusAtendimento === 'A' ? 'Ativo' : a.statusAtendimento === 'C' ? 'Cancelado' : 'Finalizado'}} 
+            </span>
 
             <span class="total-pedido">
                 Valor total: <strong> {{ a.itens.reduce((total, i) => total + (i.quantidade * i.valorUnitario), 0) | currency:'BRL' }} </strong>

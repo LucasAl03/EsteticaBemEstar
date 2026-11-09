@@ -7,6 +7,7 @@ import { Produto } from '../../Models/Produto';
 import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
 import { SessaoService } from '../../Service/SessaoService/sessao-service';
 import { FormsModule } from '@angular/forms';
+import { stat } from 'fs';
 
 @Component({
   imports: [DatePipe, CurrencyPipe, FormsModule],
@@ -20,6 +21,8 @@ export class PedidosComponent implements OnInit {
   atendimento: Atendimento[] = []
 
   statusPedido = 'A'
+  pesquisa: string = ''
+  dataFilter: string = ''
 
   item: Produto[] = []
   
@@ -33,14 +36,21 @@ export class PedidosComponent implements OnInit {
     }
 
     get filtroPedidos(): Atendimento[] {
-      const pedidos = this.atendimento;
+      const texto = this.pesquisa.trim().toLocaleLowerCase()
+
+      let pedidos = this.atendimento
 
       if (!this.sessao.ehFuncionario()){
         const idPessoa = this.sessao.sessao()?.idPessoa
-        return this.atendimento.filter(p => p.idPessoa == idPessoa)
+        pedidos = pedidos.filter(p => p.idPessoa === idPessoa)
       }
 
-      return pedidos.filter(p => p.statusAtendimento === this.statusPedido)
+      return pedidos.filter(p => {
+        const filtraStatus = !this.statusPedido || p.statusAtendimento === this.statusPedido
+        const filtraTexto = !texto || p.nomePessoa.toLocaleLowerCase().includes(texto)
+        const filtraData = !this.dataFilter || p.dataAtendimento === this.dataFilter
+        return filtraStatus && filtraTexto && filtraData;
+      })
     }
   
     carregaAtendimento(){

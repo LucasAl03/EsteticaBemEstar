@@ -17,6 +17,81 @@
     padding-bottom: 12px;
 }
 
+/* BARRA DE FILTROS */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding: 18px;
+    background: #f4f9f5;
+    border: 1px solid #d5e6d9;
+    border-left: 5px solid #176b39;
+    border-radius: 12px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 220px;
+}
+
+.campo label {
+    color: #145c32;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #1f2937;
+    background: #ffffff;
+    border: 1px solid #c9dfce;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input:hover,
+.campo select:hover {
+    border-color: #176b39;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #176b39;
+    box-shadow: 0 0 0 3px #dcfce7;
+}
+
+.status {
+    align-self: flex-start;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 999px;
+}
+
+.status-ativo {
+    color: #15803d;
+    background: #dcfce7;
+}
+
+.status-cancelado {
+    color: #b42318;
+    background: #fee4e2;
+}
+
+.status-finalizado {
+    color: #1d4ed8;
+    background: #dbeafe;
+}
+
 /* LISTA DE ATENDIMENTOS */
 .pedidos-cards {
     display: grid;
