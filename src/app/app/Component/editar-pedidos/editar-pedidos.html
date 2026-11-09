@@ -105,7 +105,7 @@
                     <select
                       [(ngModel)]="i.idItem"
                       [name]="'produto' + $index"
-                      (ngModelChange)="selecionarProduto(i)" [disabled]="!podeEditar">
+                      (ngModelChange)="selecionarProduto(i)">
 
                       <option [ngValue]="0">
                         Selecione um item
@@ -144,7 +144,7 @@
                       min="1"
                       step="1"
                       [(ngModel)]="i.quantidade"
-                      [name]="'quantidade' + $index" [disabled]="!podeEditar">
+                      [name]="'quantidade' + $index">
                   </td>
 
                   <td>
@@ -164,7 +164,7 @@
                     <button
                       type="button"
                       class="btn-remover"
-                      (click)="removerItem($index)" [disabled]="!podeEditar">
+                      (click)="removerItem($index)">
                       Remover
                     </button>
                   </td>

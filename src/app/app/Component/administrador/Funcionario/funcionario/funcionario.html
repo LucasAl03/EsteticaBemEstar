@@ -28,7 +28,7 @@
                 <span class="data-admissao">Admissão: {{ p.funcionario.dataAdmissao | date: 'dd/MM/yyyy' }}</span>
             </div>
             }
-
+            @if(sessao.cargo() === 'Administrador'){
             <div class="dados-pessoa">
                 <span><strong>Situação:</strong> {{p.ativoPessoa === 'S' ? 'Ativo' : 'Desativado'}} </span>
                 <span><strong>CPF:</strong> {{ p.cpf }}</span>
@@ -36,6 +36,7 @@
                 <span><strong>Email:</strong> {{ p.email }}</span>
                 <span><strong>Telefone:</strong> {{ p.telefone }}</span>
             </div>
+        
 
             <div class="enderecos-cabecalho">
                 <h5 class="endereco-titulo">Adicionar novo Endereço</h5>
@@ -60,6 +61,7 @@
                 <button type="button" class="btns-exclui" (click)="excluir(p)">Excluir</button>
                 <button type="button" class="btns-editar" (click)="buscaId(p)">Editar</button>
             </div>
+        }
         </div>
         } @empty {
             <h4 class="vazio">Nenhum funcionário cadastrado.</h4>
