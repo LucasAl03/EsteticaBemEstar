@@ -1,5 +1,5 @@
 import { CurrencyPipe, Location } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CarrinhoService } from '../../Service/CarrinhoService/carrinho-service';
 import { AtendimentoService } from '../../Service/AtendimentoService/atendimento-service';
@@ -8,6 +8,8 @@ import { Atendimento } from '../../Models/Atendimento';
 import { PessoaFuncionario } from '../../Models/PessoaFuncionario';
 import { FuncionarioService } from '../../Service/FuncionarioService/funcionario-service';
 import { Router } from '@angular/router';
+import { entradaService } from '../../Service/EntradaService/entrada-service';
+import { EstoqueResposta } from '../../Models/EstoqueResposta';
 
 @Component({
   imports: [CurrencyPipe, FormsModule],
@@ -23,9 +25,13 @@ export class CarrinhoComponent {
   funcionarioService = inject(FuncionarioService)
   router = inject(Router)
   location = inject(Location)
+  entradaService = inject(entradaService)
+  cdr = inject(ChangeDetectorRef)
 
   funcionarios: PessoaFuncionario[] = []
   idFuncionarioSelect: number | null = null
+
+  estoque_resposta: EstoqueResposta[] = []
 
   carregando = false;
 
@@ -35,6 +41,7 @@ export class CarrinhoComponent {
     }
 
     this.carregaFuncionarios();
+    this.carregaEstoque();
   }
 
   carregaFuncionarios(){
@@ -76,6 +83,14 @@ export class CarrinhoComponent {
       alert('Selecione um funcionário para confirmar o pedido.');
       return;
     }
+    for (const i of this.carrinho.itens()) {
+      const estoque = this.estoque_resposta.find(e => e.idItem === i.idItem);
+    
+      if (!estoque || estoque.quantidadeEstoque < i.quantidade) {
+        alert(`O produto não tem estoque suficiente: ${i.item}`);
+        return;
+      }
+    }
 
     const hoje = new Date();
     const dataAtendimento = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(hoje.getDate()).padStart(2, '0')}`;
@@ -110,5 +125,16 @@ export class CarrinhoComponent {
           this.carregando = false;
         }
       });
+  }
+
+  carregaEstoque(){
+    this.entradaService.listarEstoque()
+      .subscribe({
+        next: (lista) => {
+          this.estoque_resposta = lista.sort((a,b) => b.idItem - a.idItem)
+          this.cdr.detectChanges()
+        },
+        error: (erro) => console.log('Erro ao listar o estoque.', erro)
+      })
   }
 }
