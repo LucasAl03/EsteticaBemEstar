@@ -20,14 +20,7 @@ import { Endereco } from '../../Models/Endereco';
 })
 export class PerfilLogin implements OnInit {
 
-  constructor(
-    public sessao: SessaoService,
-    private pessoaService: PessoaService,
-    private funcionarioService: FuncionarioService,
-    private enderecoService: EnderecoService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(public sessao: SessaoService, private pessoaService: PessoaService, private funcionarioService: FuncionarioService, private enderecoService: EnderecoService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   perfil: Pessoa | PessoaFuncionario | null = null;
 
@@ -123,7 +116,7 @@ export class PerfilLogin implements OnInit {
       });
     }
   }
-
+  
   novoEnd(): void {
     if (!this.perfil) return;
 

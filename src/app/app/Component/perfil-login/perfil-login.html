@@ -40,7 +40,7 @@
                     type="text"
                     name="cpf"
                     [(ngModel)]="perfil.cpf"
-                    readonly>
+                    [readonly]="!editando">
             </div>
 
             <div class="campo">
