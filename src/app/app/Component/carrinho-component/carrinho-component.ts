@@ -10,6 +10,9 @@ import { FuncionarioService } from '../../Service/FuncionarioService/funcionario
 import { Router } from '@angular/router';
 import { entradaService } from '../../Service/EntradaService/entrada-service';
 import { EstoqueResposta } from '../../Models/EstoqueResposta';
+import { Produto } from '../../Models/Produto';
+import { ProdutoItem } from '../../Service/ProdutoItem/produto-item';
+import { forkJoin } from 'rxjs';
 
 @Component({
   imports: [CurrencyPipe, FormsModule],
@@ -27,11 +30,13 @@ export class CarrinhoComponent {
   location = inject(Location)
   entradaService = inject(entradaService)
   cdr = inject(ChangeDetectorRef)
+  produtoService = inject(ProdutoItem)
 
   funcionarios: PessoaFuncionario[] = []
   idFuncionarioSelect: number | null = null
 
   estoque_resposta: EstoqueResposta[] = []
+  produtos: Produto[] = []
 
   carregando = false;
 
@@ -40,8 +45,8 @@ export class CarrinhoComponent {
       this.router.navigate(['/home'])
     }
 
+    this.carregaDados();
     this.carregaFuncionarios();
-    this.carregaEstoque();
   }
 
   carregaFuncionarios(){
@@ -84,6 +89,10 @@ export class CarrinhoComponent {
       return;
     }
     for (const i of this.carrinho.itens()) {
+      const ehProduto = this.produtos.some(p => p.idItem === i.idItem)
+
+      if(!ehProduto) continue;
+
       const estoque = this.estoque_resposta.find(e => e.idItem === i.idItem);
     
       if (!estoque || estoque.quantidadeEstoque < i.quantidade) {
@@ -127,14 +136,17 @@ export class CarrinhoComponent {
       });
   }
 
-  carregaEstoque(){
-    this.entradaService.listarEstoque()
-      .subscribe({
-        next: (lista) => {
-          this.estoque_resposta = lista.sort((a,b) => b.idItem - a.idItem)
-          this.cdr.detectChanges()
-        },
-        error: (erro) => console.log('Erro ao listar o estoque.', erro)
-      })
+  carregaDados() {
+    forkJoin({
+      estoque: this.entradaService.listarEstoque(),
+      produtos: this.produtoService.listarProdutos()
+    }).subscribe({
+      next: ({ estoque, produtos }) => {
+        this.estoque_resposta = estoque.sort((a, b) => b.idItem - a.idItem);
+        this.produtos = produtos.filter(p => p.tipoItem === 'P');
+        this.cdr.detectChanges();
+      },
+      error: (erro) => console.log('Erro ao carregar estoque e produtos', erro)
+    });
   }
 }
