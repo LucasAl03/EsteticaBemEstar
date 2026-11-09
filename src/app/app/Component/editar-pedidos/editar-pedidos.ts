@@ -66,7 +66,7 @@ export class EditarPedidos implements OnInit {
     if (!s) return false;
   
     return (
-      this.sessao.cargo() === 'Administrador' || this.atendimento.idPessoa === s.idPessoa
+      this.sessao.cargo() === 'Administrador'
     );
   }
 

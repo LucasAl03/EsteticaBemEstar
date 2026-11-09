@@ -43,6 +43,7 @@
         @for (p of servicos; track p.idItem) {
           <div class="card">
             <h3 class="item-nome"> {{ p.item }} </h3> 
+            <p> {{p.descricaoItem}} </p>
             <span class="preco-card"> {{ p.preco | currency:'BRL' }} </span>
             <div class="btns-card">
               <button type="button" class="carrinho-btn" (click)="adicionarAoCarrinho(p)"> Adicionar ao carrinho </button>
@@ -66,6 +67,7 @@
         @for (p of produtos; track p.idItem) { 
           <div class="card">
             <h3 class="item-nome"> {{ p.item }} </h3>
+            <p> {{p.descricaoItem}} </p>
             <span class="preco-card"> {{ p.produto?.precoVenda | currency:'BRL' }} </span>
             <div class="btns-card">
               <button type="button" class="carrinho-btn" (click)="adicionarAoCarrinho(p)">

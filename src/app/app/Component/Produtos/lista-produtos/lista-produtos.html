@@ -24,7 +24,7 @@
         @for (p of itemsFiltrados; track p.idItem){
             <div class="card">
             <h3 class="servico">{{p.item}}</h3>
-            
+            <p> {{p.descricaoItem}} </p>
             <span class="preco-servico">{{p.preco | currency: 'BRL'}}</span>
 
             <div id="btns">
