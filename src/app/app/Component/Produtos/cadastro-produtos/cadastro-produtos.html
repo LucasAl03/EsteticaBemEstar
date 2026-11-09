@@ -1,5 +1,7 @@
 <div id="produtos-servicos">
     <h3 class="titulo-cadastro">Cadastro de Serviços & Itens</h3>
+
+    @if(sessao.cargo() === 'Administrador'){
     <form class="formulario-item" (ngSubmit)="enviaDados()" ngNativeValidate>
         <label for="item">Nome do Item</label>
         <input type="text" id="item" name="item" maxlength="40" [(ngModel)]="item" required>
@@ -58,6 +60,7 @@
         </div>
         
     </form>
+    }
     
     <div class="filtros">
         <div class="campo">
@@ -114,10 +117,12 @@
 
                     <span class="codigo"><span class="subtitulo">Código margem de lucro:</span> {{p.produto?.codigoPreco ?? '-' }}</span>
                     }
+                    @if(sessao.cargo() === 'Administrador'){
                     <div id="btns-card">
                         <button type="button" (click)="excluir(p)" class="btns-exclui" >Excluir</button>
                         <button type="button" (click)="buscaId(p)" class="btns-editar" >Editar</button>
                     </div>
+                    }
                 </div>
             } @empty {
                 <h3 class="entrada-produto">Nenhuma entrada cadastrada.</h3>
