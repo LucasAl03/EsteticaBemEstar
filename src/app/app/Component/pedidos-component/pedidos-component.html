@@ -65,7 +65,7 @@
             @if(sessao.cargo() === 'Administrador'){
             <button class="exclui-atendi" (click)="excluir(a)" > Excluir Atendimento </button>
             }
-            @if(sessao.cargo() === 'Administrador' || a.idPessoa === sessao.sessao().idPessoa && a.statusAtendimento === 'A'){
+            @if(sessao.cargo() === 'Administrador' || (a.idPessoa === sessao.sessao()?.idPessoa && a.statusAtendimento === 'A')){
             <button class="edita-atendi" (click)="buscaId(a)"> Editar Atendimento </button>
             }
         </div>

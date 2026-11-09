@@ -20,7 +20,7 @@ import { PerfilLogin } from './app/Component/perfil-login/perfil-login';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {
