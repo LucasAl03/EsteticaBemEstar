@@ -17,8 +17,12 @@ import { SessaoService } from '../../Service/SessaoService/sessao-service';
 export class Login implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private router: Router, private pessoaService: PessoaService, private funcionarioService: FuncionarioService, private sessaoService: SessaoService) {}
 
+  private readonly CPF_ADMIN = '05467813200';
+  private readonly SENHA_ADMIN = 'admin1234';
+
   cpfLogin = '';
   erroLogin = '';
+  senhaLogin = '';
   carregando = true;
 
   pessoa: Pessoa[] = [];
@@ -53,6 +57,10 @@ export class Login implements OnInit {
     return (valor ?? '').replace(/\D/g, '');
   }
 
+  get ehAdmin(): boolean {
+    return this.somenteNumeros(this.cpfLogin) === this.CPF_ADMIN;
+  }
+
   entrar() {
     const cpf = this.somenteNumeros(this.cpfLogin);
 
@@ -78,6 +86,11 @@ export class Login implements OnInit {
       return;
     }
 
+    if (this.ehAdmin && this.senhaLogin !== this.SENHA_ADMIN) {
+      this.erroLogin = 'Senha incorreta.';
+      return;
+    }
+
     this.erroLogin = '';
 
     // Salva a sessão (storage + signal) para o menu e os guards lerem
@@ -93,6 +106,7 @@ export class Login implements OnInit {
 
   limparCampos() {
     this.cpfLogin = '';
+    this.senhaLogin = '';
     this.erroLogin = '';
   }
 
