@@ -51,9 +51,9 @@ export class EntradaProduto implements OnInit {
       this.router.navigate(['/home'])
     }
 
-    this.carregaProdutos()
-    this.carregaEntradas()
-    this.carregaEstoque()
+    this.carregaProdutos();
+    this.carregaEntradas();
+    this.carregaEstoque();
   }
 
   exibeDados(){
@@ -190,7 +190,7 @@ export class EntradaProduto implements OnInit {
   excluir(e: Entrada) {
     if (confirm('Certeza que deseja excluir esse registro de entrada?')) {
       this.entradaService.excluirEntrada(e.idEntradaProduto).subscribe({
-        next: () => this.carregaEntradas(),
+        next: () => this.ngOnInit(),
         error: (erro) => console.log('Erro ao excluir', erro)
       })
     }
