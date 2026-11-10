@@ -117,7 +117,8 @@ export class CadastroProdutos implements OnInit {
           next: (resposta) => {
             console.log(resposta)
             this.limparCampos();
-            this.ngOnInit();
+            this.carregaProdServ();
+            this.carregaCategoria();
           }, error: (msgErro) => {
             console.log("Erro ao cadastrar o serviço/produto.", msgErro)
           }
@@ -130,8 +131,10 @@ export class CadastroProdutos implements OnInit {
           next: (resposta) => {
             console.log(item)
             console.log(resposta)
+            this.router.navigate(['cadastro-produto'])
             this.limparCampos();
-            this.ngOnInit();
+            this.carregaProdServ();
+            this.carregaCategoria();
           }, error: (msgErro) => {
             console.log("Erro ao alterar o serviço/produto", msgErro)
           }
