@@ -147,6 +147,7 @@ export class CadastroProdutos implements OnInit {
       .subscribe({
         next: (dados) => {
           console.table(dados)
+          this.cdr.detectChanges();
         }, error: (msgErro) => {
           console.log("Erro ao listar os produtos e serviços", msgErro)
         }
